@@ -33,7 +33,7 @@ if(trim($_POST["usuario"]) != "" && trim($_POST["password"]) != "")
 	
 //exit($result);	
     
-	if($row = mysql_fetch_array($result)){
+	if($row = mysqli_fetch_array($result)){
 		if($row["ESTADO"] != 1 or isset($_SESSION["IDUSU"])== $row['IDUSUARIO'] || isset($_SESSION["IDUSU"])=='' )
 		{
 	       if($row["PASS"] == $password){
@@ -42,11 +42,11 @@ if(trim($_POST["usuario"]) != "" && trim($_POST["password"]) != "")
 			
 			$query_RsActualizarModulo="
 			UPDATE modulos SET MODUESTA = '0' WHERE MODUID ='".$_POST['modulo']."'";
-			$RsActualizarModulo = mysql_query($query_RsActualizarModulo, $turnos) or die(mysql_error());
+			$RsActualizarModulo = mysqli_query($turnos, $query_RsActualizarModulo) or die(mysqli_error($turnos));
 			
 			$query_RsActualizarUsuario="
 		   UPDATE usuarios SET USUAESTA = '0' WHERE USUAID ='".$row['IDUSUARIO']."'";
-			$RsActualizarUsuario = mysql_query($query_RsActualizarUsuario, $turnos) or die(mysql_error());
+			$RsActualizarUsuario = mysqli_query( $turnos, $query_RsActualizarUsuario) or die(mysqli_error($turnos));
 			
 			echo '<SCRIPT LANGUAGE="javascript">';
 			
@@ -67,8 +67,8 @@ if(trim($_POST["usuario"]) != "" && trim($_POST["password"]) != "")
 			$_SESSION["TABLE2"] ='turnosfull';
 			
 			$query_RsNombreModulo="SELECT MODUNOMB, MODUSALA  from modulos where MODUID ='".$_POST['modulo']."'";
-			$RsNombreModulo = mysql_query($query_RsNombreModulo, $turnos) or die(mysql_error());
-		    $row_RsNombreModulo = mysql_fetch_assoc($RsNombreModulo);
+			$RsNombreModulo = mysqli_query($turnos, $query_RsNombreModulo) or die(mysqli_error($turnos));
+		    $row_RsNombreModulo = mysqli_fetch_assoc($RsNombreModulo);
 			$_SESSION["NOMBRE_MODULO"] = $row_RsNombreModulo['MODUNOMB'];
 			$_SESSION["SALA"]          = $row_RsNombreModulo['MODUSALA'];
 			//exit($query_RsNombreModulo);
@@ -76,7 +76,7 @@ if(trim($_POST["usuario"]) != "" && trim($_POST["password"]) != "")
 			UPDATE modulos SET MODUESTA = '1',
           			           MODUUSUA = '".$row['IDUSUARIO']."'
 			WHERE MODUID ='".$_POST['modulo']."'";
-			$RsActualizarModulo = mysql_query($query_RsActualizarModulo, $turnos) or die(mysql_error());
+			$RsActualizarModulo = mysqli_query($turnos, $query_RsActualizarModulo) or die(mysqli_error($turnos));
 			
 			/*$query_RsActualizarModuloU="
 			UPDATE modulos SET MODUUSUA = '".$row['IDUSUARIO']."' WHERE MODUID ='".$_POST['modulo']."'";
@@ -84,7 +84,7 @@ if(trim($_POST["usuario"]) != "" && trim($_POST["password"]) != "")
 			*/
 			$query_RsActualizarUsuario="
 		   UPDATE usuarios SET USUAESTA = '1' WHERE USUAID ='".$row['IDUSUARIO']."'";
-			$RsActualizarUsuario = mysql_query($query_RsActualizarUsuario, $turnos) or die(mysql_error());
+			$RsActualizarUsuario = mysqli_query($turnos, $query_RsActualizarUsuario) or die(mysqli_error($turnos));
 	   
 	   
            //Ingreso exitoso, ahora sera dirigido a la pagina principal. 
