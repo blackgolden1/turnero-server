@@ -156,7 +156,7 @@ if(isset($_GET['turnos_pantalla']) && $_GET['turnos_pantalla']!=''){
 							WHERE TURNIDES = 3
 							 and TURNCONS NOT IN (".$turnos_pantallatv.")";
 							 //echo($query_RsllAMADOTV2);
-         $RsllAMADOTV2 = mysql_query($query_RsllAMADOTV2, $turnos) or die(mysql_error());							 
+         $RsllAMADOTV2 = mysqli_query($turnos, $query_RsllAMADOTV2);							 
 		 $totalRows_RsllAMADOTV2 = mysqli_num_rows($RsllAMADOTV2);
 		 if($totalRows_RsllAMADOTV2>0){
 		   echo('nuevo');
@@ -195,7 +195,7 @@ if($tipoguardar=='ComprobarTurnoPendiente')
 							   WHERE TURNIDUS = '".$_SESSION["IDUSU"]."'
                                  AND TURNIDES in ('3','6')							
  								 ";								 
-		$RsConsultaTurno = mysql_query($query_RsConsultaTurno, $turnos) or die(mysql_error());
+		$RsConsultaTurno = mysqli_query( $turnos, $query_RsConsultaTurno);
 		//$row_RsConsultaTurno = mysqli_fetch_assoc($RsConsultaTurno);	
 		$totalRows_RsConsultaTurno = mysqli_num_rows($RsConsultaTurno);
 		if($totalRows_RsConsultaTurno>0){
@@ -217,7 +217,7 @@ if($tipoguardar=='ComprobarTurnoPendienteAyuda')
 							   WHERE TURNIDAP = '".$_SESSION["IDUSU"]."'
                                  AND TURNIDES in ('3','6')							
  								 ";								 
-		$RsConsultaTurno = mysql_query($query_RsConsultaTurno, $turnos) or die(mysql_error());
+		$RsConsultaTurno = mysqli_query( $turnos, $query_RsConsultaTurno);
 		//$row_RsConsultaTurno = mysqli_fetch_assoc($RsConsultaTurno);	
 		$totalRows_RsConsultaTurno = mysqli_num_rows($RsConsultaTurno);
 		if($totalRows_RsConsultaTurno>0){
@@ -282,10 +282,10 @@ if($tipoguardar=='Sincronizar_Turno')
 										  '".$_SESSION['ID_SERVI']."'
 										  )";													   
 		//echo($query_RsInsert);											   
-		$RsInsert = mysql_query($query_RsInsert, $turnos) or die(mysql_error());
+		$RsInsert = mysqli_query($turnos, $query_RsInsert) ;
 		
 	$query_RsUltInsert = "SELECT LAST_INSERT_ID() DATO";
-	$RsUltInsert = mysql_query($query_RsUltInsert, $turnos) or die(mysql_error());
+	$RsUltInsert = mysqli_query($turnos, $query_RsUltInsert);
 	$row_RsUltInsert = mysqli_fetch_assoc($RsUltInsert);
 	$parametro=$row_RsUltInsert['DATO'];
     
@@ -299,19 +299,19 @@ if($tipoguardar=='Sincronizar_Turno')
 											PARAIDMO 
 									  FROM parametros
 									  WHERE PARACONS='".$parametro."'";
-						$RsParametro = mysql_query($query_RsParametro, $turnos) or die(mysql_error());
+						$RsParametro = mysqli_query($turnos, $query_RsParametro);
 						$row_RsParametro = mysqli_fetch_assoc($RsParametro);	
 						$paravalor=$row_RsParametro['PARAVALO'];
 	//echo($paravalor);
 	if($_GET['modulo']!=''){
 	    $query_RsUpdate=" update turnos set TURNIDES = '4' where TURNMODU = '".$_GET['modulo']."' and TURNIDES in ('3','6') ";
-		$RsUpdate = mysql_query($query_RsUpdate, $turnos) or die(mysql_error());
+		$RsUpdate = mysqli_query($turnos,$query_RsUpdate);
 	    
 		$query_RsUpdate=" update turnos set TURNIDES = '4' where TURNIDUS = '".$_SESSION["IDUSU"]."' and TURNIDES in ('3','6') ";
-		$RsUpdate = mysql_query($query_RsUpdate, $turnos) or die(mysql_error());
+		$RsUpdate = mysqli_query($turnos,$query_RsUpdate);
 		
 	    $query_RsUpdate=" update turnos set TURNIDES = '4' where TURNIDAP= '".$_SESSION["IDUSU"]."' and TURNIDES in ('3','6') ";
-		$RsUpdate = mysql_query($query_RsUpdate, $turnos) or die(mysql_error());		
+		$RsUpdate = mysqli_query($turnos,$query_RsUpdate);		
 	 }
 	$query_RsInsert="INSERT INTO turnos (
 									 TURNCONS ,
@@ -340,7 +340,7 @@ if($tipoguardar=='Sincronizar_Turno')
 									'".$_SESSION["ID_SERVI"]."'
 									)";
 //echo($query_RsInsert);        
-		$RsInsert = mysql_query($query_RsInsert, $turnos) or die(mysql_error());
+		$RsInsert = mysqli_query($turnos, $query_RsInsert) ;
 $_SESSION["PARAMETRO"]=	$parametro;	
 
 $retorno=$parametro;
@@ -366,7 +366,7 @@ if($tipoguardar=='Crear_TurnoAyuda')
 												   and   T2.TURNSERV = '".$_GET['servicio']."'
 												   )
  								 ";								 
-		$RsConsultaTurno = mysql_query($query_RsConsultaTurno, $turnos) or die(mysql_error());
+		$RsConsultaTurno = mysqli_query( $turnos, $query_RsConsultaTurno) ;
 		$row_RsConsultaTurno = mysqli_fetch_assoc($RsConsultaTurno);	
 		$totalRows_RsConsultaTurno = mysqli_num_rows($RsConsultaTurno);
 		if($totalRows_RsConsultaTurno>0){
@@ -374,7 +374,7 @@ if($tipoguardar=='Crear_TurnoAyuda')
 			                             S.SERVRAIN RANGO_INICIAL
 								   FROM servicios S
 								  WHERE S.SERVID = '".$_GET['servicio']."'";
-			$RsRangosTurno = mysql_query($query_RsRangosTurno, $turnos) or die(mysql_error());
+			$RsRangosTurno = mysqli_query($turnos,$query_RsRangosTurno) ;
 			$row_RsRangosTurno = mysqli_fetch_assoc($RsRangosTurno);	
 			$totalRows_RsRangosTurno = mysqli_num_rows($RsRangosTurno);			
 			$numero_turno = $row_RsConsultaTurno['NUMERO_TURNO'];
@@ -437,9 +437,9 @@ if($tipoguardar=='Crear_TurnoAyuda')
 										'".$row_RsConsultaTurno['SERVICIO']."'
 										)";
 			 //echo($query_RsInsert);        
-			$RsInsert = mysql_query($query_RsInsert, $turnos) or die(mysql_error());
+			$RsInsert = mysqli_query($turnos, $query_RsInsert) ;
 		$query_RsUltInsert = "SELECT LAST_INSERT_ID() DATO";
-		$RsUltInsert = mysql_query($query_RsUltInsert, $turnos) or die(mysql_error());
+		$RsUltInsert = mysqli_query($turnos, $query_RsUltInsert);
 		$row_RsUltInsert = mysqli_fetch_assoc($RsUltInsert);
 		$consecutivo=$row_RsUltInsert['DATO'];			
 		$retorno=$numero_turno.'/'.$row_RsConsultaTurno['PARAMETRO'].'/'.$consecutivo.'/'.$letra_turno;		
@@ -504,23 +504,23 @@ if($tipoguardar=='Crear_turno')
 								 and  TURNCONS = (SELECT MAX(T2.TURNCONS)
 								                   FROM turnos T2
 												  WHERE T2.TURNPARA = '".$parametro_C."')";
-		$RsConsultaTurno = mysql_query($query_RsConsultaTurno, $turnos) or die(mysql_error());
+		$RsConsultaTurno = mysqli_query( $turnos, $query_RsConsultaTurno) ;
 		$row_RsConsultaTurno = mysqli_fetch_assoc($RsConsultaTurno);	
 		$totalRows_RsConsultaTurno = mysqli_num_rows($RsConsultaTurno);
 			
 		if (isset($totalRows_RsConsultaTurno) && $totalRows_RsConsultaTurno > 0)
 		{
 			$query_RsLLamarTurno="UPDATE turnos SET TURNIDES = '3' WHERE TURNCONS ='".$row_RsConsultaTurno['CONSECUTIVO']."'";
-			$RsLLamarTurno = mysql_query($query_RsLLamarTurno, $turnos) or die(mysql_error());
+			$RsLLamarTurno = mysqli_query($turnos, $query_RsLLamarTurno) ;
 
 			$query_RsLLamarTurno2="UPDATE turnos SET TURNFELL = SYSDATE() WHERE TURNCONS ='".$row_RsConsultaTurno['CONSECUTIVO']."'";
-			$RsLLamarTurno2 = mysql_query($query_RsLLamarTurno2, $turnos) or die(mysql_error());
+			$RsLLamarTurno2 = mysqli_query($turnos, $query_RsLLamarTurno2) ;
 		
 			$query_RsRangosTurno="SELECT S.SERVRAFI RANGO_FINAL,
 			                             S.SERVRAIN RANGO_INICIAL
 								   FROM servicios S
 								  WHERE S.SERVID = '".$row_RsConsultaTurno['SERVICIO']."'";
-			$RsRangosTurno = mysql_query($query_RsRangosTurno, $turnos) or die(mysql_error());
+			$RsRangosTurno = mysqli_query($turnos,$query_RsRangosTurno) ;
 			$row_RsRangosTurno = mysqli_fetch_assoc($RsRangosTurno);	
 			$totalRows_RsRangosTurno = mysqli_num_rows($RsRangosTurno);			
 			$numero_turno = $row_RsConsultaTurno['NUMERO_TURNO'];
@@ -602,7 +602,7 @@ $query_RsllAMADOTV="SELECT      MODUID  CODIGO_MODULO,
 								 and  TURNCONS = (SELECT MAX(T2.TURNCONS)
 								                   FROM turnos T2
 												  WHERE T2.TURNPARA = '".$parametro_C."')";
-		$RsConsultaTurno = mysql_query($query_RsConsultaTurno, $turnos) or die(mysql_error());
+		$RsConsultaTurno = mysqli_query( $turnos, $query_RsConsultaTurno) ;
 		$row_RsConsultaTurno = mysqli_fetch_assoc($RsConsultaTurno);	
 		$totalRows_RsConsultaTurno = mysqli_num_rows($RsConsultaTurno);	
 		$numero_turno = $_GET['numero_turno'];
@@ -612,7 +612,7 @@ $query_RsllAMADOTV="SELECT      MODUID  CODIGO_MODULO,
 			                             S.SERVRAIN RANGO_INICIAL
 								   FROM servicios S
 								  WHERE S.SERVID = '".$row_RsConsultaTurno['SERVICIO']."'";
-			$RsRangosTurno = mysql_query($query_RsRangosTurno, $turnos) or die(mysql_error());
+			$RsRangosTurno = mysqli_query($turnos,$query_RsRangosTurno) ;
 			$row_RsRangosTurno = mysqli_fetch_assoc($RsRangosTurno);	
 			$totalRows_RsRangosTurno = mysqli_num_rows($RsRangosTurno);			
 			$numero_turno = $row_RsConsultaTurno['NUMERO_TURNO'];
@@ -671,10 +671,10 @@ $query_RsllAMADOTV="SELECT      MODUID  CODIGO_MODULO,
 									'".$_SESSION["ID_SERVI"]."'
 									)";
          //echo($query_RsInsert);        
-		$RsInsert = mysql_query($query_RsInsert, $turnos) or die(mysql_error());
+		$RsInsert = mysqli_query($turnos, $query_RsInsert) ;
 		
 		$query_RsUltInsert = "SELECT LAST_INSERT_ID() DATO";
-		$RsUltInsert = mysql_query($query_RsUltInsert, $turnos) or die(mysql_error());
+		$RsUltInsert = mysqli_query($turnos, $query_RsUltInsert);
 		$row_RsUltInsert = mysqli_fetch_assoc($RsUltInsert);
 		$consecutivo=$row_RsUltInsert['DATO'];
 		
@@ -730,7 +730,7 @@ if($tipoguardar=='Siguiente_turno'){
 		if($secuencia_N == 'dos' or $secuencia_N == 'uno'  )
 		{
 			$query_RsTurno="UPDATE turnos SET TURNIDES = '4' WHERE TURNCONS ='".$_GET['consecutivo_N']."'";
-			$RsTurno = mysql_query($query_RsTurno, $turnos) or die(mysql_error());
+			$RsTurno = mysqli_query($turnos, $query_RsTurno) ;
 			$turno_N=$_GET['numero_turno_N']+1;
 		$query_RsConsultaTurno="SELECT 
 										TURNCONS CONSECUTIVO ,
@@ -743,7 +743,7 @@ if($tipoguardar=='Siguiente_turno'){
 								 and  TURNCONS = (SELECT MAX(T2.TURNCONS)
 								                   FROM turnos T2
 												  WHERE T2.TURNPARA = '".$parametro_S."')";
-		$RsConsultaTurno = mysql_query($query_RsConsultaTurno, $turnos) or die(mysql_error());
+		$RsConsultaTurno = mysqli_query( $turnos, $query_RsConsultaTurno) ;
 		$row_RsConsultaTurno = mysqli_fetch_assoc($RsConsultaTurno);	
 		$totalRows_RsConsultaTurno = mysqli_num_rows($RsConsultaTurno);				
 		if($totalRows_RsConsultaTurno>0){
@@ -752,7 +752,7 @@ if($tipoguardar=='Siguiente_turno'){
 			                             S.SERVRAIN RANGO_INICIAL
 								   FROM servicios S
 								  WHERE S.SERVID = '".$row_RsConsultaTurno['SERVICIO']."'";
-			$RsRangosTurno = mysql_query($query_RsRangosTurno, $turnos) or die(mysql_error());
+			$RsRangosTurno = mysqli_query($turnos,$query_RsRangosTurno) ;
 			$row_RsRangosTurno = mysqli_fetch_assoc($RsRangosTurno);	
 			$totalRows_RsRangosTurno = mysqli_num_rows($RsRangosTurno);			
 			$numero_turno = $turno_N;
@@ -812,10 +812,10 @@ if($tipoguardar=='Siguiente_turno'){
 									'".$_SESSION["ID_SERVI"]."'
 									)";
 //echo($query_RsInsert);        
-		$RsInsert = mysql_query($query_RsInsert, $turnos) or die(mysql_error());
+		$RsInsert = mysqli_query($turnos, $query_RsInsert) ;
 
 	$query_RsUltInsert = "SELECT LAST_INSERT_ID() DATO";
-	$RsUltInsert = mysql_query($query_RsUltInsert, $turnos) or die(mysql_error());
+	$RsUltInsert = mysqli_query($turnos, $query_RsUltInsert);
 	$row_RsUltInsert = mysqli_fetch_assoc($RsUltInsert);
 	$TurnoSiguiente=$row_RsUltInsert['DATO'];
 	
@@ -827,7 +827,7 @@ if($tipoguardar=='Siguiente_turno'){
 						 TURNSERV SERVICIO
 					FROM turnos
 					WHERE TURNCONS ='".$TurnoSiguiente."'";
-	$RsConsultaTurnoSig = mysql_query($query_RsConsultaTurnoSig, $turnos) or die(mysql_error());
+	$RsConsultaTurnoSig = mysqli_query($turnos, $query_RsConsultaTurnoSig);
 	$row_RsConsultaTurnoSig = mysqli_fetch_assoc($RsConsultaTurnoSig);	
 	
      $turno= $row_RsConsultaTurnoSig['NUMERO_TURNO'];
@@ -875,14 +875,14 @@ $query_RsI_Turno="UPDATE turnos
                       SET TURNIDES = '6' 
                       WHERE TURNCONS ='".$_GET['consecutivo_ayuda']."'
                       AND   TURNPARA ='".$_GET['parametro_ayuda']."' ";
-$RsI_Turno = mysql_query($query_RsI_Turno, $turnos) or die(mysql_error());
+$RsI_Turno = mysqli_query($turnos,$query_RsI_Turno) ;
 
 //actualizar fecha de inicio
 $query_RsI_Turno2="UPDATE turnos 
                       SET TURNFECH = SYSDATE() 
                       WHERE TURNCONS ='".$_GET['consecutivo_ayuda']."'
                       AND   TURNPARA ='".$_GET['parametro_ayuda']."' ";
-$RsI_Turno2 = mysql_query($query_RsI_Turno2, $turnos) or die(mysql_error());
+$RsI_Turno2 = mysqli_query($turnos,$query_RsI_Turno2) ;
 
 $r='T';
 $retorno=$r.'/'.$_GET['parametro_ayuda'].'/'.$_GET['consecutivo_ayuda'];		
@@ -897,14 +897,14 @@ $query_RsI_Turno="UPDATE turnos
                       SET TURNIDES = '6' 
                       WHERE TURNCONS ='".$_GET['I_consecutivo']."'
                       AND   TURNPARA ='".$_GET['I_parametro']."' ";
-$RsI_Turno = mysql_query($query_RsI_Turno, $turnos) or die(mysql_error());
+$RsI_Turno = mysqli_query($turnos,$query_RsI_Turno) ;
 
 //actualizar fecha de inicio
 $query_RsI_Turno2="UPDATE turnos 
                       SET TURNFECH = SYSDATE() 
                       WHERE TURNCONS ='".$_GET['I_consecutivo']."'
                       AND   TURNPARA ='".$_GET['I_parametro']."' ";
-$RsI_Turno2 = mysql_query($query_RsI_Turno2, $turnos) or die(mysql_error());
+$RsI_Turno2 = mysqli_query($turnos,$query_RsI_Turno2) ;
 
 $r='T';
 $retorno=$r.'/'.$_GET['I_parametro'].'/'.$_GET['I_consecutivo'];		
@@ -918,14 +918,14 @@ $query_RsF_Turno="UPDATE turnos
                       SET TURNIDES = '2' 
                       WHERE TURNCONS ='".$_GET['consecutivo_ayuda']."'
                       AND   TURNPARA ='".$_GET['parametro_ayuda']."' ";
-$RsF_Turno = mysql_query($query_RsF_Turno, $turnos) or die(mysql_error());
+$RsF_Turno = mysqli_query($turnos,$query_RsF_Turno);
 
 //actualizar fecha fin
  $query_RsF_Turno2="UPDATE turnos 
                       SET TURNFEFI =  SYSDATE()
                       WHERE TURNCONS ='".$_GET['consecutivo_ayuda']."'
                       AND   TURNPARA ='".$_GET['parametro_ayuda']."' ";
-$RsF_Turno2 = mysql_query($query_RsF_Turno2, $turnos) or die(mysql_error());
+$RsF_Turno2 = mysqli_query($turnos,$query_RsF_Turno2);
   /*    
  $query_RsConsultar_Tur="SELECT `TURNCONS`,
                                  TURNCOAS TURNO,
@@ -934,7 +934,7 @@ $RsF_Turno2 = mysql_query($query_RsF_Turno2, $turnos) or die(mysql_error());
 						   WHERE `TURNPARA`='".$_GET['F_parametro']."'
                            AND   `TURNCONS`='".$_GET['F_consecutivo']."'";
 						   
-$RsConsultar_Tur = mysql_query($query_RsConsultar_Tur, $turnos) or die(mysql_error());
+$RsConsultar_Tur = mysqli_query($turnos,$query_RsConsultar_Tur);
 $row_RsConsultar_Tur = mysqli_fetch_assoc($RsConsultar_Tur);	
 $turno=$row_RsConsultar_Tur['TURNO'];						   
 $r=$turno+1;		
@@ -952,14 +952,14 @@ $query_RsF_Turno="UPDATE turnos
                       SET TURNIDES = '2' 
                       WHERE TURNCONS ='".$_GET['F_consecutivo']."'
                       AND   TURNPARA ='".$_GET['F_parametro']."' ";
-$RsF_Turno = mysql_query($query_RsF_Turno, $turnos) or die(mysql_error());
+$RsF_Turno = mysqli_query($turnos,$query_RsF_Turno);
 
 //actualizar fecha fin
  $query_RsF_Turno2="UPDATE turnos 
                       SET TURNFEFI =  SYSDATE()
                       WHERE TURNCONS ='".$_GET['F_consecutivo']."'
                       AND   TURNPARA ='".$_GET['F_parametro']."' ";
-$RsF_Turno2 = mysql_query($query_RsF_Turno2, $turnos) or die(mysql_error());
+$RsF_Turno2 = mysqli_query($turnos,$query_RsF_Turno2) ;
       /*
  $query_RsConsultar_Tur="SELECT `TURNCONS`,
                                  TURNCOAS TURNO,
@@ -981,7 +981,7 @@ $RsF_Turno2 = mysql_query($query_RsF_Turno2, $turnos) or die(mysql_error());
 											   WHERE T2.TURNPARA = '".$_GET['F_parametro']."')  
 						   ";						   
 						   
-$RsConsultar_Tur = mysql_query($query_RsConsultar_Tur, $turnos) or die(mysql_error());
+$RsConsultar_Tur = mysqli_query($turnos,$query_RsConsultar_Tur);
 $row_RsConsultar_Tur = mysqli_fetch_assoc($RsConsultar_Tur);	
 $turno=$row_RsConsultar_Tur['TURNO'];						   
 $Fconsecutivo=$row_RsConsultar_Tur['TURNCONS'];						   
@@ -995,7 +995,7 @@ $n="dos";
 			                             S.SERVRAIN RANGO_INICIAL
 								   FROM servicios S
 								  WHERE S.SERVID = '".$row_RsConsultar_Tur['SERVICIO']."'";
-			$RsRangosTurno = mysql_query($query_RsRangosTurno, $turnos) or die(mysql_error());
+			$RsRangosTurno = mysqli_query($turnos,$query_RsRangosTurno) ;
 			$row_RsRangosTurno = mysqli_fetch_assoc($RsRangosTurno);	
 			$totalRows_RsRangosTurno = mysqli_num_rows($RsRangosTurno);			
 			//$numero_turno = $row_RsConsultar_Tur['TURNO'];
@@ -1039,17 +1039,17 @@ $S_idusuario=$_SESSION["IDUSU"];
 
             $query_RsModulo="
 			UPDATE modulos SET MODUESTA = '0', MODUSERV= '' WHERE MODUID ='".$_GET['S_modulo']."'";
-			$RsModulo = mysql_query($query_RsModulo, $turnos) or die(mysql_error());
+			$RsModulo = mysqli_query($turnos, $query_RsModulo) ;
 			
 			$query_RsActualizarUsuario="
 		   UPDATE usuarios SET USUAESTA = '0' WHERE USUAID ='".$S_idusuario."'";
-			$RsActualizarUsuario = mysql_query($query_RsActualizarUsuario, $turnos) or die(mysql_error());
+			$RsActualizarUsuario = mysqli_query($turnos,$query_RsActualizarUsuario) ;
 			
     $query_RsSalida="UPDATE turnos 
                       SET TURNIDES = '4'
                       WHERE TURNCONS ='".$_GET['S_consecutivo']."'
                       AND   TURNPARA ='".$_GET['S_parametro']."' ";
-    $RsSalida = mysql_query($query_RsSalida, $turnos) or die(mysql_error());
+    $RsSalida = mysqli_query($turnos, $query_RsSalida) ;
 	
 /*
 	$query_RsComprobarEstados="SELECT T.TURNCONS FROM 
@@ -1062,7 +1062,7 @@ $S_idusuario=$_SESSION["IDUSU"];
 								WHERE TURNPARA = '".$_GET['S_consecutivo']."'
 								 AND T.TURNIDES IN ('3','6') ";
 
-    $RsComprobarEstados = mysql_query($query_RsComprobarEstados, $turnos) or die(mysql_error());
+    $RsComprobarEstados = mysqli_query($turnos, $query_RsComprobarEstados) ;
 	//$row_RsComprobarEstados = mysqli_fetch_assoc($RsComprobarEstados);	
 	$totalRows_RsComprobarEstados = mysqli_num_rows($RsComprobarEstados);
 if($totalRows_RsComprobarEstados == 0){	
@@ -1081,7 +1081,7 @@ if($totalRows_RsComprobarEstados == 0){
 										T.TURNSERV
 							FROM turnos T
 					    WHERE TURNIDUS = '".$_SESSION["IDUSU"]."'";
-	$RsTurnosExistentes = mysql_query($query_RsTurnosExistentes, $turnos) or die(mysql_error());
+	$RsTurnosExistentes = mysqli_query($turnos,$query_RsTurnosExistentes);
 	$row_RsTurnosExistentes = mysqli_fetch_assoc($RsTurnosExistentes);	
 	$totalRows_RsTurnosExistentes = mysqli_num_rows($RsTurnosExistentes);	
 	if($totalRows_RsTurnosExistentes>0){
@@ -1117,21 +1117,21 @@ if($totalRows_RsComprobarEstados == 0){
 												  '".$row_RsTurnosExistentes['TURNIDAP']."',
 												  '".$row_RsTurnosExistentes['TURNSERV']."'
 												  )";
-	     $RsInsert = mysql_query($query_RsInsert, $turnos) or die(mysql_error());
+	     $RsInsert = mysqli_query($turnos, $query_RsInsert) ;
 		 
 		 $query_RsDelete="delete from turnos where TURNCONS = '".$row_RsTurnosExistentes['TURNCONS']."'";
-		 $RsDelete = mysql_query($query_RsDelete, $turnos) or die(mysql_error());
+		 $RsDelete = mysqli_query($turnos,$query_RsDelete);
 	    }while($row_RsTurnosExistentes = mysqli_fetch_assoc($RsTurnosExistentes));
 
 		$query_RsTruncarTable = "SELECT count(TURNCONS) CANTIDAD 
 		                              FROM TURNOS 
                                ";
-		$RsTruncarTable = mysql_query($query_RsTruncarTable, $turnos) or die(mysql_error());
+		$RsTruncarTable = mysqli_query($turnos,$query_RsTruncarTable);
 		$row_RsTruncarTable = mysqli_fetch_assoc($RsTruncarTable);	
 		//$totalRows_RsTruncarTable = mysqli_num_rows($RsTruncarTable);
 		if($row_RsTruncarTable['CANTIDAD']==0){
 		  $query_RsTruncar = 'TRUNCATE TABLE TURNOS';
-		  $RsTruncar = mysql_query($query_RsTruncar, $turnos) or die(mysql_error());		  
+		  $RsTruncar = mysqli_query($turnos,$query_RsTruncar);		  
 		}
 	
 	}
@@ -1155,7 +1155,7 @@ $query_RsContadorMax="
 	WHERE `TURNPARA` ='".$C_parametro."'
 	AND `TURNIDES` =2";
 
-	$RsContadorMax = mysql_query($query_RsContadorMax, $turnos) or die(mysql_error());
+	$RsContadorMax = mysqli_query($turnos,$query_RsContadorMax) ;
 	$row_RsContadorMax = mysqli_fetch_assoc($RsContadorMax);	
 	$Contador=$row_RsContadorMax['numero'];
 	
@@ -1168,7 +1168,7 @@ $_SESSION["ID_SERVI"]=$_GET['C_servicio'];
 	$query_RsContadorMax="UPDATE modulos set MODUSERV = '".$_GET['C_servicio']."', MODUMULT = 0 
 	                       WHERE MODUUSUA = '".$_SESSION["IDUSU"]."'
 						    AND  MODUESTA = 1";
-	$RsContadorMax = mysql_query($query_RsContadorMax, $turnos) or die(mysql_error());
+	$RsContadorMax = mysqli_query($turnos,$query_RsContadorMax);
 header('location:home.php');
 }
 
@@ -1189,7 +1189,7 @@ $query_RsTurnoMax="SELECT TURNCONS ,
 					FROM turnos
 					WHERE TURNPARA =".$A_parametro."";
 
-	$RsTurnoMax = mysql_query($query_RsTurnoMax, $turnos) or die(mysql_error());
+	$RsTurnoMax = mysqli_query($turnos,$query_RsTurnoMax) ;
 	$row_RsTurnoMax = mysqli_fetch_assoc($RsTurnoMax);	
 	$TurnoMax=$row_RsTurnoMax['NUMERO'];
 	
@@ -1200,4 +1200,3 @@ $query_RsTurnoMax="SELECT TURNCONS ,
 	
 }
 	 
-?>
