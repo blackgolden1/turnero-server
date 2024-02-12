@@ -10,9 +10,9 @@ if (!isset($_SESSION)) {
   		session_start();
 	}
 	
-mysql_select_db($database_turnos, $turnos);
-@mysql_query("SET collation_connection = utf8_general_ci;");
-mysql_query ("SET NAMES 'utf8'");
+//mysql_select_db($database_turnos, $turnos);
+// @mysql_query("SET collation_connection = utf8_general_ci;");
+// mysql_query ("SET NAMES 'utf8'");
 
 $tipoguardar='';
 if(isset($_GET['tipoguardar']) && $_GET['tipoguardar']!=''){
@@ -77,9 +77,9 @@ if(isset($_GET['turnos_pantalla']) && $_GET['turnos_pantalla']!=''){
 		}
         		
 		$query_RsllAMADOTV=$query_RsllAMADOTV." ORDER BY TURNCONS asc";
-		$RsllAMADOTV = mysql_query($query_RsllAMADOTV, $turnos) or die(mysql_error());
-		$row_RsllAMADOTV = mysql_fetch_assoc($RsllAMADOTV);	
-		$totalRows_RsllAMADOTV = mysql_num_rows($RsllAMADOTV);
+		$RsllAMADOTV = mysqli_query($turnos, $query_RsllAMADOTV);
+		$row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV);	
+		$totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 		
 		if($totalRows_RsllAMADOTV==0){
 		
@@ -91,8 +91,8 @@ if(isset($_GET['turnos_pantalla']) && $_GET['turnos_pantalla']!=''){
 							WHERE TURNIDES = 3
 							 and TURNCONS NOT IN (".$turnos_pantallatv.")";
 							 //echo($query_RsllAMADOTV2);
-         $RsllAMADOTV2 = mysql_query($query_RsllAMADOTV2, $turnos) or die(mysql_error());							 
-		 $totalRows_RsllAMADOTV2 = mysql_num_rows($RsllAMADOTV2);
+         $RsllAMADOTV2 = mysqli_query($turnos,$query_RsllAMADOTV2);							 
+		 $totalRows_RsllAMADOTV2 = mysqli_num_rows($RsllAMADOTV2);
 		 if($totalRows_RsllAMADOTV2>0){
 		   echo('nuevo');
 		   exit();
@@ -123,15 +123,15 @@ if(isset($_GET['turnos_pantalla']) && $_GET['turnos_pantalla']!=''){
 		}
         		
 		$query_RsllAMADOTV=$query_RsllAMADOTV." ORDER BY TURNCONS asc";
-		$RsllAMADOTV = mysql_query($query_RsllAMADOTV, $turnos) or die(mysql_error());
-		$row_RsllAMADOTV = mysql_fetch_assoc($RsllAMADOTV);	
-		$totalRows_RsllAMADOTV = mysql_num_rows($RsllAMADOTV);
+		$RsllAMADOTV = mysqli_query($turnos,$query_RsllAMADOTV);
+		$row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV);	
+		$totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 		if($totalRows_RsllAMADOTV>0){
 	 	 $k=0;
 		  do{
 		    $turnosExs[$k]=$row_RsllAMADOTV['CONSECUTIVO'];
 		    
-			}while($row_RsllAMADOTV = mysql_fetch_assoc($RsllAMADOTV));
+			}while($row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV));
 		}else{
 		 echo('count0');
 		 exit();
@@ -157,7 +157,7 @@ if(isset($_GET['turnos_pantalla']) && $_GET['turnos_pantalla']!=''){
 							 and TURNCONS NOT IN (".$turnos_pantallatv.")";
 							 //echo($query_RsllAMADOTV2);
          $RsllAMADOTV2 = mysql_query($query_RsllAMADOTV2, $turnos) or die(mysql_error());							 
-		 $totalRows_RsllAMADOTV2 = mysql_num_rows($RsllAMADOTV2);
+		 $totalRows_RsllAMADOTV2 = mysqli_num_rows($RsllAMADOTV2);
 		 if($totalRows_RsllAMADOTV2>0){
 		   echo('nuevo');
 		   exit();
@@ -196,8 +196,8 @@ if($tipoguardar=='ComprobarTurnoPendiente')
                                  AND TURNIDES in ('3','6')							
  								 ";								 
 		$RsConsultaTurno = mysql_query($query_RsConsultaTurno, $turnos) or die(mysql_error());
-		//$row_RsConsultaTurno = mysql_fetch_assoc($RsConsultaTurno);	
-		$totalRows_RsConsultaTurno = mysql_num_rows($RsConsultaTurno);
+		//$row_RsConsultaTurno = mysqli_fetch_assoc($RsConsultaTurno);	
+		$totalRows_RsConsultaTurno = mysqli_num_rows($RsConsultaTurno);
 		if($totalRows_RsConsultaTurno>0){
 		  echo('si');
 		}else{
@@ -218,8 +218,8 @@ if($tipoguardar=='ComprobarTurnoPendienteAyuda')
                                  AND TURNIDES in ('3','6')							
  								 ";								 
 		$RsConsultaTurno = mysql_query($query_RsConsultaTurno, $turnos) or die(mysql_error());
-		//$row_RsConsultaTurno = mysql_fetch_assoc($RsConsultaTurno);	
-		$totalRows_RsConsultaTurno = mysql_num_rows($RsConsultaTurno);
+		//$row_RsConsultaTurno = mysqli_fetch_assoc($RsConsultaTurno);	
+		$totalRows_RsConsultaTurno = mysqli_num_rows($RsConsultaTurno);
 		if($totalRows_RsConsultaTurno>0){
 		  echo('si');
 		}else{
@@ -249,13 +249,13 @@ $query_RsllAMADOTV="SELECT      MODUID  CODIGO_MODULO,
 						AND TURNIDES = ESTAID
 						ORDER BY TURNCONS
 						";
-	$RsllAMADOTV = mysql_query($query_RsllAMADOTV, $turnos) or die(mysql_error());
-	$row_RsllAMADOTV = mysql_fetch_assoc($RsllAMADOTV);	
-	$totalRows_RsllAMADOTV = mysql_num_rows($RsllAMADOTV);
+	$RsllAMADOTV = mysqli_query($turnos, $query_RsllAMADOTV);
+	$row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV);	
+	$totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
     if($totalRows_RsllAMADOTV>0){
 	  do{
 	  echo($row_RsllAMADOTV['CODIGO_MODULO'].'/'.$row_RsllAMADOTV['MODULO'].'/'.$row_RsllAMADOTV['TURNO'].'/'.$row_RsllAMADOTV['CONSECUTIVO'].'/'.$row_RsllAMADOTV['COLOR'].'/'.$row_RsllAMADOTV['SERVICIO_DES'].'!');
-	    }while($row_RsllAMADOTV = mysql_fetch_assoc($RsllAMADOTV));
+	    }while($row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV));
 	}
 }
 
@@ -286,7 +286,7 @@ if($tipoguardar=='Sincronizar_Turno')
 		
 	$query_RsUltInsert = "SELECT LAST_INSERT_ID() DATO";
 	$RsUltInsert = mysql_query($query_RsUltInsert, $turnos) or die(mysql_error());
-	$row_RsUltInsert = mysql_fetch_assoc($RsUltInsert);
+	$row_RsUltInsert = mysqli_fetch_assoc($RsUltInsert);
 	$parametro=$row_RsUltInsert['DATO'];
     
 	//echo($parametro);
@@ -300,7 +300,7 @@ if($tipoguardar=='Sincronizar_Turno')
 									  FROM parametros
 									  WHERE PARACONS='".$parametro."'";
 						$RsParametro = mysql_query($query_RsParametro, $turnos) or die(mysql_error());
-						$row_RsParametro = mysql_fetch_assoc($RsParametro);	
+						$row_RsParametro = mysqli_fetch_assoc($RsParametro);	
 						$paravalor=$row_RsParametro['PARAVALO'];
 	//echo($paravalor);
 	if($_GET['modulo']!=''){
@@ -367,16 +367,16 @@ if($tipoguardar=='Crear_TurnoAyuda')
 												   )
  								 ";								 
 		$RsConsultaTurno = mysql_query($query_RsConsultaTurno, $turnos) or die(mysql_error());
-		$row_RsConsultaTurno = mysql_fetch_assoc($RsConsultaTurno);	
-		$totalRows_RsConsultaTurno = mysql_num_rows($RsConsultaTurno);
+		$row_RsConsultaTurno = mysqli_fetch_assoc($RsConsultaTurno);	
+		$totalRows_RsConsultaTurno = mysqli_num_rows($RsConsultaTurno);
 		if($totalRows_RsConsultaTurno>0){
 			$query_RsRangosTurno="SELECT S.SERVRAFI RANGO_FINAL,
 			                             S.SERVRAIN RANGO_INICIAL
 								   FROM servicios S
 								  WHERE S.SERVID = '".$_GET['servicio']."'";
 			$RsRangosTurno = mysql_query($query_RsRangosTurno, $turnos) or die(mysql_error());
-			$row_RsRangosTurno = mysql_fetch_assoc($RsRangosTurno);	
-			$totalRows_RsRangosTurno = mysql_num_rows($RsRangosTurno);			
+			$row_RsRangosTurno = mysqli_fetch_assoc($RsRangosTurno);	
+			$totalRows_RsRangosTurno = mysqli_num_rows($RsRangosTurno);			
 			$numero_turno = $row_RsConsultaTurno['NUMERO_TURNO'];
 			$no_enter=0;
 			if($totalRows_RsRangosTurno>0){
@@ -440,7 +440,7 @@ if($tipoguardar=='Crear_TurnoAyuda')
 			$RsInsert = mysql_query($query_RsInsert, $turnos) or die(mysql_error());
 		$query_RsUltInsert = "SELECT LAST_INSERT_ID() DATO";
 		$RsUltInsert = mysql_query($query_RsUltInsert, $turnos) or die(mysql_error());
-		$row_RsUltInsert = mysql_fetch_assoc($RsUltInsert);
+		$row_RsUltInsert = mysqli_fetch_assoc($RsUltInsert);
 		$consecutivo=$row_RsUltInsert['DATO'];			
 		$retorno=$numero_turno.'/'.$row_RsConsultaTurno['PARAMETRO'].'/'.$consecutivo.'/'.$letra_turno;		
 	    echo($retorno);	
@@ -464,9 +464,9 @@ $query_RsllAMADOTV="SELECT      MODUID  CODIGO_MODULO,
 						AND TURNIDES = ESTAID
 						AND TURNCONS = '".$consecutivo."'
 						";
-	$RsllAMADOTV = mysql_query($query_RsllAMADOTV, $turnos) or die(mysql_error());
-	$row_RsllAMADOTV = mysql_fetch_assoc($RsllAMADOTV);	
-	$totalRows_RsllAMADOTV = mysql_num_rows($RsllAMADOTV);
+	$RsllAMADOTV = mysqli_query($turnos, $query_RsllAMADOTV);
+	$row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV);	
+	$totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 	$turnoactual='0/0/0/0/0/0!';
     if($totalRows_RsllAMADOTV>0){
 	  $turnoactual=$row_RsllAMADOTV['CODIGO_MODULO'].'/'.$row_RsllAMADOTV['MODULO'].'/'.$row_RsllAMADOTV['TURNO'].'/'.$row_RsllAMADOTV['CONSECUTIVO'].'/'.$row_RsllAMADOTV['COLOR'].'/'.$row_RsllAMADOTV['SERVICIO_DES'].'!';
@@ -505,8 +505,8 @@ if($tipoguardar=='Crear_turno')
 								                   FROM turnos T2
 												  WHERE T2.TURNPARA = '".$parametro_C."')";
 		$RsConsultaTurno = mysql_query($query_RsConsultaTurno, $turnos) or die(mysql_error());
-		$row_RsConsultaTurno = mysql_fetch_assoc($RsConsultaTurno);	
-		$totalRows_RsConsultaTurno = mysql_num_rows($RsConsultaTurno);
+		$row_RsConsultaTurno = mysqli_fetch_assoc($RsConsultaTurno);	
+		$totalRows_RsConsultaTurno = mysqli_num_rows($RsConsultaTurno);
 			
 		if (isset($totalRows_RsConsultaTurno) && $totalRows_RsConsultaTurno > 0)
 		{
@@ -521,8 +521,8 @@ if($tipoguardar=='Crear_turno')
 								   FROM servicios S
 								  WHERE S.SERVID = '".$row_RsConsultaTurno['SERVICIO']."'";
 			$RsRangosTurno = mysql_query($query_RsRangosTurno, $turnos) or die(mysql_error());
-			$row_RsRangosTurno = mysql_fetch_assoc($RsRangosTurno);	
-			$totalRows_RsRangosTurno = mysql_num_rows($RsRangosTurno);			
+			$row_RsRangosTurno = mysqli_fetch_assoc($RsRangosTurno);	
+			$totalRows_RsRangosTurno = mysqli_num_rows($RsRangosTurno);			
 			$numero_turno = $row_RsConsultaTurno['NUMERO_TURNO'];
 			$no_enter=0;
 			if($totalRows_RsRangosTurno>0){
@@ -572,9 +572,9 @@ $query_RsllAMADOTV="SELECT      MODUID  CODIGO_MODULO,
 						AND TURNIDES = ESTAID
 					    and TURNCONS = '".$row_RsConsultaTurno['CONSECUTIVO']."'";
 						
-	$RsllAMADOTV = mysql_query($query_RsllAMADOTV, $turnos) or die(mysql_error());
-	$row_RsllAMADOTV = mysql_fetch_assoc($RsllAMADOTV);	
-	$totalRows_RsllAMADOTV = mysql_num_rows($RsllAMADOTV);
+	$RsllAMADOTV = mysqli_query($turnos, $query_RsllAMADOTV);
+	$row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV);	
+	$totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 	$turnoactual='0/0/0/0/0/0!';
     if($totalRows_RsllAMADOTV>0){
 	  $turnoactual=$row_RsllAMADOTV['CODIGO_MODULO'].'/'.$row_RsllAMADOTV['MODULO'].'/'.$row_RsllAMADOTV['TURNO'].'/'.$row_RsllAMADOTV['CONSECUTIVO'].'/'.$row_RsllAMADOTV['COLOR'].'/'.$row_RsllAMADOTV['SERVICIO_DES'].'!';
@@ -603,8 +603,8 @@ $query_RsllAMADOTV="SELECT      MODUID  CODIGO_MODULO,
 								                   FROM turnos T2
 												  WHERE T2.TURNPARA = '".$parametro_C."')";
 		$RsConsultaTurno = mysql_query($query_RsConsultaTurno, $turnos) or die(mysql_error());
-		$row_RsConsultaTurno = mysql_fetch_assoc($RsConsultaTurno);	
-		$totalRows_RsConsultaTurno = mysql_num_rows($RsConsultaTurno);	
+		$row_RsConsultaTurno = mysqli_fetch_assoc($RsConsultaTurno);	
+		$totalRows_RsConsultaTurno = mysqli_num_rows($RsConsultaTurno);	
 		$numero_turno = $_GET['numero_turno'];
 		if($totalRows_RsConsultaTurno>0){
 		  $numero_turno = $row_RsConsultaTurno['NUMERO_TURNO'];
@@ -613,8 +613,8 @@ $query_RsllAMADOTV="SELECT      MODUID  CODIGO_MODULO,
 								   FROM servicios S
 								  WHERE S.SERVID = '".$row_RsConsultaTurno['SERVICIO']."'";
 			$RsRangosTurno = mysql_query($query_RsRangosTurno, $turnos) or die(mysql_error());
-			$row_RsRangosTurno = mysql_fetch_assoc($RsRangosTurno);	
-			$totalRows_RsRangosTurno = mysql_num_rows($RsRangosTurno);			
+			$row_RsRangosTurno = mysqli_fetch_assoc($RsRangosTurno);	
+			$totalRows_RsRangosTurno = mysqli_num_rows($RsRangosTurno);			
 			$numero_turno = $row_RsConsultaTurno['NUMERO_TURNO'];
 			$no_enter=0;
 			if($totalRows_RsRangosTurno>0){
@@ -675,7 +675,7 @@ $query_RsllAMADOTV="SELECT      MODUID  CODIGO_MODULO,
 		
 		$query_RsUltInsert = "SELECT LAST_INSERT_ID() DATO";
 		$RsUltInsert = mysql_query($query_RsUltInsert, $turnos) or die(mysql_error());
-		$row_RsUltInsert = mysql_fetch_assoc($RsUltInsert);
+		$row_RsUltInsert = mysqli_fetch_assoc($RsUltInsert);
 		$consecutivo=$row_RsUltInsert['DATO'];
 		
 		//$retorno=$_GET['numero_turno'].'/'.$parametro_C.'/'.$consecutivo;		
@@ -701,9 +701,9 @@ $query_RsllAMADOTV="SELECT      MODUID  CODIGO_MODULO,
 						AND TURNIDES = ESTAID
 						AND TURNCONS = '".$consecutivo."'
 						";
-	$RsllAMADOTV = mysql_query($query_RsllAMADOTV, $turnos) or die(mysql_error());
-	$row_RsllAMADOTV = mysql_fetch_assoc($RsllAMADOTV);	
-	$totalRows_RsllAMADOTV = mysql_num_rows($RsllAMADOTV);
+	$RsllAMADOTV = mysqli_query($turnos, $query_RsllAMADOTV);
+	$row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV);	
+	$totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 	$turnoactual='0/0/0/0/0/0!';
     if($totalRows_RsllAMADOTV>0){
 	  $turnoactual=$row_RsllAMADOTV['CODIGO_MODULO'].'/'.$row_RsllAMADOTV['MODULO'].'/'.$row_RsllAMADOTV['TURNO'].'/'.$row_RsllAMADOTV['CONSECUTIVO'].'/'.$row_RsllAMADOTV['COLOR'].'/'.$row_RsllAMADOTV['SERVICIO_DES'].'!';
@@ -744,8 +744,8 @@ if($tipoguardar=='Siguiente_turno'){
 								                   FROM turnos T2
 												  WHERE T2.TURNPARA = '".$parametro_S."')";
 		$RsConsultaTurno = mysql_query($query_RsConsultaTurno, $turnos) or die(mysql_error());
-		$row_RsConsultaTurno = mysql_fetch_assoc($RsConsultaTurno);	
-		$totalRows_RsConsultaTurno = mysql_num_rows($RsConsultaTurno);				
+		$row_RsConsultaTurno = mysqli_fetch_assoc($RsConsultaTurno);	
+		$totalRows_RsConsultaTurno = mysqli_num_rows($RsConsultaTurno);				
 		if($totalRows_RsConsultaTurno>0){
 		  $turno_N=$row_RsConsultaTurno['NUMERO_TURNO'];
 			$query_RsRangosTurno="SELECT S.SERVRAFI RANGO_FINAL,
@@ -753,8 +753,8 @@ if($tipoguardar=='Siguiente_turno'){
 								   FROM servicios S
 								  WHERE S.SERVID = '".$row_RsConsultaTurno['SERVICIO']."'";
 			$RsRangosTurno = mysql_query($query_RsRangosTurno, $turnos) or die(mysql_error());
-			$row_RsRangosTurno = mysql_fetch_assoc($RsRangosTurno);	
-			$totalRows_RsRangosTurno = mysql_num_rows($RsRangosTurno);			
+			$row_RsRangosTurno = mysqli_fetch_assoc($RsRangosTurno);	
+			$totalRows_RsRangosTurno = mysqli_num_rows($RsRangosTurno);			
 			$numero_turno = $turno_N;
 			$no_enter=0;
 			if($totalRows_RsRangosTurno>0){
@@ -816,7 +816,7 @@ if($tipoguardar=='Siguiente_turno'){
 
 	$query_RsUltInsert = "SELECT LAST_INSERT_ID() DATO";
 	$RsUltInsert = mysql_query($query_RsUltInsert, $turnos) or die(mysql_error());
-	$row_RsUltInsert = mysql_fetch_assoc($RsUltInsert);
+	$row_RsUltInsert = mysqli_fetch_assoc($RsUltInsert);
 	$TurnoSiguiente=$row_RsUltInsert['DATO'];
 	
 	$query_RsConsultaTurnoSig="SELECT 
@@ -828,7 +828,7 @@ if($tipoguardar=='Siguiente_turno'){
 					FROM turnos
 					WHERE TURNCONS ='".$TurnoSiguiente."'";
 	$RsConsultaTurnoSig = mysql_query($query_RsConsultaTurnoSig, $turnos) or die(mysql_error());
-	$row_RsConsultaTurnoSig = mysql_fetch_assoc($RsConsultaTurnoSig);	
+	$row_RsConsultaTurnoSig = mysqli_fetch_assoc($RsConsultaTurnoSig);	
 	
      $turno= $row_RsConsultaTurnoSig['NUMERO_TURNO'];
 			
@@ -854,9 +854,9 @@ $query_RsllAMADOTV="SELECT      MODUID  CODIGO_MODULO,
 						AND TURNIDES = ESTAID
 						AND TURNCONS = '".$TurnoSiguiente."'
 						";
-	$RsllAMADOTV = mysql_query($query_RsllAMADOTV, $turnos) or die(mysql_error());
-	$row_RsllAMADOTV = mysql_fetch_assoc($RsllAMADOTV);	
-	$totalRows_RsllAMADOTV = mysql_num_rows($RsllAMADOTV);
+	$RsllAMADOTV = mysqli_query($turnos, $query_RsllAMADOTV);
+	$row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV);	
+	$totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 	$turnoactual='0/0/0/0/0/0!';
     if($totalRows_RsllAMADOTV>0){
 	  $turnoactual=$row_RsllAMADOTV['CODIGO_MODULO'].'/'.$row_RsllAMADOTV['MODULO'].'/'.$row_RsllAMADOTV['TURNO'].'/'.$row_RsllAMADOTV['CONSECUTIVO'].'/'.$row_RsllAMADOTV['COLOR'].'/'.$row_RsllAMADOTV['SERVICIO_DES'].'!';
@@ -935,7 +935,7 @@ $RsF_Turno2 = mysql_query($query_RsF_Turno2, $turnos) or die(mysql_error());
                            AND   `TURNCONS`='".$_GET['F_consecutivo']."'";
 						   
 $RsConsultar_Tur = mysql_query($query_RsConsultar_Tur, $turnos) or die(mysql_error());
-$row_RsConsultar_Tur = mysql_fetch_assoc($RsConsultar_Tur);	
+$row_RsConsultar_Tur = mysqli_fetch_assoc($RsConsultar_Tur);	
 $turno=$row_RsConsultar_Tur['TURNO'];						   
 $r=$turno+1;		
 $n="dos";
@@ -982,7 +982,7 @@ $RsF_Turno2 = mysql_query($query_RsF_Turno2, $turnos) or die(mysql_error());
 						   ";						   
 						   
 $RsConsultar_Tur = mysql_query($query_RsConsultar_Tur, $turnos) or die(mysql_error());
-$row_RsConsultar_Tur = mysql_fetch_assoc($RsConsultar_Tur);	
+$row_RsConsultar_Tur = mysqli_fetch_assoc($RsConsultar_Tur);	
 $turno=$row_RsConsultar_Tur['TURNO'];						   
 $Fconsecutivo=$row_RsConsultar_Tur['TURNCONS'];						   
 $r=$turno+1;		
@@ -996,8 +996,8 @@ $n="dos";
 								   FROM servicios S
 								  WHERE S.SERVID = '".$row_RsConsultar_Tur['SERVICIO']."'";
 			$RsRangosTurno = mysql_query($query_RsRangosTurno, $turnos) or die(mysql_error());
-			$row_RsRangosTurno = mysql_fetch_assoc($RsRangosTurno);	
-			$totalRows_RsRangosTurno = mysql_num_rows($RsRangosTurno);			
+			$row_RsRangosTurno = mysqli_fetch_assoc($RsRangosTurno);	
+			$totalRows_RsRangosTurno = mysqli_num_rows($RsRangosTurno);			
 			//$numero_turno = $row_RsConsultar_Tur['TURNO'];
 			$no_enter=0;
 			if($totalRows_RsRangosTurno>0){
@@ -1063,8 +1063,8 @@ $S_idusuario=$_SESSION["IDUSU"];
 								 AND T.TURNIDES IN ('3','6') ";
 
     $RsComprobarEstados = mysql_query($query_RsComprobarEstados, $turnos) or die(mysql_error());
-	//$row_RsComprobarEstados = mysql_fetch_assoc($RsComprobarEstados);	
-	$totalRows_RsComprobarEstados = mysql_num_rows($RsComprobarEstados);
+	//$row_RsComprobarEstados = mysqli_fetch_assoc($RsComprobarEstados);	
+	$totalRows_RsComprobarEstados = mysqli_num_rows($RsComprobarEstados);
 if($totalRows_RsComprobarEstados == 0){	
 	$query_RsTurnosExistentes="SELECT   T.TURNCONS,
 										T.TURNCOAS,
@@ -1082,8 +1082,8 @@ if($totalRows_RsComprobarEstados == 0){
 							FROM turnos T
 					    WHERE TURNIDUS = '".$_SESSION["IDUSU"]."'";
 	$RsTurnosExistentes = mysql_query($query_RsTurnosExistentes, $turnos) or die(mysql_error());
-	$row_RsTurnosExistentes = mysql_fetch_assoc($RsTurnosExistentes);	
-	$totalRows_RsTurnosExistentes = mysql_num_rows($RsTurnosExistentes);	
+	$row_RsTurnosExistentes = mysqli_fetch_assoc($RsTurnosExistentes);	
+	$totalRows_RsTurnosExistentes = mysqli_num_rows($RsTurnosExistentes);	
 	if($totalRows_RsTurnosExistentes>0){
 	  do{
 	     $query_RsInsert="INSERT INTO turnosfull(
@@ -1121,14 +1121,14 @@ if($totalRows_RsComprobarEstados == 0){
 		 
 		 $query_RsDelete="delete from turnos where TURNCONS = '".$row_RsTurnosExistentes['TURNCONS']."'";
 		 $RsDelete = mysql_query($query_RsDelete, $turnos) or die(mysql_error());
-	    }while($row_RsTurnosExistentes = mysql_fetch_assoc($RsTurnosExistentes));
+	    }while($row_RsTurnosExistentes = mysqli_fetch_assoc($RsTurnosExistentes));
 
 		$query_RsTruncarTable = "SELECT count(TURNCONS) CANTIDAD 
 		                              FROM TURNOS 
                                ";
 		$RsTruncarTable = mysql_query($query_RsTruncarTable, $turnos) or die(mysql_error());
-		$row_RsTruncarTable = mysql_fetch_assoc($RsTruncarTable);	
-		//$totalRows_RsTruncarTable = mysql_num_rows($RsTruncarTable);
+		$row_RsTruncarTable = mysqli_fetch_assoc($RsTruncarTable);	
+		//$totalRows_RsTruncarTable = mysqli_num_rows($RsTruncarTable);
 		if($row_RsTruncarTable['CANTIDAD']==0){
 		  $query_RsTruncar = 'TRUNCATE TABLE TURNOS';
 		  $RsTruncar = mysql_query($query_RsTruncar, $turnos) or die(mysql_error());		  
@@ -1156,7 +1156,7 @@ $query_RsContadorMax="
 	AND `TURNIDES` =2";
 
 	$RsContadorMax = mysql_query($query_RsContadorMax, $turnos) or die(mysql_error());
-	$row_RsContadorMax = mysql_fetch_assoc($RsContadorMax);	
+	$row_RsContadorMax = mysqli_fetch_assoc($RsContadorMax);	
 	$Contador=$row_RsContadorMax['numero'];
 	
 	echo($Contador);
@@ -1190,7 +1190,7 @@ $query_RsTurnoMax="SELECT TURNCONS ,
 					WHERE TURNPARA =".$A_parametro."";
 
 	$RsTurnoMax = mysql_query($query_RsTurnoMax, $turnos) or die(mysql_error());
-	$row_RsTurnoMax = mysql_fetch_assoc($RsTurnoMax);	
+	$row_RsTurnoMax = mysqli_fetch_assoc($RsTurnoMax);	
 	$TurnoMax=$row_RsTurnoMax['NUMERO'];
 	
 	$_SESSION["ID_PARAMETRO"]   =   $A_parametro;
