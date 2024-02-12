@@ -3,13 +3,13 @@
 
 require_once('Connections/db.php');
 
-mysql_select_db($database_turnos, $turnos);
-@mysql_query("SET collation_connection = utf8_general_ci;");
-mysql_query ("SET NAMES 'utf8'");
+// mysql_select_db($database_turnos, $turnos);
+// @mysqli_query("SET collation_connection = utf8_general_ci;");
+// mysqli_query ("SET NAMES 'utf8'");
 
 $sonido="";
         $query_RsDatosBienvenida="DELETE FROM turnos where TURNIDUS = '0'";
-		$RsDatosBienvenida = mysql_query($query_RsDatosBienvenida, $turnos) or die(mysql_error());
+		$RsDatosBienvenida = mysqli_query($turnos,$query_RsDatosBienvenida) ;
 
 		$query_RsParams="SELECT A.PARAVALOR NODESERVER,
                            (SELECT A2.PARAVALOR 					
@@ -19,8 +19,8 @@ $sonido="";
 						WHERE A.PARACODI = '1' 
 						
 						";
-		$RsParams = mysql_query($query_RsParams, $turnos) or die(mysql_error());
-		$row_RsParams = mysql_fetch_assoc($RsParams);	
+		$RsParams = mysqli_query($turnos,$query_RsParams);
+		$row_RsParams = mysqli_fetch_assoc($RsParams);	
         $nodeserver = $row_RsParams['NODESERVER'];		
         $nodeport   = $row_RsParams['NODEPORT'];
 		//$urlnode = 'http://'.$nodeserver.':'.$nodeport;	
@@ -44,9 +44,9 @@ $query_RsllAMADOTV="SELECT      MODUID  CODIGO_MODULO,
 						ORDER BY MODUID
 						";
 						//echo($query_RsllAMADOTV);
-	$RsllAMADOTV = mysql_query($query_RsllAMADOTV, $turnos) or die(mysql_error());
-	$row_RsllAMADOTV = mysql_fetch_assoc($RsllAMADOTV);	
-	$totalRows_RsllAMADOTV = mysql_num_rows($RsllAMADOTV);
+	$RsllAMADOTV = mysqli_query($turnos,$query_RsllAMADOTV) ;
+	$row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV);	
+	$totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 
 if($totalRows_RsllAMADOTV > 0)
 {$sonido='autoplay';}else
@@ -273,7 +273,7 @@ border:0 none !important;
           </tr>		  
 		 <?php /*</div>*/?>
 		<?php
-		}while($row_RsllAMADOTV = mysql_fetch_assoc($RsllAMADOTV));
+		}while($row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV));
 	  }
 	 ?>
 	 </tbody>

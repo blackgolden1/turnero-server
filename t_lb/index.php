@@ -6,7 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-mysqli_select_db($turnos, $database_turnos);
+// mysqli_select_db($turnos, $database_turnos);
 
 $query_RsParams = "SELECT PARAVALOR as NODESERVER,
                           (SELECT PARAVALOR 

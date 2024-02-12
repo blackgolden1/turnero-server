@@ -2,9 +2,9 @@
 if (!isset($_SESSION)) {
   session_start();
 }
-mysql_select_db($database_turnos, $turnos);
-@mysql_query("SET collation_connection = utf8_general_ci;");
-mysql_query ("SET NAMES 'utf8'");
+// mysql_select_db($database_turnos, $turnos);
+// @mysql_query("SET collation_connection = utf8_general_ci;");
+// mysql_query ("SET NAMES 'utf8'");
 
 		$query_RsParams="SELECT A.PARAVALOR NODESERVER,
                            (SELECT A2.PARAVALOR 					
@@ -14,8 +14,8 @@ mysql_query ("SET NAMES 'utf8'");
 						WHERE A.PARACODI = '1' 
 						
 						";
-		$RsParams = mysql_query($query_RsParams, $turnos) or die(mysql_error());
-		$row_RsParams = mysql_fetch_assoc($RsParams);	
+		$RsParams = mysqli_query($turnos,$query_RsParams );
+		$row_RsParams = mysqli_fetch_assoc($RsParams);	
         $nodeserver = $row_RsParams['NODESERVER'];		
         $nodeport   = $row_RsParams['NODEPORT'];
 		$urlnode = 'http://'.$nodeserver.':'.$nodeport;
@@ -34,4 +34,4 @@ mysql_query ("SET NAMES 'utf8'");
 		$elephant->emit('tur_lb', $turnoactual);
 		}
 		$elephant->close();
-		?>
+		
