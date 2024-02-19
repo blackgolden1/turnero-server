@@ -728,8 +728,8 @@ if($tipoguardar=='Siguiente_turno'){
 		{
 			$query_RsTurno="UPDATE turnos SET TURNIDES = '4' WHERE TURNCONS ='".$_GET['consecutivo_N']."'";
 			$RsTurno = mysqli_query($turnos, $query_RsTurno) ;
-			$turno_N=$_GET['numero_turno_N']+1;
-		$query_RsConsultaTurno="SELECT 
+			$turno_N = intval($_GET['numero_turno_N']) + 1;
+			$query_RsConsultaTurno="SELECT 
 										TURNCONS CONSECUTIVO ,
 										(TURNCOAS+1) NUMERO_TURNO,
 										TURNLETR LETRA,

@@ -211,6 +211,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 	<!-- SET: STYLESHEET -->
 	<script src="jquery/jquery-1.10.2.min.js"></script>
 	<script src="socket/socket.io.min.js"></script>
+	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="js/messages.js" type="text/javascript"></script>
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	<link href="css/messages.css" rel="stylesheet" type="text/css" />
@@ -300,7 +301,18 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 		}
 
 		#num_atendidosAyuda {
-			margin-left: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: bold;
+			color: #000000;
+			font-size: 85px;
+		}
+
+		#num_atendidos {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			font-weight: bold;
 			color: #000000;
 			font-size: 85px;
@@ -655,18 +667,18 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			var date = new Date();
 			var timestamp = date.getTime();
 
-			var v_dato = getDataServer("tipoguardar.php", "?tipoguardar=Crear_turno&modulo=<?php echo ($_SESSION['MODULO']); ?>&turnojornada=<?php echo ($jornada); ?>&C_secuencia=" + document.form3.secuencia.value + "&numero_turno=" + document.form3.numero_turno.value + "&parametro_G=" + document.form3.parametro_A.value + "&letra_sincronizada=" + document.getElementById('letra_sincronizada').value + "&time=" + timestamp);
+			var v_dato = getDataServer("tipoguardar.php", "?tipoguardar=Siguiente_turno&modulo=<?php echo ($_SESSION['MODULO']); ?>&turnojornada=<?php echo ($jornada); ?>&secuencia_N=" + document.form3.secuencia.value + "&numero_turno_N=" + document.form3.numero_turno.value + "&consecutivo_N=" + document.form3.consecutivo_turno.value + "&parametro_N=" + document.form3.parametro_A.value + "&letra_sincronizada=" + document.getElementById('letra_sincronizada').value + "&time=" + timestamp);
 			if (v_dato != '') {
-
 				var v_campos;
-				var caracter = '/';
-
+				var caracter = '/'
 				v_campos = v_dato.split(caracter);
 
 				var valor1 = v_campos[0]; <?php /* numero de turno turncoas*/?>
 				var valor2 = v_campos[1]; <?php /* parametro*/?>
 				var valor3 = v_campos[2]; <?php /* consecutivo TURNCONS*/?>
-				var valor4 = v_campos[3]; <?php /* la letra*/?>
+				var valorLetra = v_campos[3]; <?php /* la letra*/?>
+				var elementos = valorLetra.split("<br");
+				var valor4 = elementos[0];
 
 				document.getElementById('num_atendidos').innerHTML = valor4 + '' + valor1;
 				document.getElementById('turno_actual').innerHTML = valor4 + '' + valor1;
@@ -681,6 +693,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 					try {
 						document.getElementById('li_inicio').style.display = 'block';
 						document.getElementById('li_sig').style.display = 'block';
+
 					} catch (exc) {
 						if (exc.description == null) {
 							//alert("excepcion "+exc.message);
@@ -700,17 +713,24 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			var date = new Date();
 			var timestamp = date.getTime();
 			var v_dato = getDataServer("tipoguardar.php", "?tipoguardar=Siguiente_turno&modulo=<?php echo ($_SESSION['MODULO']); ?>&turnojornada=<?php echo ($jornada); ?>&secuencia_N=" + document.form3.secuencia.value + "&numero_turno_N=" + document.form3.numero_turno.value + "&consecutivo_N=" + document.form3.consecutivo_turno.value + "&parametro_N=" + document.form3.parametro_A.value + "&letra_sincronizada=" + document.getElementById('letra_sincronizada').value + "&time=" + timestamp);
+
 			var v_campos;
 			var caracter = '/'
 			v_campos = v_dato.split(caracter);
 
+
+
 			var valor1 = v_campos[0]; <?php /*numero de turno turncoas*/?>
 			var valor2 = v_campos[1]; <?php /*parametro*/?>
 			var valor3 = v_campos[2]; <?php /*consecutivo turcons*/?>
-			var valor4 = v_campos[3]; <?php /*letra del turno*/?>
+			var valorLetra = v_campos[3]; <?php /*letra del turno*/?>
+			let elementos = valorLetra.split("<br");
+			let valor4 = elementos[0];
+
 
 			document.getElementById('num_atendidos').innerHTML = valor4 + '' + valor1;
 			document.getElementById('turno_actual').innerHTML = valor4 + '' + valor1;
+
 			document.getElementById('letra_sincronizada').value = valor4;
 			document.form3.numero_parametrizado.value = valor2;
 			document.form3.consecutivo_turno.value = valor3;
@@ -734,27 +754,34 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			var date = new Date();
 			var timestamp = date.getTime();
 
-			var v_dato = getDataServer("tipoguardar.php", "?tipoguardar=Inicio_Atencion&I_consecutivo=" + document.form3.consecutivo_turno.value + "&I_parametro=" + document.form3.numero_parametrizado.value + "&letra_sincronizada=" + document.getElementById('letra_sincronizada').value + "&time=" + timestamp);
-			//alert(v_dato);
+			var v_dato = getDataServer("tipoguardar.php", "?tipoguardar=Siguiente_turno&modulo=<?php echo ($_SESSION['MODULO']); ?>&turnojornada=<?php echo ($jornada); ?>&secuencia_N=" + document.form3.secuencia.value + "&numero_turno_N=" + document.form3.numero_turno.value + "&consecutivo_N=" + document.form3.consecutivo_turno.value + "&parametro_N=" + document.form3.parametro_A.value + "&letra_sincronizada=" + document.getElementById('letra_sincronizada').value + "&time=" + timestamp);
 			if (v_dato != '') {
 
 				var v_campos;
 				var caracter = '/'
+
 				v_campos = v_dato.split(caracter);
 				var valor1 = v_campos[0];
 				var valor2 = v_campos[1];
 				var valor3 = v_campos[2];
-				document.getElementById('num_atendidos').innerHTML = valor1;
-				//document.getElementById('turno_actual').innerHTML =valor1;
+				var valorLetra = v_campos[3]; <?php /*letra del turno*/?>
+				let elementos = valorLetra.split("<br");
+				let valor4 = elementos[0];
+
+				document.getElementById('num_atendidos').innerHTML = valor4 + '' + valor1;
+				document.getElementById('turno_actual').innerHTML = valor4 + '' + valor1;
+				// document.form3.numero_parametrizado.value = valor2;
+				// document.form3.consecutivo_turno.value = valor3;
 				document.form3.numero_parametrizado.value = valor2;
 				document.form3.consecutivo_turno.value = valor3;
+				document.form3.numero_turno.value = valor1;
 
-
-				document.getElementById('li_inicio').style.display = 'none';
-				document.getElementById('li_sig').style.display = 'none';
+				 document.getElementById('li_inicio').style.display = 'none';
+				 document.getElementById('li_sig').style.display = 'none';
 				setTimeout(function () {
 					try {
-						document.getElementById('li_fin').style.display = 'block';
+						 document.getElementById('li_fin').style.display = 'block';
+					
 					} catch (exc) {
 						if (exc.description == null) {
 							//alert("excepcion "+exc.message);
@@ -1034,7 +1061,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			<!-- Banner Starts -->
 			<div id="bienvenidatext" class="bienvenida"><b>
 					Bienvenido:
-					<?php echo ($_SESSION["USU_AUT_NOMB"]); ?> Modulo:
+					<?php echo ($_SESSION["USU_AUT_NOMB"]); ?>
 					<?php echo ($row_RsDatosBienvenida['MODULO_DES']); ?> SERVICIO:
 					<?php echo ($row_RsDatosBienvenida['SERVICIO_DES']); ?>
 				</b>
@@ -1061,15 +1088,17 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				<div id="link_ayuda" class="ayuda">
 				</div>
 				<div id="num_atendidosAyuda" class="num_atendidos">
-					T
+
+					<!-- <div id="turno_actual"></div> -->
 				</div>
 				<div class="typs">
-					<ul style="float: left; margin-left: 5%; margin-top: -22px;">
+					<ul style="float: left; margin-left: 5%; margin-top: -22px;" class="flex ">
 						<li id="li_turnoAyuda" style="display:none;">
-							<a href="javascript:turnoAyuda();">LLAMAR</a>
+							<a href="javascript:turnoAyuda();" class="text-3xl">LLAMAR</a>
 						</li>
 						<li class="l3" id="li_inicioAyuda" style="display:none;">
 							<a href="javascript:inicioAyuda();">INICIO</a>
+
 						</li>
 						<li class="l2" id="li_sigAyuda" style="display:none;">
 							<a href="javascript:siguienteAyuda();">SIGUIENTE</a>
@@ -1098,7 +1127,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 										echo ($row_RsFechaActual['FECHA']);
 										?>
 
-										Cupos de turno:
+										<br>Cupos de turno:
 										<?php
 										echo ($cupo_turno);
 										?>
@@ -1110,24 +1139,29 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 										<table width="90%" border="0" id="T_sincronizado" style="display:none;">
 											<tr>
 												<td width="170" align="right" class="labeltextdefault">Iniciar Turno
-													Con:</td>
+													Con Numero:</td>
 												<td width="159">
 													<input class="inputtext" style="height:26px;" type="text"
-														name="numero_sincronizado" placeholder="numero de turno"
+														name="numero_sincronizado" placeholder="Numero de turno"
 														onKeyPress='return acceptNum(event)' ; id="numero_sincronizado"
 														value="" size="15">
 												</td>
 												<td width="59"><a class="btn btn-xs btn-default"
-														href="javascript:f_sincronizar();" class="sbttn">Enviar</a></td>
+														href="javascript:f_sincronizar();" class="sbttn"
+														style="background:#267BA3;color:white; border: none">Enviar</a>
+												</td>
 											</tr>
 											<tr>
-												<td align="right">Usa Letra:</td>
+												<td align="right"> Letra:</td>
 												<td>
 													<input class="inputtext" type="text" style="height:26px;"
-														placeholder="letra si es necesario" name="letra_sincronizada"
-														id="letra_sincronizada"
+														placeholder="Letra de turno (opcional)"
+														name="letra_sincronizada" id="letra_sincronizada"
 														onblur="this.value = this.value.toUpperCase();" size="15">
 												</td>
+
+											</tr>
+											<tr>
 												<td><a class="btn btn-xs btn-default" id="ocultarsincr" class="sbttn"
 														href="javascript:OcultarSincr()">Ocultar</a></td>
 											</tr>
@@ -1146,7 +1180,8 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 							<tr>
 								<td class="labeltextdefault">Turno Actual</td>
 								<td>
-									<div id="turno_actual"></div>
+									<div id="turno_actual">este si </div>
+
 								</td>
 							</tr>
 
@@ -1160,25 +1195,22 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 						<input type="hidden" name="consecutivo_turno" id="consecutivo_turno" value="">
 						<input type="hidden" name="secuencia" id="secuencia" value="">
 						<input type="hidden" name="numero_turno" id="numero_turno" value="">
-						<input type="hidden" name="sesion_modulo" id="sesion_modulo"
-							value="<?php if (isset($_SESSION["MODULO"]) && $_SESSION["MODULO"] != '') {
-								echo ($_SESSION["MODULO"]);
-							} ?>">
-						<input type="hidden" name="sesion_servicio" id="sesion_servicio"
-							value="<?php if (isset($_SESSION["ID_SERVI"]) && $_SESSION["ID_SERVI"] != '') {
-								echo ($_SESSION["ID_SERVI"]);
-							} ?>">
-						<input type="hidden" name="sesion_usuario" id="sesion_usuario"
-							value="<?php if (isset($_SESSION["IDUSU"]) && $_SESSION["IDUSU"] != '') {
-								echo ($_SESSION["IDUSU"]);
-							} ?>">
+						<input type="hidden" name="sesion_modulo" id="sesion_modulo" value="<?php if (isset($_SESSION["MODULO"]) && $_SESSION["MODULO"] != '') {
+							echo ($_SESSION["MODULO"]);
+						} ?>">
+						<input type="hidden" name="sesion_servicio" id="sesion_servicio" value="<?php if (isset($_SESSION["ID_SERVI"]) && $_SESSION["ID_SERVI"] != '') {
+							echo ($_SESSION["ID_SERVI"]);
+						} ?>">
+						<input type="hidden" name="sesion_usuario" id="sesion_usuario" value="<?php if (isset($_SESSION["IDUSU"]) && $_SESSION["IDUSU"] != '') {
+							echo ($_SESSION["IDUSU"]);
+						} ?>">
 					</form>
 					<div id="num_atendidos" class="num_atendidos" style="width:100%;">
 						Sincroniza y llama al primer turno
 					</div>
 					<ul style="margin-left:43%">
 						<li id="li_turno" style="display:none;">
-							<a href="javascript:turno();">LLAMAR</a>
+							<a href="javascript:turno();" class="text-3xl">LLAMAR</a>
 						</li>
 						<li class="l3" id="li_inicio" style="display:none;">
 							<a href="javascript:inicio();">INICIO</a>
@@ -1194,7 +1226,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				</div>
 				<div class="banner"> <img src="images/banner_img.jpg" width="940" height="116" alt="img" /> </div>
 				<div id="usuariosenlinea" class="news">
-					<p align="center"><b>USUARIOS CONECTADOS AL SISTEMA</b></p>
+					<p align="center" class="text-5xl"><b>USUARIOS CONECTADOS AL SISTEMA</b></p>
 					<table id="listausuarios">
 						<tr style="font-weight:bold;">
 							<td width="150">Persona</td>
@@ -1208,19 +1240,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			<div class="footer">
 				<div class="footer_continer">
 					<div class="footer_top">
-						<?php /*
-					   <div class="footer_nav">
-						 <ul>
-						   <li><a href="#">HOME</a></li>
-						   <li><a href="#">ABOUT</a></li>
-						   <li><a href="#">SERVICES</a></li>
-						   <li><a href="#">BLOG</a></li>
-						   <li class="pad_last no_bg"><a href="#">CONTACT</a></li>
-						 </ul>
-						 <div class="clear"></div>
-					   </div>
-					   <div class="social"><a href="#" class="tw">Twitter</a> <a href="#" class="fb">Facebook</a></div>
-					   */?>
+
 						<div class="clear"></div>
 					</div>
 				</div>

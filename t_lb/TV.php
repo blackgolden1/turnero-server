@@ -69,7 +69,7 @@ $totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 		$(document).ready(function () {
 
 			// $.ionSound({
-			
+
 			// 	sounds: [
 			// 		"SD_ALERT_12"
 			// 	],
@@ -155,165 +155,129 @@ $totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 
 
 	</script>
-	<style type="text/css">
-		body {
-			/*background:url(fondogradiente/45x850.jpg) repeat-x;*/
-		}
 
-		h3,
-		h4,
-		h5,
-		h6 {
-			color: BLACK;
-		}
-
-		#contenedor {
-			/*border:solid #ff0000 1px;*/
-			width: 100%;
-			min-width: 800px;
-		}
-
-		#div_title {
-			text-align: center;
-		}
-
-		#div_turnmod {
-			width: 1050px;
-		}
-
-		.contenedor_turno {
-			/*border:solid #ff0000 1px;*/
-			/*clear:both;
-padding-top:2px;
-overflow:hidden;
-margin-top:3px;
-display:table;
-width:1050px;
-height:300px;*/
-		}
-
-		.turno {
-			/*width:300px;*/
-			/*border:solid #ff0000 1px;*/
-			/*float:left;
-text-align:center;*/
-		}
-
-		.modulo {
-			margin-left: 5px;
-			/*width:700px;*/
-			/*border:solid #ff0000 1px;*/
-			/*text-align:center;*/
-		}
-
-		.moduloA,
-		.serviA {
-			font-size: 130px;
-			font-weight: bold;
-		}
-
-		.turnoA {
-			font-size: 210px;
-			font-weight: bold;
-		}
-
-		.turnoA {
-			/*width:300px;*/
-			/*border:solid #ff0000 1px;*/
-			/*float:left;
-text-align:center;
-margin-top:30px;
-*/
-		}
-
-		.moduloA {
-			font-size: 65px;
-			/*margin-left:10px;
-width:700px;*/
-			/*border:solid #ff0000 1px;*/
-			/*text-align:center;*/
-			margin-top: 50px;
-		}
-
-		.serviA {
-			font-size: 65px;
-			margin-left: 10px;
-			width: 700px;
-			/*border:solid #ff0000 1px;*/
-			float: left;
-			text-align: center;
-		}
-
-		.serviA {
-			/*border-top:2px none !important;
-border-style:dashed;
-*/
-			border: 0 none !important;
-		}
-
-		.moduloA {
-			/*
-border-bottom:2px none !important;
-border-style:dashed;*/
-			border: 0 none !important;
-		}
-	</style>
 
 </head>
 
 <body>
-	<div style="width: 300px">
-		<div id="chat" style="height: 100%"></div>
-	</div>
-	<form name="form1" method="post" action="">
-		<div id="div_title">
-			<h4 style="font-family:helvetica;">HOSPITAL SAN FRANCISCO</h4>
-		</div>
-		<table width="800" cellspacing="0" border="0" id="contenedor">
-			<thead>
-				<tr>
-					<td align="center" width="300" id="turno" class="turno">
-						<h3 style="font-family:helvetica;">TURNO</h3>
-					</td>
-					<td align="center" width="700" id="modulo" class="modulo">
-						<h3 style="font-family:helvetica;">LABORATORIOS</h3>
-					</td>
-				</tr>
-			</thead>
-			<tbody>
-				<?php
-				if ($totalRows_RsllAMADOTV > 0) { // Show if recordset not empty 
-					do {
-						?>
-						<?php /*<div style="BACKGROUND:<?php echo($row_RsllAMADOTV['COLOR']);?>" class="contenedor_turno" id="div_turn_<?php echo($row_RsllAMADOTV['TURNO']);?>_<?php echo($row_RsllAMADOTV['CODIGO_MODULO']);?>_<?php echo($row_RsllAMADOTV['CONSECUTIVO']);?>">
-						
-						  <div  class="turnoA"  style="BACKGROUND:<?php echo($row_RsllAMADOTV['COLOR']);?>" ><?php echo($row_RsllAMADOTV['TURNO']);?></div>
-						  <div  class="moduloA" style="border-color:<?php echo($row_RsllAMADOTV['COLOR']);?>;"><?php echo($row_RsllAMADOTV['MODULO']);?></div>	
-						  <div  class="serviA"  style="border-color:<?php echo($row_RsllAMADOTV['COLOR']);?>;" ><?php echo($row_RsllAMADOTV['SERVICIO']);?></div>
-						 </div>
-						 <div>*/?>
-						<tr style="BACKGROUND:<?php echo ($row_RsllAMADOTV['COLOR']); ?>" class="contenedor_turno"
-							id="div_turn_<?php echo ($row_RsllAMADOTV['TURNO']); ?>_<?php echo ($row_RsllAMADOTV['CODIGO_MODULO']); ?>_<?php echo ($row_RsllAMADOTV['CONSECUTIVO']); ?>">
-							<td width="300" align="center" height="319" class="turnoA"
-								style="BACKGROUND:<?php echo ($row_RsllAMADOTV['COLOR']); ?>">
-								<?php echo ($row_RsllAMADOTV['TURNO']); ?>
-							</td>
-							<td width="400" align="center" height="319" class="moduloA"
-								style="border-color:<?php echo ($row_RsllAMADOTV['COLOR']); ?>">
-								<?php echo ($row_RsllAMADOTV['MODULO']); ?>
-								<?php echo ('<br>' . $row_RsllAMADOTV['SERVICIO']); ?>
-							</td>
-						</tr>
-						<?php /*</div>*/?>
-						<?php
-					} while ($row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV));
-				}
-				?>
-			</tbody>
-			<input type="hidden" name="peticiones_ok" id="peticiones_ok" value="0">
-		</table>
-	</form>
+	<div class="container">
+		<form name="form1" method="post" action="">
+			<div id="div_title">
+				<h4>HOSPITAL SAN FRANCISCO</h4>
+			</div>
+			<table width="800" cellspacing="0" border="0" id="contenedor">
+				<thead>
+					<tr>
+						<td align="center" width="300" id="turno" class="turno">
+							<h3>TURNO</h3>
+						</td>
+						<td align="center" width="700" id="modulo" class="modulo">
+							<h3>LABORATORIOS</h3>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					if ($totalRows_RsllAMADOTV > 0) { // Show if recordset not empty 
+						do {
+							?>
 
+							<tr style="BACKGROUND:<?php echo ($row_RsllAMADOTV['COLOR']); ?>" class="contenedor_turno"
+								id="div_turn_<?php echo ($row_RsllAMADOTV['TURNO']); ?>_<?php echo ($row_RsllAMADOTV['CODIGO_MODULO']); ?>_<?php echo ($row_RsllAMADOTV['CONSECUTIVO']); ?>">
+								<td width="300" align="center" height="200" class="turnoA"
+									style="BACKGROUND:<?php echo ($row_RsllAMADOTV['COLOR']); ?>">
+									<?php echo ($row_RsllAMADOTV['TURNO']); ?>
+								</td>
+								<td width="400" align="center" height="200" class="moduloA"
+									style="border-color:<?php echo ($row_RsllAMADOTV['COLOR']); ?>">
+									<?php echo ($row_RsllAMADOTV['MODULO']); ?>
+									<?php echo ('<br>' . $row_RsllAMADOTV['SERVICIO']); ?>
+								</td>
+							</tr>
+							<?php /*</div>*/?>
+							<?php
+						} while ($row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV));
+					}
+					?>
+				</tbody>
+				<input type="hidden" name="peticiones_ok" id="peticiones_ok" value="0">
+			</table>
+		</form>
+	</div>
 </body>
 
 </html>
+<style type="text/css">
+	body {
+		font-family: Arial, sans-serif;
+		margin: 0;
+		padding: 0;
+		background-color: white;
+		overflow: hidden;
+	}
+
+	.container {
+		height: 100vh;
+		width: 100vw;
+
+	}
+
+	h4 {
+		color: navy;
+		font-weight: bold;
+		text-align: center;
+		margin-bottom: 30px;
+		margin-top: 30px;
+	}
+
+	table {
+		width: 100%;
+		max-width: 1400px;
+		margin: 0 auto;
+
+		border-collapse: separate;
+		border-left: 0;
+		border-radius: 27px;
+		border-spacing: 0px;
+	}
+
+	th,
+	td {
+		padding: 15px;
+		text-align: center;
+		border: 1px solid darkgrey;
+	
+	}
+
+	thead:first-child td:first-child {
+		border-radius: 7px 0 0 0;
+	}
+
+	thead:last-child th:last-child
+	{
+		border-radius: 0 0 0 7px;
+	}
+
+	.turno {
+		background-color: #f2f2f2;
+	}
+
+	.modulo {
+		background-color: #f2f2f2;
+	}
+
+	.contenedor_turno {
+		background-color: #fff;
+	}
+
+	.turnoA,
+	.moduloA {
+		font-size: 36px;
+		font-weight: bold;
+	}
+
+	.servicio {
+		font-size: 24px;
+		font-weight: bold;
+	}
+</style>

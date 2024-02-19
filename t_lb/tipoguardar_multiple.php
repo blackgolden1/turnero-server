@@ -316,8 +316,7 @@ if($tipoguardar=='Sincronizar_Turno')
 									 TURNLETR ,
 									 TURNMODU ,
 									 TURNIDUS ,
-									 TURNFECH ,
-									 TURNFEFI ,
+									 
 									 TURNTURN ,
 									 TURNIDES ,
 									 TURNPARA ,
@@ -329,8 +328,7 @@ if($tipoguardar=='Sincronizar_Turno')
 									'".$_GET['letra_sincronizada']."',
 									'".$_GET['modulo']."',
 									'".$_SESSION["IDUSU"]."',
-									'',
-									'',
+									
 									'".$_GET['turnojornada']."',
 									'5',
 									'".$parametro."',
@@ -369,8 +367,7 @@ if($tipoguardar=='Crear_TurnoAyuda')
 										 TURNCOAS ,
 										 TURNMODU ,
 										 TURNIDUS ,
-										 TURNFECH ,
-										 TURNFEFI ,
+										 
 										 TURNTURN ,
 										 TURNIDES ,
 										 TURNPARA,
@@ -384,8 +381,7 @@ if($tipoguardar=='Crear_TurnoAyuda')
 										'".$row_RsConsultaTurno['NUMERO_TURNO']."',
 										'".$_SESSION["MODULO"]."',
 										'".$_GET["user_ayudar"]."',
-										'',
-										'',
+										
 										'".$row_RsConsultaTurno['JORNADA']."',
 										'3',
 										'".$row_RsConsultaTurno['PARAMETRO']."',
@@ -716,8 +712,7 @@ if($tipoguardar=='Siguiente_turno'){
 									 TURNLETR ,
 									 TURNMODU ,
 									 TURNIDUS ,
-									 TURNFECH ,
-									 TURNFEFI ,
+									 
 									 TURNTURN ,
 									 TURNIDES ,
 									 TURNPARA,
@@ -730,8 +725,7 @@ if($tipoguardar=='Siguiente_turno'){
 									'".$letra_turno."',
 									'".$_GET['modulo']."',
 									'".$_SESSION["IDUSU"]."',
-									'',
-									'',
+									
 									'".$_GET['turnojornada']."',
 									'3',
 									'".$_GET['parametro_N']."',
