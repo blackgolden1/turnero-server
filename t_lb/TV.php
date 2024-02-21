@@ -131,7 +131,7 @@ $totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 							})
 							//$.ionSound.play("Alert");
 
-							$("#contenedor").prepend("<tr class='contenedor_turno' style='background:" + color + "' id='div_turn_" + turno + "_" + codigo_modulo + "_" + consecutivo + "'><td class='turnoA' height='319' align='center' style='background:" + color + "'>" + turno + "</td><td align='center' class='moduloA' height='319' style='border-color:" + color + "'>" + nombre_modulo + "<br>" + nombre_servicio + "</td></tr>");
+							$("#turnero").prepend("<tr class='contenedor_turno' style='background:" + color + "' id='div_turn_" + turno + "_" + codigo_modulo + "_" + consecutivo + "'><td class='turnoA' height='319' align='center' style='background:" + color + "'>" + turno + "</td><td align='center' class='moduloA' height='319' style='border-color:" + color + "'>" + nombre_modulo + "<br>" + nombre_servicio + "</td></tr>");
 							document.getElementById('peticiones_ok').value = parseInt(document.getElementById('peticiones_ok').value) + 1;
 							if (parseInt(document.getElementById('peticiones_ok').value) > 0) {
 								document.getElementById('peticiones_ok').value = parseInt(document.getElementById('peticiones_ok').value) + 1;
@@ -161,49 +161,59 @@ $totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 
 <body>
 	<div class="container">
-		<form name="form1" method="post" action="">
-			<div id="div_title">
-				<h4>HOSPITAL SAN FRANCISCO</h4>
+		<div id="div_title">
+			<img src="images/logo-hospital.png" width="100" alt="">
+			<h4>HOSPITAL SAN FRANCISCO</h4>
+		</div>
+		<div class="contentTurns">
+			<div>
+				<img src="images/hospital.jpg" alt="">
 			</div>
-			<table width="800" cellspacing="0" border="0" id="contenedor">
-				<thead>
-					<tr>
-						<td align="center" width="300" id="turno" class="turno">
-							<h3>TURNO</h3>
-						</td>
-						<td align="center" width="700" id="modulo" class="modulo">
-							<h3>LABORATORIOS</h3>
-						</td>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-					if ($totalRows_RsllAMADOTV > 0) { // Show if recordset not empty 
-						do {
-							?>
+			<form name="form1" method="post" action="">
+				<table id="turnero">
+					<thead>
+						<tr>
+							<td align="center" width="200" id="turno" class="turno">
+								<h3>Turno</h3>
+							</td>
+							<td align="center" width="200" id="modulo" class="modulo">
+								<h3>Modulo</h3>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						if ($totalRows_RsllAMADOTV > 0) { // Show if recordset not empty 
+							do {
+								?>
 
-							<tr style="BACKGROUND:<?php echo ($row_RsllAMADOTV['COLOR']); ?>" class="contenedor_turno"
-								id="div_turn_<?php echo ($row_RsllAMADOTV['TURNO']); ?>_<?php echo ($row_RsllAMADOTV['CODIGO_MODULO']); ?>_<?php echo ($row_RsllAMADOTV['CONSECUTIVO']); ?>">
-								<td width="300" align="center" height="200" class="turnoA"
-									style="BACKGROUND:<?php echo ($row_RsllAMADOTV['COLOR']); ?>">
-									<?php echo ($row_RsllAMADOTV['TURNO']); ?>
-								</td>
-								<td width="400" align="center" height="200" class="moduloA"
-									style="border-color:<?php echo ($row_RsllAMADOTV['COLOR']); ?>">
-									<?php echo ($row_RsllAMADOTV['MODULO']); ?>
-									<?php echo ('<br>' . $row_RsllAMADOTV['SERVICIO']); ?>
-								</td>
-							</tr>
-							<?php /*</div>*/?>
-							<?php
-						} while ($row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV));
-					}
-					?>
-				</tbody>
-				<input type="hidden" name="peticiones_ok" id="peticiones_ok" value="0">
-			</table>
-		</form>
+								<tr style="BACKGROUND:<?php echo ($row_RsllAMADOTV['COLOR']); ?>" class="contenedor_turno"
+									id="div_turn_<?php echo ($row_RsllAMADOTV['TURNO']); ?>_<?php echo ($row_RsllAMADOTV['CODIGO_MODULO']); ?>_<?php echo ($row_RsllAMADOTV['CONSECUTIVO']); ?>">
+									<td width="200" align="center" height="100" class="turnoA"
+										style="BACKGROUND:<?php echo ($row_RsllAMADOTV['COLOR']); ?>">
+										<?php echo ($row_RsllAMADOTV['TURNO']); ?>
+									</td>
+									<td width="200" align="center" height="100" class="moduloA"
+										style="border-color:<?php echo ($row_RsllAMADOTV['COLOR']); ?>">
+										<?php echo ($row_RsllAMADOTV['MODULO']); ?>
+										
+									</td>
+								</tr>
+								<?php /*</div>*/ ?>
+								<?php
+							} while ($row_RsllAMADOTV = mysqli_fetch_assoc($RsllAMADOTV));
+						}
+						?>
+					</tbody>
+					<input type="hidden" name="peticiones_ok" id="peticiones_ok" value="0">
+				</table>
+			</form>
+		</div>
+		<div class="footerTV">
+			Copyright © 2024. Todos los Derechos Reservados.
+		</div>
 	</div>
+
 </body>
 
 </html>
@@ -213,13 +223,33 @@ $totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 		margin: 0;
 		padding: 0;
 		background-color: white;
+		height: 100vh;
+		width: 100vw;
 		overflow: hidden;
 	}
 
 	.container {
 		height: 100vh;
 		width: 100vw;
+		padding-top: 15px;
+	}
 
+	.contentTurns {
+		display: flex;
+		padding-left: 30px;
+		width: 100%;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+	}
+	.footerTV{
+		display: flex;
+		flex-direction: row;
+		text-align: center;
+		justify-content: center;
+		height: fit-content;
+		padding-top: 4em;
+		margin-bottom: 0;
 	}
 
 	h4 {
@@ -231,30 +261,41 @@ $totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 	}
 
 	table {
-		width: 100%;
+		width: fit-content;
 		max-width: 1400px;
 		margin: 0 auto;
-
 		border-collapse: separate;
 		border-left: 0;
 		border-radius: 27px;
 		border-spacing: 0px;
 	}
 
+	#div_title {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-evenly;
+	}
+
+	img {
+		max-width: 700px;
+
+	}
+
 	th,
 	td {
-		padding: 15px;
+		padding: 10px;
 		text-align: center;
-		border: 1px solid darkgrey;
-	
+		border: 2px solid white;
+		height: fit-content;
+
 	}
 
 	thead:first-child td:first-child {
 		border-radius: 7px 0 0 0;
 	}
 
-	thead:last-child th:last-child
-	{
+	thead:last-child th:last-child {
 		border-radius: 0 0 0 7px;
 	}
 
