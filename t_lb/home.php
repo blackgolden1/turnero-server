@@ -673,10 +673,10 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				var caracter = '/'
 				v_campos = v_dato.split(caracter);
 
-				var valor1 = v_campos[0]; <?php /* numero de turno turncoas*/?>
-				var valor2 = v_campos[1]; <?php /* parametro*/?>
-				var valor3 = v_campos[2]; <?php /* consecutivo TURNCONS*/?>
-				var valorLetra = v_campos[3]; <?php /* la letra*/?>
+				var valor1 = v_campos[0]; <?php /* numero de turno turncoas*/ ?>
+				var valor2 = v_campos[1]; <?php /* parametro*/ ?>
+				var valor3 = v_campos[2]; <?php /* consecutivo TURNCONS*/ ?>
+				var valorLetra = v_campos[3]; <?php /* la letra*/ ?>
 				var elementos = valorLetra.split("<br");
 				var valor4 = elementos[0];
 
@@ -720,10 +720,10 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 
 
 
-			var valor1 = v_campos[0]; <?php /*numero de turno turncoas*/?>
-			var valor2 = v_campos[1]; <?php /*parametro*/?>
-			var valor3 = v_campos[2]; <?php /*consecutivo turcons*/?>
-			var valorLetra = v_campos[3]; <?php /*letra del turno*/?>
+			var valor1 = v_campos[0]; <?php /*numero de turno turncoas*/ ?>
+			var valor2 = v_campos[1]; <?php /*parametro*/ ?>
+			var valor3 = v_campos[2]; <?php /*consecutivo turcons*/ ?>
+			var valorLetra = v_campos[3]; <?php /*letra del turno*/ ?>
 			let elementos = valorLetra.split("<br");
 			let valor4 = elementos[0];
 
@@ -764,7 +764,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				var valor1 = v_campos[0];
 				var valor2 = v_campos[1];
 				var valor3 = v_campos[2];
-				var valorLetra = v_campos[3]; <?php /*letra del turno*/?>
+				var valorLetra = v_campos[3]; <?php /*letra del turno*/ ?>
 				let elementos = valorLetra.split("<br");
 				let valor4 = elementos[0];
 
@@ -776,12 +776,12 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				document.form3.consecutivo_turno.value = valor3;
 				document.form3.numero_turno.value = valor1;
 
-				 document.getElementById('li_inicio').style.display = 'none';
-				 document.getElementById('li_sig').style.display = 'none';
+				document.getElementById('li_inicio').style.display = 'none';
+				document.getElementById('li_sig').style.display = 'none';
 				setTimeout(function () {
 					try {
-						 document.getElementById('li_fin').style.display = 'block';
-					
+						document.getElementById('li_fin').style.display = 'block';
+
 					} catch (exc) {
 						if (exc.description == null) {
 							//alert("excepcion "+exc.message);
@@ -805,11 +805,11 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				var v_campos;
 				var caracter = '/'
 				v_campos = v_dato.split(caracter);
-				var valor1 = v_campos[0]; <?php /*numero de turno turncoas*/?>
-				var valor2 = v_campos[1]; <?php /*parametro*/?>
-				var valor3 = v_campos[2]; <?php /*secuencia uno o dos*/?>
-				var valor4 = v_campos[3]; <?php /*consecutivo TURNCONS*/?>
-				var valor5 = v_campos[4]; <?php /*letra del turno*/?>
+				var valor1 = v_campos[0]; <?php /*numero de turno turncoas*/ ?>
+				var valor2 = v_campos[1]; <?php /*parametro*/ ?>
+				var valor3 = v_campos[2]; <?php /*secuencia uno o dos*/ ?>
+				var valor4 = v_campos[3]; <?php /*consecutivo TURNCONS*/ ?>
+				var valor5 = v_campos[4]; <?php /*letra del turno*/ ?>
 				document.getElementById('num_atendidos').innerHTML = valor5 + '' + valor1;
 				document.getElementById('turno_actual').innerHTML = valor5 + '' + valor1;
 				document.getElementById('letra_sincronizada').value = valor5;
@@ -837,13 +837,13 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 		}
 
 		function salir() {
-	/*var date = new Date();
-		  var timestamp = date.getTime();
-	var v_dato = getDataServer("tipoguardar.php","?tipoguardar=ComprobarSalirTurno&S_modulo=<?php echo ($_SESSION['MODULO']); ?>& S_consecutivo="+document.form3.consecutivo_turno.value+" & S_parametro="+document.form3.numero_parametrizado.value+" & time="+timestamp);
+			var date = new Date();
+			var timestamp = date.getTime();
+			var v_dato = getDataServer("tipoguardar.php", "?tipoguardar=ComprobarSalirTurno&S_modulo=<?php echo ($_SESSION['MODULO']); ?>& S_consecutivo=" + document.form3.consecutivo_turno.value + " & S_parametro=" + document.form3.numero_parametrizado.value + " & time=" + timestamp);
 			if (v_dato == 'si') {
 				alert('tiene turno pendiente en curso');
 			}
-	* /
+
 
 			if (confirm('seguro que desea salir?')) {
 				var date = new Date();
@@ -978,7 +978,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			var timestamp = date.getTime();
 			var v_dato = getDataServer("tipoguardar.php", "?tipoguardar=Fin_AtencionAyuda&consecutivo_ayuda=" + document.getElementById('consecutivo_ayuda').value + "&parametro_ayuda=" + document.getElementById('parametro_ayuda').value + "&time=" + timestamp);
 			if (v_dato != '') {
-				generarAyuda(); <?php /*actualizar la tabla contenedor de ayuda */?>
+				generarAyuda(); <?php /*actualizar la tabla contenedor de ayuda */ ?>
 
 
 				document.getElementById('li_finAyuda').style.display = 'none';
@@ -1043,14 +1043,14 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				</div>
 				<div id="nav">
 					<ul class="nav nav-pills">
-						<?php /*<li><a href="javascript:multiple();">MODO MULTIPLE</a></li>*/?>
+						<?php /*<li><a href="javascript:multiple();">MODO MULTIPLE</a></li>*/ ?>
 						<li id="limodoayuda"><a href="javascript:ayuda();">MODO AYUDA</a></li>
 
 						<li id="lisincronizar"><a href="javascript:mostrar();">SINCRONIZAR</a></li>
 						<?php if ($rol_usuario == '4') { ?>
 							<li id="liusuarios"><a href="panel_control.php">USUARIOS</a></li>
 						<?php } ?>
-						<?php /*<li><a href="javascript:contador();">CONTADOR</a></li>*/?>
+						<?php /*<li><a href="javascript:contador();">CONTADOR</a></li>*/ ?>
 						<li class="pad_last"><a href="javascript:salir();">SALIR</a></li>
 					</ul>
 					<div class="clear"></div>
@@ -1173,7 +1173,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 								<td class="labeltextdefault">Valor Sincronizado:</td>
 								<td>
 									<div id="dato_sincronizado">
-										<?php //echo($turno_sincronizado);?>
+										<?php //echo($turno_sincronizado); ?>
 									</div>
 								</td>
 							</tr>

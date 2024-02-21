@@ -1082,7 +1082,7 @@ if($totalRows_RsComprobarEstados == 0){
 	if($totalRows_RsTurnosExistentes>0){
 	  do{
 	     $query_RsInsert="INSERT INTO turnosfull(
-												 TURNCONS,
+												 
 												 TURNCOAS,
 												 TURNMODU,
 												 TURNIDUS,
@@ -1098,16 +1098,16 @@ if($totalRows_RsComprobarEstados == 0){
 		                                          )
 												  VALUES
 												  (
-												  'NULL',
+												 
 												  '".$row_RsTurnosExistentes['TURNCOAS']."',
 												  '".$row_RsTurnosExistentes['TURNMODU']."',
 												  '".$row_RsTurnosExistentes['TURNIDUS']."',
-												  '".$row_RsTurnosExistentes['TURNFECH']."',
-												  '".$row_RsTurnosExistentes['TURNFEFI']."',
+												  if ('".$row_RsTurnosExistentes['TURNFECH']."' = '', null, '".$row_RsTurnosExistentes['TURNFECH']."'),
+												  if ('".$row_RsTurnosExistentes['TURNFEFI']."' = '', null, '".$row_RsTurnosExistentes['TURNFEFI']."'),
 												  '".$row_RsTurnosExistentes['TURNTURN']."',
 												  '".$row_RsTurnosExistentes['TURNIDES']."',
 												  '".$row_RsTurnosExistentes['TURNPARA']."',
-												  '".$row_RsTurnosExistentes['TURNFELL']."',
+												  if ('".$row_RsTurnosExistentes['TURNFELL']."' = '', null, '".$row_RsTurnosExistentes['TURNFELL']."'),
 												  '".$row_RsTurnosExistentes['TURNAPOY']."',
 												  '".$row_RsTurnosExistentes['TURNIDAP']."',
 												  '".$row_RsTurnosExistentes['TURNSERV']."'

@@ -17,10 +17,10 @@ $idusuario  = $_GET['idusuario'];
 }
 
 if($modulo!='' /*&& $servicio!=''*/ && $idusuario!=''){
- $query_RsServicios="UPDATE modulos SET MODUESTA = '', MODUUSUA = '', MODUMULT = '', MODUSERV = '' WHERE MODUID = '".$modulo."' ";
+ $query_RsServicios="UPDATE modulos SET MODUESTA = 0, MODUUSUA = '', MODUMULT = '', MODUSERV = '' WHERE MODUID = '".$modulo."' ";
  $RsServicios = mysqli_query($turnos, $query_RsServicios);
  
- $query_RsServicios="UPDATE modulos SET MODUESTA = '', MODUUSUA = '', MODUMULT = '', MODUSERV = '' WHERE MODUUSUA = '".$idusuario."' ";
+ $query_RsServicios="UPDATE modulos SET MODUESTA = 0, MODUUSUA = '', MODUMULT = '', MODUSERV = '' WHERE MODUUSUA = '".$idusuario."' ";
  $RsServicios = mysqli_query($turnos, $query_RsServicios);
  
  $query_RsServicios="UPDATE usuarios SET USUAESTA = 0 WHERE USUAID	 = '".$idusuario."' ";

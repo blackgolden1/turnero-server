@@ -1056,13 +1056,13 @@ var date = new Date();
 }
 
 function salir(){
-	/*var date = new Date();
+	var date = new Date();
 		  var timestamp = date.getTime();
 	var v_dato = getDataServer("tipoguardar.php","?tipoguardar=ComprobarSalirTurno&S_modulo=<?php echo($_SESSION['MODULO']); ?>&S_consecutivo="+document.form3.consecutivo_turno.value+"&S_parametro="+document.form3.numero_parametrizado.value+"&time="+timestamp);
 	if(v_dato=='si'){
 	 alert('tiene turno pendiente en curso');
 	}
-	*/
+	
 	
 if(confirm('seguro que desea salir?')){
 	var date = new Date();
