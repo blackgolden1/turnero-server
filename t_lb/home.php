@@ -315,7 +315,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			justify-content: center;
 			font-weight: bold;
 			color: #000000;
-			font-size: 85px;
+			font-size: 35px;
 		}
 
 		.datagrid {
@@ -1136,7 +1136,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 								<td width="160"> </td>
 								<td rowspan="3">
 									<form name="form2" id="form2" method="post" action="">
-										<table width="90%" border="0" id="T_sincronizado" style="display:none;">
+										<table width="100%" border="0" id="T_sincronizado" style="display:none;">
 											<tr>
 												<td width="170" align="right" class="labeltextdefault">Iniciar Turno
 													Con Numero:</td>
@@ -1159,12 +1159,10 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 														name="letra_sincronizada" id="letra_sincronizada"
 														onblur="this.value = this.value.toUpperCase();" size="15">
 												</td>
-
-											</tr>
-											<tr>
 												<td><a class="btn btn-xs btn-default" id="ocultarsincr" class="sbttn"
 														href="javascript:OcultarSincr()">Ocultar</a></td>
 											</tr>
+											
 										</table>
 									</form>
 								</td>
@@ -1180,7 +1178,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 							<tr>
 								<td class="labeltextdefault">Turno Actual</td>
 								<td>
-									<div id="turno_actual">este si </div>
+									<div id="turno_actual"></div>
 
 								</td>
 							</tr>
@@ -1208,7 +1206,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 					<div id="num_atendidos" class="num_atendidos" style="width:100%;">
 						Sincroniza y llama al primer turno
 					</div>
-					<ul style="margin-left:43%">
+					<ul style="display:flex; flex-direction:row; justify-content:center; width:100%;padding:10px;">
 						<li id="li_turno" style="display:none;">
 							<a href="javascript:turno();" class="text-3xl">LLAMAR</a>
 						</li>
@@ -1224,7 +1222,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 					</ul>
 					<div class="clear"></div>
 				</div>
-				<div class="banner"> <img src="images/banner_img.jpg" width="940" height="116" alt="img" /> </div>
+				<!-- <div class="banner"> <img src="images/banner_img.jpg" width="940" height="116" alt="img" /> </div> -->
 				<div id="usuariosenlinea" class="news">
 					<p align="center" class="text-5xl"><b>USUARIOS CONECTADOS AL SISTEMA</b></p>
 					<table id="listausuarios">
@@ -1261,7 +1259,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 	//$row_RsComprobarDataLog = mysqli_fetch_assoc($RsComprobarDataLog);		
 	$totalRows_RsComprobarDataLog = mysqli_num_rows($RsComprobarDataLog);
 	if ($totalRows_RsComprobarDataLog == 0) {
-		header("location: logout.php");
+		// header("location: logout.php");
 	}
 	?>
 </body>
