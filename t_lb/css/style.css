@@ -49,10 +49,12 @@ box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.
 outline: 0 none;
 }
 #num_atendidos {
-margin-left:50%;
+display: flex;
+justify-content: center;
+align-items: center;
 font-weight:bold;
 color:#000000;
-font-size:85px;
+
 }
 
 #TV.table {

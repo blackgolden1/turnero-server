@@ -5,9 +5,9 @@ if (!isset($_SESSION)) {
   		session_start();
 	}
 //print_r($_SESSION["ARR_SERVI"]);	
-mysql_select_db($database_turnos, $turnos);
-@mysql_query("SET collation_connection = utf8_general_ci;");
-mysql_query ("SET NAMES 'utf8'");
+// mysql_select_db($database_turnos, $turnos);
+// @mysqli_query("SET collation_connection = utf8_general_ci;");
+// mysqli_query ("SET NAMES 'utf8'");
 /*
  campos hidden con nombre seguido de _ y el codigo para obtener nombres unicos dinamicos de acuerdo al id del servicio
 paramservice_3          parametro en la tabla parametros parametrizado
@@ -47,9 +47,9 @@ echo("este es el turno sincronizado ".$turno_sincronizado);
 						WHERE 1
 						AND SERVID != '".$_SESSION["ID_SERVI"]."'
 						";
-		$RsServicios = mysql_query($query_RsServicios, $turnos) or die(mysql_error());
-		$row_RsServicios = mysql_fetch_assoc($RsServicios);		
-		$totalRows_RsServicios = mysql_num_rows($RsServicios);
+		$RsServicios = mysqli_query($turnos,$query_RsServicios) ;
+		$row_RsServicios = mysqli_fetch_assoc($RsServicios);		
+		$totalRows_RsServicios = mysqli_num_rows($RsServicios);
 */
 /*
         $query_RsDatosBienvenida="SELECT M.MODUNOMB MODULO_DES,
@@ -61,8 +61,8 @@ echo("este es el turno sincronizado ".$turno_sincronizado);
 		                            FROM modulos M
 								   where MODUID = '".$_SESSION["MODULO"]."'
 								  ";
-		$RsDatosBienvenida = mysql_query($query_RsDatosBienvenida, $turnos) or die(mysql_error());
-		$row_RsDatosBienvenida = mysql_fetch_assoc($RsDatosBienvenida);
+		$RsDatosBienvenida = mysqli_query($query_RsDatosBienvenida, $turnos) or die(mysql_error());
+		$row_RsDatosBienvenida = mysqli_fetch_assoc($RsDatosBienvenida);
 		
 		
 		$query_RsFechaActual="SELECT SYSDATE() FECHA,
@@ -75,10 +75,10 @@ echo("este es el turno sincronizado ".$turno_sincronizado);
 							   WHERE M2.SERVID = '".$_SESSION['ID_SERVI']."') TARDE
 							  
 						";
-		$RsFechaActual = mysql_query($query_RsFechaActual, $turnos) or die(mysql_error());
-		$row_RsFechaActual = mysql_fetch_assoc($RsFechaActual);		
+		$RsFechaActual = mysqli_query($turnos,$query_RsFechaActual);
+		$row_RsFechaActual = mysqli_fetch_assoc($RsFechaActual);		
 		//echo('('.$row_RsFechaActual['FECHA'].')');
-		//$totalRows_RsFechaActual = mysql_num_rows($RsFechaActual);
+		//$totalRows_RsFechaActual = mysqli_num_rows($RsFechaActual);
 	//echo($_SESSION["MODULO"]);
 			 if($row_RsFechaActual['HORA']=='AM'){
                $inicio_turno='08:00:00 AM';	
@@ -99,8 +99,8 @@ echo("este es el turno sincronizado ".$turno_sincronizado);
 						WHERE A.PARACODI = '1' 
 						
 						";
-		$RsParams = mysql_query($query_RsParams, $turnos) or die(mysql_error());
-		$row_RsParams = mysql_fetch_assoc($RsParams);	
+		$RsParams = mysqli_query($turnos,$query_RsParams) ;
+		$row_RsParams = mysqli_fetch_assoc($RsParams);	
         $nodeserver = $row_RsParams['NODESERVER'];		
         $nodeport   = $row_RsParams['NODEPORT'];
 
@@ -108,8 +108,8 @@ echo("este es el turno sincronizado ".$turno_sincronizado);
 							  DATE_FORMAT(SYSDATE(), '%p') HORA
 							  
 						";
-		$RsFechaActual = mysql_query($query_RsFechaActual, $turnos) or die(mysql_error());
-		$row_RsFechaActual = mysql_fetch_assoc($RsFechaActual);		
+		$RsFechaActual = mysqli_query($turnos,$query_RsFechaActual);
+		$row_RsFechaActual = mysqli_fetch_assoc($RsFechaActual);		
 		
 			 if($row_RsFechaActual['HORA']=='AM'){
                $inicio_turno='TURNOS AM';	
@@ -123,9 +123,9 @@ function ArmarLi($arr,$turnos){ //$turnos es el resource de conexion
  if(is_array($arr)){
    for($i=0; $i<count($arr); $i++){
 			$query_RsServicios="SELECT * FROM servicios where SERVID = '".$arr[$i]."'";
-			$RsServicios = mysql_query($query_RsServicios, $turnos) or die(mysql_error());
-			$row_RsServicios = mysql_fetch_assoc($RsServicios);		
-			$totalRows_RsServicios = mysql_num_rows($RsServicios);
+			$RsServicios = mysqli_query($turnos,$query_RsServicios) ;
+			$row_RsServicios = mysqli_fetch_assoc($RsServicios);		
+			$totalRows_RsServicios = mysqli_num_rows($RsServicios);
 			 if($totalRows_RsServicios>0){
 			  echo(/*$row_RsServicios['SERVID'].*/'<div class="s_servicios" id="s_servicios_'.$row_RsServicios['SERVID'].'">'.$row_RsServicios['SERVNOMB'].'&nbsp;&nbsp;&nbsp;<input type="text" name="paramservice_'.$row_RsServicios['SERVID'].'" id="paramservice_'.$row_RsServicios['SERVID'].'" value="" size="3"><input type="text" name="paramservicevalor_'.$row_RsServicios['SERVID'].'" id="paramservicevalor_'.$row_RsServicios['SERVID'].'" value="" size="3"><input type="text" name="secuenciaservice_'.$row_RsServicios['SERVID'].'" id="secuenciaservice_'.$row_RsServicios['SERVID'].'" value="" size="3"><input type="text" name="secuencia_'.$row_RsServicios['SERVID'].'" id="secuencia_'.$row_RsServicios['SERVID'].'" value="" size="3"><input type="text" name="consecutivoturno_'.$row_RsServicios['SERVID'].'" id="consecutivoturno_'.$row_RsServicios['SERVID'].'" value="" size="3"><input class="checkservices" type="checkbox" value="'.$row_RsServicios['SERVID'].'" name="checkserv_'.$row_RsServicios['SERVID'].'" id="checkserv_'.$row_RsServicios['SERVID'].'"></div>'); 
 			 }
@@ -1056,13 +1056,13 @@ var date = new Date();
 }
 
 function salir(){
-	/*var date = new Date();
+	var date = new Date();
 		  var timestamp = date.getTime();
 	var v_dato = getDataServer("tipoguardar.php","?tipoguardar=ComprobarSalirTurno&S_modulo=<?php echo($_SESSION['MODULO']); ?>&S_consecutivo="+document.form3.consecutivo_turno.value+"&S_parametro="+document.form3.numero_parametrizado.value+"&time="+timestamp);
 	if(v_dato=='si'){
 	 alert('tiene turno pendiente en curso');
 	}
-	*/
+	
 	
 if(confirm('seguro que desea salir?')){
 	var date = new Date();
@@ -1275,7 +1275,7 @@ function OcultarSincr(){
 		 ?>
 		 <option value="<?php echo($row_RsServicios['CODIGO']);?>"><?php echo($row_RsServicios['NOMBRE']);?></option>
 		 <?php
-		  }while($row_RsServicios = mysql_fetch_assoc($RsServicios));
+		  }while($row_RsServicios = mysqli_fetch_assoc($RsServicios));
 		}
 
 	 ?>
@@ -1343,9 +1343,9 @@ function OcultarSincr(){
  if(is_array($_SESSION["ARR_SERVI"])){
    for($i=0; $i<count($_SESSION["ARR_SERVI"]); $i++){
 			$query_RsServicios="SELECT * FROM servicios where SERVID = '".$_SESSION["ARR_SERVI"][$i]."'";
-			$RsServicios = mysql_query($query_RsServicios, $turnos) or die(mysql_error());
-			$row_RsServicios = mysql_fetch_assoc($RsServicios);		
-			$totalRows_RsServicios = mysql_num_rows($RsServicios);
+			$RsServicios = mysqli_query($turnos,$query_RsServicios) ;
+			$row_RsServicios = mysqli_fetch_assoc($RsServicios);		
+			$totalRows_RsServicios = mysqli_num_rows($RsServicios);
 			 if($totalRows_RsServicios>0){
 			 ?>
 			 <tr class="s_servicios" id="s_servicios_<?php echo($row_RsServicios['SERVID']);?>">

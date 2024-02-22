@@ -10,9 +10,9 @@ if (!isset($_SESSION)) {
   		session_start();
 	}
 	
-mysql_select_db($database_turnos, $turnos);
-@mysql_query("SET collation_connection = utf8_general_ci;");
-mysql_query ("SET NAMES 'utf8'");
+// mysql_select_db($database_turnos, $turnos);
+// @mysqli_query("SET collation_connection = utf8_general_ci;");
+// mysqli_query ("SET NAMES 'utf8'");
 
 $tipoguardar='';
 if(isset($_GET['tipoguardar']) && $_GET['tipoguardar']!=''){
@@ -33,14 +33,14 @@ function TablamodeAyuda($turnos,$jornada){
 									  AND U.USUAIDPE = P.PERSCONS 
 									  AND M.MODUMULT = 1
 									  AND M.MODUSALA = '".$_GET['sala']."'";
-		$RsServiciosMultiples = mysql_query($query_RsServiciosMultiples, $turnos) or die(mysql_error());
-		$row_RsServiciosMultiples = mysql_fetch_assoc($RsServiciosMultiples);		
-		$totalRows_RsServiciosMultiples = mysql_num_rows($RsServiciosMultiples);
+		$RsServiciosMultiples = mysqli_query($turnos,$query_RsServiciosMultiples) ;
+		$row_RsServiciosMultiples = mysqli_fetch_assoc($RsServiciosMultiples);		
+		$totalRows_RsServiciosMultiples = mysqli_num_rows($RsServiciosMultiples);
 	/*	
 		$query_RsServiciosMultiples="SELECT M.MODUUSUA USUARIO, M.MODUSERV SERVICIOS FROM MODULOS M where M.MODUMULT = 1";
-		$RsServiciosMultiples = mysql_query($query_RsServiciosMultiples, $turnos) or die(mysql_error());
-		$row_RsServiciosMultiples = mysql_fetch_assoc($RsServiciosMultiples);		
-		$totalRows_RsServiciosMultiples = mysql_num_rows($RsServiciosMultiples);
+		$RsServiciosMultiples = mysqli_query($turnos,$query_RsServiciosMultiples) ;
+		$row_RsServiciosMultiples = mysqli_fetch_assoc($RsServiciosMultiples);		
+		$totalRows_RsServiciosMultiples = mysqli_num_rows($RsServiciosMultiples);
 */
 
 		 $contmult='';
@@ -58,9 +58,9 @@ function TablamodeAyuda($turnos,$jornada){
 									  and  T.TURNIDUS = '".$row_RsServiciosMultiples['USUARIO']."'
 									  and  T.TURNSERV = '".$services[$z]."'
 									  AND  DATE_FORMAT(T.TURNFEFI, '%d') = DATE_FORMAT(SYSDATE(),'%d')) REALIZADOS FROM servicios s where s.servid = '".$services[$z]."'";
-				$RsDatosServicio = mysql_query($query_RsDatosServicio, $turnos) or die(mysql_error());
-				$row_RsDatosServicio = mysql_fetch_assoc($RsDatosServicio);		
-				$totalRows_RsDatosServicio = mysql_num_rows($RsDatosServicio);			  
+				$RsDatosServicio = mysqli_query($turnos,$query_RsDatosServicio);
+				$row_RsDatosServicio = mysqli_fetch_assoc($RsDatosServicio);		
+				$totalRows_RsDatosServicio = mysqli_num_rows($RsDatosServicio);			  
 				$q++;
 			  if($totalRows_RsDatosServicio>0){	
 			  if($q%2==0){
@@ -84,7 +84,7 @@ function TablamodeAyuda($turnos,$jornada){
 			    }
 			   }
 			  }
-		    }while($row_RsServiciosMultiples = mysql_fetch_assoc($RsServiciosMultiples));		
+		    }while($row_RsServiciosMultiples = mysqli_fetch_assoc($RsServiciosMultiples));		
 		}
 		
 		return $contmult;
@@ -97,8 +97,8 @@ if($tipoguardar=='ModeAyuda')
 		$query_RsHora="SELECT CURTIME() HORA,
 		                     date_format(sysdate(),'%H') num_hora,
 		                     date_format(sysdate(),'%d') dia";
-		$RsHora = mysql_query($query_RsHora, $turnos) or die(mysql_error());
-		$row_RsHora = mysql_fetch_assoc($RsHora);
+		$RsHora = mysqli_query($turnos,$query_RsHora);
+		$row_RsHora = mysqli_fetch_assoc($RsHora);
 		
 		$horaselect=$row_RsHora['HORA'];
 		$partshora=explode(':',$horaselect);
@@ -156,9 +156,9 @@ if($tipoguardar=='ModeAyuda')
 									  AND  DATE_FORMAT(T.TURNFEFI, '%d') = DATE_FORMAT(SYSDATE(),'%d')) >0 
 							 AND M.MODUSALA = '".$_GET['sala']."'";
 							 //ECHO($query_RsServicios);
-		$RsServicios = mysql_query($query_RsServicios, $turnos) or die(mysql_error());
-		$row_RsServicios = mysql_fetch_assoc($RsServicios);		
-		$totalRows_RsServicios = mysql_num_rows($RsServicios);    
+		$RsServicios = mysqli_query($turnos,$query_RsServicios);
+		$row_RsServicios = mysqli_fetch_assoc($RsServicios);		
+		$totalRows_RsServicios = mysqli_num_rows($RsServicios);    
 		  
 	  
 		  if($totalRows_RsServicios>0){
@@ -186,7 +186,7 @@ if($tipoguardar=='ModeAyuda')
 				</tr>
 				";
 				}
-			 }while($row_RsServicios = mysql_fetch_assoc($RsServicios));
+			 }while($row_RsServicios = mysqli_fetch_assoc($RsServicios));
 			 /*for($i=0; $i<3; $i++){
 			 $cont=$cont.$cont;
 			 }*/
@@ -202,9 +202,9 @@ if($tipoguardar=='ModeAyuda')
 									where M.MODUUSUA = U.USUAID 
 									  AND U.USUAIDPE = P.PERSCONS 
 									  AND M.MODUMULT = 1";
-		$RsServiciosMultiples = mysql_query($query_RsServiciosMultiples, $turnos) or die(mysql_error());
-		$row_RsServiciosMultiples = mysql_fetch_assoc($RsServiciosMultiples);		
-		$totalRows_RsServiciosMultiples = mysql_num_rows($RsServiciosMultiples);
+		$RsServiciosMultiples = mysqli_query($turnos,$query_RsServiciosMultiples) ;
+		$row_RsServiciosMultiples = mysqli_fetch_assoc($RsServiciosMultiples);		
+		$totalRows_RsServiciosMultiples = mysqli_num_rows($RsServiciosMultiples);
          */
         $contmult=TablamodeAyuda($turnos,'2');
 		echo($table.$contmult.$cont.$endtable);
@@ -250,9 +250,9 @@ if($tipoguardar=='ModeAyuda')
 							 AND M.MODUSALA = '".$_GET['sala']."'
 							 ";
 							 //ECHO($query_RsServicios);
-		$RsServicios = mysql_query($query_RsServicios, $turnos) or die(mysql_error());
-		$row_RsServicios = mysql_fetch_assoc($RsServicios);		
-		$totalRows_RsServicios = mysql_num_rows($RsServicios);    
+		$RsServicios = mysqli_query($turnos,$query_RsServicios);
+		$row_RsServicios = mysqli_fetch_assoc($RsServicios);		
+		$totalRows_RsServicios = mysqli_num_rows($RsServicios);    
 		  if($totalRows_RsServicios>0){
 		  $table="<table  class='datagrid'>
 		           <tr>
@@ -293,7 +293,7 @@ if($tipoguardar=='ModeAyuda')
 				</tr>
 				";
 				}
-			 }while($row_RsServicios = mysql_fetch_assoc($RsServicios));
+			 }while($row_RsServicios = mysqli_fetch_assoc($RsServicios));
 			 
 			 $contmult=TablamodeAyuda($turnos,'1');
 		echo($table.$cont.$contmult.$endtable);
@@ -310,4 +310,3 @@ if($tipoguardar=='ModeAyuda')
 
   }
 } 
-?>

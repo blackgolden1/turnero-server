@@ -2,29 +2,30 @@
 require_once('seguridad.php');
 require_once('Connections/db.php');
 if (!isset($_SESSION)) {
-  		session_start();
-	}
-	
-mysql_select_db($database_turnos, $turnos);
-@mysql_query("SET collation_connection = utf8_general_ci;");
-mysql_query ("SET NAMES 'utf8'");
-		$query_RsServicios="SELECT `SERVID` CODIGO,
-						        `SERVNOMB`  NOMBRE,
-								`SERVTUMA`,
-								`SERVTUTA`,
-								`SERVCOLO` 
-						FROM `servicios` 
-						WHERE 1
-						";
-		$RsServicios = mysql_query($query_RsServicios, $turnos) or die(mysql_error());
-		$row_RsServicios = mysql_fetch_assoc($RsServicios);		
-		$totalRows_RsServicios = mysql_num_rows($RsServicios);
-		
-		$RsServicios2 = mysql_query($query_RsServicios, $turnos) or die(mysql_error());
-		$row_RsServicios2 = mysql_fetch_assoc($RsServicios2);		
-		$totalRows_RsServicios2 = mysql_num_rows($RsServicios2);
+    session_start();
+}
 
+mysqli_select_db($turnos, $database_turnos);
+mysqli_query($turnos, "SET collation_connection = utf8_general_ci;");
+mysqli_query($turnos, "SET NAMES 'utf8'");
+
+$query_RsServicios = "SELECT `SERVID` CODIGO,
+                               `SERVNOMB`  NOMBRE,
+                               `SERVTUMA`,
+                               `SERVTUTA`,
+                               `SERVCOLO` 
+                        FROM `servicios` 
+                        WHERE 1";
+
+$RsServicios = mysqli_query($turnos, $query_RsServicios) or die(mysqli_error($turnos));
+$row_RsServicios = mysqli_fetch_assoc($RsServicios);
+$totalRows_RsServicios = mysqli_num_rows($RsServicios);
+
+$RsServicios2 = mysqli_query($turnos, $query_RsServicios) or die(mysqli_error($turnos));
+$row_RsServicios2 = mysqli_fetch_assoc($RsServicios2);
+$totalRows_RsServicios2 = mysqli_num_rows($RsServicios2);
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -141,7 +142,7 @@ document.form_servicios.action=("tipoguardar_multiple.php?tipoguardar=servicio_c
 			  ?>
 			 <option value="<?php echo($row_RsServicios['CODIGO']);?>" style="background:"><?php echo($row_RsServicios['NOMBRE']);?></option>
 			  <?php
-			   }while($row_RsServicios = mysql_fetch_assoc($RsServicios));
+			   }while($row_RsServicios = mysqli_fetch_array($RsServicios));
 			}
 			?>
 			</td>
@@ -175,7 +176,7 @@ document.form_servicios.action=("tipoguardar_multiple.php?tipoguardar=servicio_c
 				    </td>
 				  </tr>
 				  <?php
-				   }while($row_RsServicios2 = mysql_fetch_assoc($RsServicios2));
+				   }while($row_RsServicios2 = mysqli_fetch_array($RsServicios2));
 				}
 			  ?>  
 			   </table>

@@ -68,11 +68,11 @@ $tipoGuardar=$_GET['tipoGuardar'];
 														'".$celular_usuario."'
 														)";
 						//echo($query_RsInsertPersona);
-	$RsInsertPersona = mysql_query($query_RsInsertPersona, $turnos) or die(mysql_error());
+	$RsInsertPersona = mysqli_query( $turnos,$query_RsInsertPersona);
     
 	$query_RsUltInsert = "SELECT LAST_INSERT_ID() DATO";
-	$RsUltInsert = mysql_query($query_RsUltInsert, $turnos) or die(mysql_error());
-	$row_RsUltInsert = mysql_fetch_assoc($RsUltInsert);
+	$RsUltInsert = mysqli_query( $turnos,$query_RsUltInsert) ;
+	$row_RsUltInsert = mysqli_fetch_assoc($RsUltInsert);
 	$cod_persona = $row_RsUltInsert['DATO'];
 	
 	  $query_RsInsertUsuario= " INSERT INTO usuarios (
@@ -95,7 +95,7 @@ $tipoGuardar=$_GET['tipoGuardar'];
 								  
 														
 						//echo($query_RsInsertPersona);
-	$RsInsertUsuario = mysql_query($query_RsInsertUsuario, $turnos) or die(mysql_error());
+	$RsInsertUsuario = mysqli_query( $turnos,$query_RsInsertUsuario);
     
 	
 	
@@ -103,4 +103,4 @@ $tipoGuardar=$_GET['tipoGuardar'];
 $redireccionar = "location: logout.php";
 header($redireccionar);
 }
-?>
+

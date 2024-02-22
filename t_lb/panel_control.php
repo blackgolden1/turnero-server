@@ -5,9 +5,9 @@ if (!isset($_SESSION)) {
   		session_start();
 	}
 	
-mysql_select_db($database_turnos, $turnos);
-@mysql_query("SET collation_connection = utf8_general_ci;");
-mysql_query ("SET NAMES 'utf8'");
+// mysql_select_db($database_turnos, $turnos);
+// @mysql_query("SET collation_connection = utf8_general_ci;");
+// mysql_query ("SET NAMES 'utf8'");
         
 		$query_RsModulo="SELECT MODUID CODIGO,
 		                        MODUNOMB NOMBRE,
@@ -15,18 +15,18 @@ mysql_query ("SET NAMES 'utf8'");
 						  FROM MODULOS 
 						WHERE  1
 						";
-		$RsModulo = mysql_query($query_RsModulo, $turnos) or die(mysql_error());
-		$row_RsModulo = mysql_fetch_assoc($RsModulo);		
-		$totalRows_RsModulo = mysql_num_rows($RsModulo);
+		$RsModulo = mysqli_query($turnos, $query_RsModulo) ;
+		$row_RsModulo = mysqli_fetch_assoc($RsModulo);		
+		$totalRows_RsModulo = mysqli_num_rows($RsModulo);
 	
 		$query_RsRol="SELECT `ROLEID`CODIGO,
 		                        `ROLENOMB` NOMBRE 
 								FROM `roles` 
 								WHERE 1
 						";
-		$RsRol = mysql_query($query_RsRol, $turnos) or die(mysql_error());
-		$row_RsRol = mysql_fetch_assoc($RsRol);		
-		$totalRows_RsRol = mysql_num_rows($RsRol);
+		$RsRol = mysqli_query($turnos,$query_RsRol);
+		$row_RsRol = mysqli_fetch_assoc($RsRol);		
+		$totalRows_RsRol = mysqli_num_rows($RsRol);
 	
 	
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -98,7 +98,7 @@ mysql_query ("SET NAMES 'utf8'");
 			  ?>
 			 <option value="<?php echo($row_RsModulo['CODIGO']);?>" style="background:<?php echo($row_RsModulo['COLOR']);?>"><?php echo($row_RsModulo['NOMBRE']);?></option>
 			  <?php
-			   }while($row_RsModulo = mysql_fetch_assoc($RsModulo));
+			   }while($row_RsModulo = mysqli_fetch_assoc($RsModulo));
 			}
 			?>
 			</td>
@@ -114,7 +114,7 @@ mysql_query ("SET NAMES 'utf8'");
 			  ?>
 			 <option value="<?php echo($row_RsRol['CODIGO']);?>" ><?php echo($row_RsRol['NOMBRE']);?></option>
 			  <?php
-			   }while($row_RsRol = mysql_fetch_assoc($RsRol));
+			   }while($row_RsRol = mysqli_fetch_assoc($RsRol));
 			}
 			?>
 			</td>

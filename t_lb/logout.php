@@ -1,8 +1,8 @@
 <?php session_start(); 
 require_once('Connections/db.php');
-mysql_select_db($database_turnos, $turnos);
-@mysql_query("SET collation_connection = utf8_general_ci;");
-mysql_query ("SET NAMES 'utf8'");
+$turnos->select_db("tur_lb");
+// @mysqli_query("SET collation_connection = utf8_general_ci;");
+// mysqli_query ("SET NAMES 'utf8'");
 $modulo   = '';
 if(isset($_GET['modulo']) && $_GET['modulo']!=''){
 $modulo  = $_GET['modulo'];
@@ -17,14 +17,14 @@ $idusuario  = $_GET['idusuario'];
 }
 
 if($modulo!='' /*&& $servicio!=''*/ && $idusuario!=''){
- $query_RsServicios="UPDATE modulos SET MODUESTA = '', MODUUSUA = '', MODUMULT = '', MODUSERV = '' WHERE MODUID = '".$modulo."' ";
- $RsServicios = mysql_query($query_RsServicios, $turnos) or die(mysql_error());
+ $query_RsServicios="UPDATE modulos SET MODUESTA = 0, MODUUSUA = '', MODUMULT = '', MODUSERV = '' WHERE MODUID = '".$modulo."' ";
+ $RsServicios = mysqli_query($turnos, $query_RsServicios);
  
- $query_RsServicios="UPDATE modulos SET MODUESTA = '', MODUUSUA = '', MODUMULT = '', MODUSERV = '' WHERE MODUUSUA = '".$idusuario."' ";
- $RsServicios = mysql_query($query_RsServicios, $turnos) or die(mysql_error()); 
+ $query_RsServicios="UPDATE modulos SET MODUESTA = 0, MODUUSUA = '', MODUMULT = '', MODUSERV = '' WHERE MODUUSUA = '".$idusuario."' ";
+ $RsServicios = mysqli_query($turnos, $query_RsServicios);
  
  $query_RsServicios="UPDATE usuarios SET USUAESTA = 0 WHERE USUAID	 = '".$idusuario."' ";
- $RsServicios = mysql_query($query_RsServicios, $turnos) or die(mysql_error()); 
+ $RsServicios = mysqli_query($turnos, $query_RsServicios);
 }
 // Borramos toda la sesion
 session_destroy(); 
