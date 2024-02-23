@@ -79,11 +79,12 @@ $row_RsModulo = mysqli_fetch_assoc($RsModulo);
 			font-weight: bold;
 		}
 
-		.content {
+		.contentLogin {
 			background-color: #fff;
-			padding: 20px;
+			padding: 30px;
 			border-radius: 8px;
 			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			margin: auto auto ;
 		}
 
 		.label-login {
@@ -97,6 +98,7 @@ $row_RsModulo = mysqli_fetch_assoc($RsModulo);
 			border: 1px solid #ccc;
 			border-radius: 5px;
 		}
+
 
 		.button-login {
 			width: 100%;
@@ -112,6 +114,7 @@ $row_RsModulo = mysqli_fetch_assoc($RsModulo);
 		.button-login:hover {
 			background-color: #0056b3;
 		}
+
 
 		.footer {
 			text-align: center;
@@ -212,13 +215,13 @@ $row_RsModulo = mysqli_fetch_assoc($RsModulo);
 	<div class="container">
 		<div class="header">
 			<div class="logo">
-				<p class="navbar-brand">Sistema de turnos</p>
+				<p style="font-weight: bold;color: #0056b3; font-size: 6rem">Sistema de turnos</p>
 			</div>
 		</div>
-		<div class="content">
-			<div class="types">
+		<div class="contentLogin">
+			
 				<form name="formlogin" id="formlogin" action="" method="post">
-					<table align="center">
+					<table align="center" width="100%">
 						<tr>
 							<td class="label-login">Usuario</td>
 							<td><input class="input-login" type="text" name="usuario" id="usuario" value="" size="40"
@@ -247,13 +250,13 @@ $row_RsModulo = mysqli_fetch_assoc($RsModulo);
 									?>
 							</td>
 						</tr>
-						<tr>
-							<td colspan="2"><input class="button-login" type="submit" value="Ingresar"
+						<tr style="display:flex;justify-content: center; width: 100%;">
+							<td  ><input class="button-login" type="submit" value="Ingresar"
 									onclick="return validar();"></td>
 						</tr>
 					</table>
 				</form>
-			</div>
+			
 		</div>
 		<div class="footer">
 		<div class="footer-container">

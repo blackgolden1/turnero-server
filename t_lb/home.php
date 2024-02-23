@@ -220,10 +220,13 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 	<!-- SET: SCRIPTS -->
 	<style type="text/css">
 		body {
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #003A57), color-stop(1, #267BA3));
+			/* background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #003A57), color-stop(1, #267BA3));
 			background: -moz-linear-gradient(center top, #003A57 5%, #267BA3 100%);
 			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#003A57', endColorstr='#267BA3');
-			background-color: #003A57;
+			background-color: #003A57; */
+			height: 100vh;
+			width: 100vw;
+			overflow: hidden;
 		}
 
 		.info {
@@ -231,10 +234,9 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			border: 1px solid #CCCCCC;
 			color: #000000;
 			font: 12px/150% Arial, Helvetica, sans-serif;
-			height: 77px;
-			margin-left: 8px;
-			margin-top: -19px;
-			width: 928px;
+			height: fit-content;
+	
+			width: 30rem;
 		}
 
 		.info_text {
@@ -299,7 +301,11 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			font-size: 11px;
 			font-weight: normal;
 		}
-
+		.footerHome{
+			background-color: #4790FF;
+			height: 5rem;
+			width: 100%;
+		}
 		#num_atendidosAyuda {
 			display: flex;
 			align-items: center;
@@ -384,7 +390,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			margin-top: 1px;
 			margin-left: 27px;
 			clear: both;
-			background: #E1EEF4;
+			background: #003A57;
 			width: 930px;
 			text-align: right;
 		}
@@ -1033,89 +1039,117 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 </head>
 
 <body>
-	<!-- wrapper starts -->
-	<div class="wrapper">
-		<!-- Header Starts -->
-		<div class="continer">
-			<div class="header">
+	<div style="width:100%; height: 100%;display:flex;flex-direction:column; justify-content:center;">			
+		<div class="header">
 				<div class="logo">
-					<p>Turnos Web</p>
+					<p>Sistema de turnos</p>
 				</div>
 				<div id="nav">
 					<ul class="nav nav-pills">
-						<?php /*<li><a href="javascript:multiple();">MODO MULTIPLE</a></li>*/ ?>
-						<li id="limodoayuda"><a href="javascript:ayuda();">MODO AYUDA</a></li>
+						 <!-- <li><a href="javascript:multiple();">MODO MULTIPLE</a></li>  -->
+						<li id="limodoayuda"><a href="javascript:ayuda();">Modo Ayuda</a></li>
 
-						<li id="lisincronizar"><a href="javascript:mostrar();">SINCRONIZAR</a></li>
+						<li id="lisincronizar"><a href="javascript:mostrar();">Sincronizar</a></li>
 						<?php if ($rol_usuario == '4') { ?>
-							<li id="liusuarios"><a href="panel_control.php">USUARIOS</a></li>
+							<li id="liusuarios"><a href="panel_control.php">Usuarios</a></li>
 						<?php } ?>
 						<?php /*<li><a href="javascript:contador();">CONTADOR</a></li>*/ ?>
-						<li class="pad_last"><a href="javascript:salir();">SALIR</a></li>
+						<li class="pad_last"><a href="javascript:salir();">Salir</a></li>
 					</ul>
-					<div class="clear"></div>
 				</div>
-				<div class="clear"></div>
-			</div>
-			<!-- Header ends -->
-			<!-- Banner Starts -->
-			<div id="bienvenidatext" class="bienvenida"><b>
-					Bienvenido:
-					<?php echo ($_SESSION["USU_AUT_NOMB"]); ?>
-					<?php echo ($row_RsDatosBienvenida['MODULO_DES']); ?> SERVICIO:
-					<?php echo ($row_RsDatosBienvenida['SERVICIO_DES']); ?>
-				</b>
-			</div>
-			<div id="contentmultiple" class="contentmultiple" style="display:none;">
-				<label>Agregar Servicio</label>
-				<select name="servicio_multiple" id="servicio_multiple">
-					<option value="">Seleccione...</option>
-					<?php
-					if ($totalRows_RsServicios > 0) {
-						do {
-							?>
-							<option value="<?php echo ($row_RsServicios['CODIGO']); ?>">
-								<?php echo ($row_RsServicios['NOMBRE']); ?>
-							</option>
-							<?php
-						} while ($row_RsServicios = mysqli_fetch_assoc($RsServicios));
-					}
+		</div>
 
-					?>
-				</select>
-			</div>
-			<div id="contentayuda" class="contentayuda" style="display:none;">
-				<div id="link_ayuda" class="ayuda">
-				</div>
-				<div id="num_atendidosAyuda" class="num_atendidos">
+			<!-- comentado porque no se esta usando -->
+		<div id="contentmultiple" class="contentmultiple" style="display:none;" >
+			<label>Agregar Servicio</label>
+			<select name="servicio_multiple" id="servicio_multiple">
+				<option value="">Seleccione...</option>
+				<?php
+				if ($totalRows_RsServicios > 0) {
+					do {
+						?>
+						<option value="<?php echo ($row_RsServicios['CODIGO']); ?>">
+							<?php echo ($row_RsServicios['NOMBRE']); ?>
+						</option>
+						<?php
+					} while ($row_RsServicios = mysqli_fetch_assoc($RsServicios));
+				}
 
-					<!-- <div id="turno_actual"></div> -->
-				</div>
-				<div class="typs">
-					<ul style="float: left; margin-left: 5%; margin-top: -22px;" class="flex ">
-						<li id="li_turnoAyuda" style="display:none;">
-							<a href="javascript:turnoAyuda();" class="text-3xl">LLAMAR</a>
-						</li>
-						<li class="l3" id="li_inicioAyuda" style="display:none;">
-							<a href="javascript:inicioAyuda();">INICIO</a>
-
-						</li>
-						<li class="l2" id="li_sigAyuda" style="display:none;">
-							<a href="javascript:siguienteAyuda();">SIGUIENTE</a>
-						</li>
-						<li class="l4" id="li_finAyuda" style="display:none;">
-							<a href="javascript:finAyuda();">FIN</a>
-						</li>
-					</ul>
-					<input type="hidden" name="turno_ayuda" value="" id="turno_ayuda">
-					<input type="hidden" name="parametro_ayuda" value="" id="parametro_ayuda">
-					<input type="hidden" name="consecutivo_ayuda" value="" id="consecutivo_ayuda">
-				</div>
+				?>
+			</select>
+		</div> 
+		<div id="contentayuda" class="contentayuda" style="display:none;">
+			<div id="link_ayuda" class="ayuda">
 			</div>
+			<div id="num_atendidosAyuda" class="num_atendidos">
+
+				<!-- <div id="turno_actual"></div> -->
+			</div>
+			<div class="typs">
+				<ul style="float: left; margin-left: 5%; margin-top: -22px;" class="flex ">
+					<li id="li_turnoAyuda" style="display:none;">
+						<a href="javascript:turnoAyuda();" class="text-3xl">LLAMAR</a>
+					</li>
+					<li class="l3" id="li_inicioAyuda" style="display:none;">
+						<a href="javascript:inicioAyuda();">INICIO</a>
+
+					</li>
+					<li class="l2" id="li_sigAyuda" style="display:none;">
+						<a href="javascript:siguienteAyuda();">SIGUIENTE</a>
+					</li>
+					<li class="l4" id="li_finAyuda" style="display:none;">
+						<a href="javascript:finAyuda();">FIN</a>
+					</li>
+				</ul>
+				<input type="hidden" name="turno_ayuda" value="" id="turno_ayuda">
+				<input type="hidden" name="parametro_ayuda" value="" id="parametro_ayuda">
+				<input type="hidden" name="consecutivo_ayuda" value="" id="consecutivo_ayuda">
+			</div>
+		</div>
 			<div id='link_cargandoayuda'></div>
 			<div class="content" id="content">
-				<div class="typs">
-					<div id="info_turnos" class="info">
+			<div class="typs">
+					<form name="form3" id="form3" method="post" action="">
+						<input type="hidden" name="parametro_A" id="parametro_A" value="">
+						<input type="hidden" name="numero_parametrizado" id="numero_parametrizado" value="">
+						<input type="hidden" name="consecutivo_turno" id="consecutivo_turno" value="">
+						<input type="hidden" name="secuencia" id="secuencia" value="">
+						<input type="hidden" name="numero_turno" id="numero_turno" value="">
+						<input type="hidden" name="sesion_modulo" id="sesion_modulo" value="<?php if (isset($_SESSION["MODULO"]) && $_SESSION["MODULO"] != '') {
+							echo ($_SESSION["MODULO"]);
+						} ?>">
+						<input type="hidden" name="sesion_servicio" id="sesion_servicio" value="<?php if (isset($_SESSION["ID_SERVI"]) && $_SESSION["ID_SERVI"] != '') {
+							echo ($_SESSION["ID_SERVI"]);
+						} ?>">
+						<input type="hidden" name="sesion_usuario" id="sesion_usuario" value="<?php if (isset($_SESSION["IDUSU"]) && $_SESSION["IDUSU"] != '') {
+							echo ($_SESSION["IDUSU"]);
+						} ?>">
+					</form>
+					<div id="num_atendidos" class="num_atendidos" style="width:100%;">
+						Sincroniza y llama al primer turno
+					</div>
+					<ul style="display:flex; flex-direction:row; justify-content:center; width:100%;padding:10px;">
+						<li id="li_turno" style="display:none;">
+							<a href="javascript:turno();" class="text-3xl">LLAMAR</a>
+						</li>
+						<li class="l3" id="li_inicio" style="display:none;">
+							<a href="javascript:inicio();">INICIO</a>
+						</li>
+						<li class="l2" id="li_sig" style="display:none;">
+							<a href="javascript:siguiente();">SIGUIENTE</a>
+						</li>
+						<li class="l4" id="li_fin" style="display:none;">
+							<a href="javascript:fin();">FIN</a>
+						</li>
+					</ul>
+					<div class="clear"></div>
+				
+				<!-- <div class="banner"> <img src="images/banner_img.jpg" width="940" height="116" alt="img" /> </div> -->
+
+		
+</div>
+<div style="width:100%; height: 100%;display:flex;flex-direction:column; align-items:center;justify-content: space-evenly;">		
+<div id="info_turnos" class="info">
 						<p>
 						<table width="100%" border="0" class="info_text" id="table_info">
 							<tr>
@@ -1185,45 +1219,8 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 
 						</table>
 						</p>
-
-					</div>
-					<form name="form3" id="form3" method="post" action="">
-						<input type="hidden" name="parametro_A" id="parametro_A" value="">
-						<input type="hidden" name="numero_parametrizado" id="numero_parametrizado" value="">
-						<input type="hidden" name="consecutivo_turno" id="consecutivo_turno" value="">
-						<input type="hidden" name="secuencia" id="secuencia" value="">
-						<input type="hidden" name="numero_turno" id="numero_turno" value="">
-						<input type="hidden" name="sesion_modulo" id="sesion_modulo" value="<?php if (isset($_SESSION["MODULO"]) && $_SESSION["MODULO"] != '') {
-							echo ($_SESSION["MODULO"]);
-						} ?>">
-						<input type="hidden" name="sesion_servicio" id="sesion_servicio" value="<?php if (isset($_SESSION["ID_SERVI"]) && $_SESSION["ID_SERVI"] != '') {
-							echo ($_SESSION["ID_SERVI"]);
-						} ?>">
-						<input type="hidden" name="sesion_usuario" id="sesion_usuario" value="<?php if (isset($_SESSION["IDUSU"]) && $_SESSION["IDUSU"] != '') {
-							echo ($_SESSION["IDUSU"]);
-						} ?>">
-					</form>
-					<div id="num_atendidos" class="num_atendidos" style="width:100%;">
-						Sincroniza y llama al primer turno
-					</div>
-					<ul style="display:flex; flex-direction:row; justify-content:center; width:100%;padding:10px;">
-						<li id="li_turno" style="display:none;">
-							<a href="javascript:turno();" class="text-3xl">LLAMAR</a>
-						</li>
-						<li class="l3" id="li_inicio" style="display:none;">
-							<a href="javascript:inicio();">INICIO</a>
-						</li>
-						<li class="l2" id="li_sig" style="display:none;">
-							<a href="javascript:siguiente();">SIGUIENTE</a>
-						</li>
-						<li class="l4" id="li_fin" style="display:none;">
-							<a href="javascript:fin();">FIN</a>
-						</li>
-					</ul>
-					<div class="clear"></div>
-				</div>
-				<!-- <div class="banner"> <img src="images/banner_img.jpg" width="940" height="116" alt="img" /> </div> -->
-				<div id="usuariosenlinea" class="news">
+						</div>
+						<div id="usuariosenlinea" class="news">
 					<p align="center" class="text-5xl"><b>USUARIOS CONECTADOS AL SISTEMA</b></p>
 					<table id="listausuarios">
 						<tr style="font-weight:bold;">
@@ -1232,23 +1229,14 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 						</tr>
 					</table>
 				</div>
-			</div>
-			<!-- Banner End -->
-			<!-- FOOTER Starts -->
-			<div class="footer">
-				<div class="footer_continer">
-					<div class="footer_top">
+			
+			</div>	
 
-						<div class="clear"></div>
-					</div>
-				</div>
-				<div class="copy">
+</div>
 
-				</div>
-			</div>
-		</div>
-		<!-- FOOTER END -->
-	</div>
+		<div class="footerHome"></div>
+</div>
+
 	<!-- WARRPER END -->
 	<?php
 	$query_RsComprobarDataLog = "SELECT * FROM MODULOS 
