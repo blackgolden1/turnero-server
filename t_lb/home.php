@@ -891,7 +891,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			} else {
 				document.getElementById('contentmultiple').style.display = 'none';
 				document.getElementById('T_sincronizado').style.display = 'block';
-				document.getElementById('content').style.display = 'block';
+				document.getElementById('content').style.display = 'flex';
 				document.getElementById('contentayuda').style.display = 'none';
 				document.getElementById('li_inicio').style.display = 'none';
 				document.getElementById('li_sig').style.display = 'none';
