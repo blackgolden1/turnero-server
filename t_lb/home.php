@@ -1109,7 +1109,8 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			<div id='link_cargandoayuda'></div>
 			<div class="content" id="content">
 			<div class="typs">
-					<form name="form3" id="form3" method="post" action="">
+					
+			<form name="form3" id="form3" method="post" action="">
 						<input type="hidden" name="parametro_A" id="parametro_A" value="">
 						<input type="hidden" name="numero_parametrizado" id="numero_parametrizado" value="">
 						<input type="hidden" name="consecutivo_turno" id="consecutivo_turno" value="">
