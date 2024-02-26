@@ -252,7 +252,7 @@ a.menu4:hover {
 	height: 100%;
 	background: #fff;
 	display: flex;
-	
+
 	flex-direction: row;
 }
 
@@ -313,67 +313,41 @@ a.menu4:hover {
 }
 
 /* ------------------ BANNER DETIALS HERE -------------------*/
-/* .typs {
+.typs {
 	width: 100%;
 	height: 100%;
-} */
+}
 
 .typs ul {
 
 	list-style: none;
 	/* float: left; */
-	display: inline-block;
+	/* display: inline-block; */
 }
 
 .typs ul li {
 
-	width: 189px;
-	/* float: left; */
-	display: inline-block;
-	background-color: #ee8484;
+	/* width: 189px; */
+	/* display: inline-block; */
+	/* background-color: #ee8484; */
 	text-align: center;
-	border-radius: 5px;
+	border-radius: 15px;
 	height: 100px;
+	margin-left: 15px;
 }
 
-.typs ul li.l2 {
-
-	width: 189px;
-	/* float: left; */
-	display: inline-block;
-	background-color: #988def;
-}
-
-.typs ul li.l3 {
-
-	margin: 0 20px 0 0;
-	width: 189px;
-	/* float: left; */
-	display: inline-block;
-	background-color: #81adff;
-}
-
-.typs ul li.l4 {
-
-	margin: 0 20px 0 0;
-	width: 189px;
-	/* float: left; */
-	display: inline-block;
-	background-color: #a4d080;
-}
-
-.typs ul li span {
+/* .typs ul li span {
 	padding-top: 15PX;
 	padding-right: 0;
 	padding-bottom: 6px;
-	display: inline-block;
+
 	margin: 0px;
-	display: inline-block;
+
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 24px;
 	color: #43424e;
-}
-
+} */
+/* 
 .typs ul li p {
 	padding: 0px;
 	margin: 0px;
@@ -382,23 +356,25 @@ a.menu4:hover {
 	color: #FFFFFF;
 	padding: 10px 0 20px 0;
 	line-height: 20px;
-}
+} */
 
 .typs ul li a {
-	padding: 0px;
-	display: inline-block;
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	color: #666666;
-	padding-top: 6px;
-	padding-right: 10px;
-	padding-left: 10px;
-	padding-bottom: 6px;
-	text-decoration: none;
+	font-size: 35px;
 	border-radius: 5px;
-	background-color: #EEEEEE;
-	margin-top: 50px;
+	width: 100%;
+	height: 100%;
+	padding: 15px;
+	text-align: center;
+	color:#ffffff;
+	font-weight: bold;
+
 }
+
 
 .typs ul li span.type1 {
 	display: inline-block;
@@ -413,7 +389,7 @@ a.menu4:hover {
 }
 
 .typs ul li a:hover {
-	background-color: #CFCFCF;
+	font-weight: bolder;
 }
 
 .typs ul li span.type2 {

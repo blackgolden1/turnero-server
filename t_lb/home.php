@@ -236,13 +236,12 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			font: 12px/150% Arial, Helvetica, sans-serif;
 			height: fit-content;
 	
-			width: 30rem;
+			width: fit-content;
 		}
 
 		.info_text {
-			margin: 5px;
-			font-family: sans-serif;
-			font-size: 13px;
+			margin: 15px;
+			font-size: 20px;
 		}
 
 		.contentayuda {
@@ -321,7 +320,9 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			justify-content: center;
 			font-weight: bold;
 			color: #000000;
-			font-size: 35px;
+			font-size: 55px;
+			padding: 50px;
+			text-align: center;
 		}
 
 		.datagrid {
@@ -377,13 +378,11 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 		}
 
 		.bienvenida {
-			background: none repeat scroll 0 0 #fff;
-			font: 12px/150% Arial, Helvetica, sans-serif;
-			margin: 0 auto;
-			width: 930px;
-			color: #D9536C;
-
-
+			color: #000000;
+			font: 20px/150% Arial, Helvetica, sans-serif;
+			width: fit-content;
+			font-weight: lighter;
+			padding: 50px;
 		}
 
 		.contentmultiple {
@@ -1109,6 +1108,13 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			<div id='link_cargandoayuda'></div>
 			<div class="content" id="content">
 			<div class="typs">
+			<div id="bienvenidatext" class="bienvenida"><b>
+					Bienvenido:
+					<?php echo ($_SESSION["USU_AUT_NOMB"]); ?>.
+					<?php echo ($row_RsDatosBienvenida['MODULO_DES']); ?> Servicio:
+					<?php echo ($row_RsDatosBienvenida['SERVICIO_DES']); ?>
+				</b>
+			</div>
 					<form name="form3" id="form3" method="post" action="">
 						<input type="hidden" name="parametro_A" id="parametro_A" value="">
 						<input type="hidden" name="numero_parametrizado" id="numero_parametrizado" value="">
@@ -1128,46 +1134,37 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 					<div id="num_atendidos" class="num_atendidos" style="width:100%;">
 						Sincroniza y llama al primer turno
 					</div>
-					<ul style="display:flex; flex-direction:row; justify-content:center; width:100%;padding:10px;">
-						<li id="li_turno" style="display:none;">
-							<a href="javascript:turno();" class="text-3xl">LLAMAR</a>
+					<ul style="display:flex; flex-direction:row; justify-content:center; width:100%;padding:40px;">
+						<li id="li_turno" style="display:none;background-color:#4790FF;">
+							<a href="javascript:turno();">LLAMAR</a>
 						</li>
-						<li class="l3" id="li_inicio" style="display:none;">
+						<li class="l3" id="li_inicio" style="display:none;background-color:#4790FF;">
 							<a href="javascript:inicio();">INICIO</a>
 						</li>
-						<li class="l2" id="li_sig" style="display:none;">
+						<li class="l2" id="li_sig" style="display:none;background-color:#00a135;">
 							<a href="javascript:siguiente();">SIGUIENTE</a>
 						</li>
-						<li class="l4" id="li_fin" style="display:none;">
+						<li class="l4" id="li_fin" style="display:none;background-color:#ec5353;">
 							<a href="javascript:fin();">FIN</a>
 						</li>
 					</ul>
-					<div class="clear"></div>
-				
-				<!-- <div class="banner"> <img src="images/banner_img.jpg" width="940" height="116" alt="img" /> </div> -->
 
-		
 </div>
 <div style="width:100%; height: 100%;display:flex;flex-direction:column; align-items:center;justify-content: space-evenly;">		
 <div id="info_turnos" class="info">
 						<p>
 						<table width="100%" border="0" class="info_text" id="table_info">
 							<tr>
-								<td width="175" class="labeltextdefault">Fecha de inicio de turno:</td>
-								<td width="227">
-									<span style="font-size:11px;">
+								<td  class="labeltextdefault">Fecha de inicio de turno:</td>
+								<td >
+									<span style="font-size:18px;">
 										<?php
 										//echo($inicio_turno);
 										echo ($row_RsFechaActual['FECHA']);
 										?>
-
-										<br>Cupos de turno:
-										<?php
-										echo ($cupo_turno);
-										?>
 									</span>
 								</td>
-								<td width="160"> </td>
+								<!-- <td width="160"> </td> -->
 								<td rowspan="3">
 									<form name="form2" id="form2" method="post" action="">
 										<table width="100%" border="0" id="T_sincronizado" style="display:none;">
@@ -1199,6 +1196,14 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 											
 										</table>
 									</form>
+								</td>
+							</tr>
+							<tr>
+								<td>Cupos de turno:</td>
+								<td>
+								<?php
+										echo ($cupo_turno);
+										?>
 								</td>
 							</tr>
 							<tr>
