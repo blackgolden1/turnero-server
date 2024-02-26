@@ -302,11 +302,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			font-size: 11px;
 			font-weight: normal;
 		}
-		.footerHome{
-			background-color: #4790FF;
-			height: 5rem;
-			width: 100%;
-		}
+
 		#num_atendidosAyuda {
 			display: flex;
 			align-items: center;

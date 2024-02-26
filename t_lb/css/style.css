@@ -255,10 +255,14 @@ a.menu4:hover {
 	flex-direction: row;
 	justify-content: space-evenly;
 }
-
+.footerHome{
+	background-color: #4790FF;
+	height: 5rem;
+	width: 100%;
+}
 .footer {
-	width: 978px;
-	margin: 0 auto;
+	width: 100%;
+
 	background: #fff;
 	padding: 0;
 	float: left;

@@ -47,32 +47,25 @@ $row_RsModulo = mysqli_fetch_assoc($RsModulo);
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	<link href="css/messages.css" rel="stylesheet" type="text/css" />
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap" rel="stylesheet">
 
 	<style>
 		body {
-			font-family: Arial, sans-serif;
 			margin: 0;
 			padding: 0;
 			background-color: #f8f8f8;
 			width: 100vw;
 			height: 100vh;
 			overflow: hidden;
+			font-family: "Sarabun", sans-serif;
+			font-style: normal;
 		}
 
-		.container {
-			max-width: 100vw;
-			margin: auto auto;
-			padding: 20px;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			align-items: center
-		}
-
-		.header {
-			text-align: center;
-			margin-bottom: 20px;
-		}
 
 		.logo {
 			font-size: 24px;
@@ -84,11 +77,13 @@ $row_RsModulo = mysqli_fetch_assoc($RsModulo);
 			padding: 30px;
 			border-radius: 8px;
 			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-			margin: auto auto ;
+			margin: auto auto;
+			width: fit-content;
 		}
 
 		.label-login {
-			font-weight: bold;
+			font-weight: normal;
+			font-size: 17px;
 		}
 
 		.input-login {
@@ -99,6 +94,11 @@ $row_RsModulo = mysqli_fetch_assoc($RsModulo);
 			border-radius: 5px;
 		}
 
+		.tableLogin {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
 
 		.button-login {
 			width: 100%;
@@ -108,6 +108,9 @@ $row_RsModulo = mysqli_fetch_assoc($RsModulo);
 			border: none;
 			border-radius: 5px;
 			cursor: pointer;
+			margin-top: 15px;
+			font-size: 17px;
+			font-weight: normal;
 			transition: background-color 0.3s ease;
 		}
 
@@ -212,63 +215,56 @@ $row_RsModulo = mysqli_fetch_assoc($RsModulo);
 </head>
 
 <body>
-	<div class="container">
+	<div style="width:100%; height: 100%;display:flex;flex-direction:column; justify-content:center;">
+
 		<div class="header">
 			<div class="logo">
-				<p style="font-weight: bold;color: #0056b3; font-size: 6rem">Sistema de turnos</p>
+				<p>Sistema de turnos</p>
 			</div>
 		</div>
+
 		<div class="contentLogin">
-			
-				<form name="formlogin" id="formlogin" action="" method="post">
-					<table align="center" width="100%">
-						<tr>
-							<td class="label-login">Usuario</td>
-							<td><input class="input-login" type="text" name="usuario" id="usuario" value="" size="40"
-									placeholder="Nombre de Usuario"></td>
-						</tr>
-						<tr>
-							<td class="label-login">Clave</td>
-							<td><input class="input-login" type="password" name="password" id="password" value=""
-									size="40" placeholder="Password"></td>
-						</tr>
-						<tr>
-							<td class="label-login">Modulo</td>
-							<td>
-								<select name="modulo" id="modulo" class="input-login">
-									<option value="">Seleccione</option>
-									<?php
-									if ($totalRows_RsModulo > 0) {
-										do {
-											?>
-											<option value="<?php echo ($row_RsModulo['CODIGO']); ?>">
-												<?php echo ($row_RsModulo['NOMBRE']); ?>
-											</option>
-											<?php
-										} while ($row_RsModulo = mysqli_fetch_assoc($RsModulo));
-									}
-									?>
-							</td>
-						</tr>
-						<tr style="display:flex;justify-content: center; width: 100%;">
-							<td  ><input class="button-login" type="submit" value="Ingresar"
-									onclick="return validar();"></td>
-						</tr>
-					</table>
-				</form>
-			
+
+			<form name="formlogin" id="formlogin" action="" method="post">
+				<table align="center" width="100%" class="tableLogin">
+					<tr>
+						<td class="label-login">Usuario</td>
+						<td><input class="input-login" type="text" name="usuario" id="usuario" value="" size="40"
+								placeholder="Nombre de Usuario"></td>
+					</tr>
+					<tr>
+						<td class="label-login">Clave</td>
+						<td><input class="input-login" type="password" name="password" id="password" value="" size="40"
+								placeholder="Password"></td>
+					</tr>
+					<tr>
+						<td class="label-login">Modulo</td>
+						<td>
+							<select name="modulo" id="modulo" class="input-login">
+								<option value="">Seleccione</option>
+								<?php
+								if ($totalRows_RsModulo > 0) {
+									do {
+										?>
+										<option value="<?php echo ($row_RsModulo['CODIGO']); ?>">
+											<?php echo ($row_RsModulo['NOMBRE']); ?>
+										</option>
+										<?php
+									} while ($row_RsModulo = mysqli_fetch_assoc($RsModulo));
+								}
+								?>
+						</td>
+					</tr>
+					<tr style="display:flex;justify-content: center; width: 100%;">
+						<td><input class="button-login" type="submit" value="Ingresar" onclick="return validar();"></td>
+					</tr>
+				</table>
+			</form>
+
 		</div>
-		<div class="footer">
-		<div class="footer-container">
-			<div class="copy">
-				<p>&copy;
-					<?php echo date('Y'); ?> Sistema de turnos
-				</p>
-			</div>
-		</div>
+		<div class="footerHome"></div>
+
 	</div>
-	</div>
-	
 </body>
 
 </html>
