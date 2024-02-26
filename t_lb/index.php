@@ -108,7 +108,7 @@ $row_RsModulo = mysqli_fetch_assoc($RsModulo);
 			border: none;
 			border-radius: 5px;
 			cursor: pointer;
-			margin-top: 15px;
+			
 			font-size: 17px;
 			font-weight: normal;
 			transition: background-color 0.3s ease;
@@ -255,7 +255,7 @@ $row_RsModulo = mysqli_fetch_assoc($RsModulo);
 								?>
 						</td>
 					</tr>
-					<tr style="display:flex;justify-content: center; width: 100%;">
+					<tr style="display:flex;justify-content: center; width: 100%;margin-top: 20px;">
 						<td><input class="button-login" type="submit" value="Ingresar" onclick="return validar();"></td>
 					</tr>
 				</table>

@@ -48,7 +48,7 @@ q:after {
 
 .labeltext {
 	/* font-family: Verdana, Arial, Helvetica, sans-serif; */
-	font-size: 15px;
+	font-size: 17px;
 	color: #777;
 }
 
@@ -462,6 +462,7 @@ a.menu4:hover {
 	justify-content: center;
 	align-items: center;
 	border-radius: 15px;
+	box-shadow: 0 8px 15px 0 #ccc;
 }
 
 /* ------------------ NEWS HERE -------------------*/

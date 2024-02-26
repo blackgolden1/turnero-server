@@ -240,6 +240,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			flex-direction: column;
 			padding: 15px;
 			background-color:#f7f7f7;
+			box-shadow: 0 8px 15px 0 #ccc;
 		}
 
 		.info_text {
@@ -1045,7 +1046,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				<div id="nav">
 					<ul class="nav nav-pills">
 						 <!-- <li><a href="javascript:multiple();">MODO MULTIPLE</a></li>  -->
-						<li id="limodoayuda"><a href="javascript:ayuda();">Modo Ayuda</a></li>
+						<!-- <li id="limodoayuda"><a href="javascript:ayuda();">Modo Ayuda</a></li> -->
 
 						<li id="lisincronizar"><a href="javascript:mostrar();">Sincronizar</a></li>
 						<?php if ($rol_usuario == '4') { ?>
