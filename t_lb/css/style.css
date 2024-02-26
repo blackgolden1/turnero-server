@@ -42,12 +42,12 @@ q:after {
 /***************************************************************************/
 
 .labeltextdefault {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	/* font-family: Verdana, Arial, Helvetica, sans-serif; */
 	color: #333;
 }
 
 .labeltext {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	/* font-family: Verdana, Arial, Helvetica, sans-serif; */
 	font-size: 15px;
 	color: #777;
 }
@@ -232,7 +232,7 @@ a.menu4:hover {
 	justify-content: space-between;
 	width: 100vw;
 	background-color: #4790FF;
-	height: 9rem;
+	height: 120px;
 	padding: 30px 50px;
 
 
@@ -251,9 +251,9 @@ a.menu4:hover {
 	width: 100%;
 	height: 100%;
 	background: #fff;
-	display: flex;
-
+	display: flex !important;
 	flex-direction: row;
+	justify-content: space-evenly;
 }
 
 .footer {
@@ -276,7 +276,7 @@ a.menu4:hover {
 }
 
 .logo a {
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	/* font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; */
 	font-weight: normal;
 	font-size: 35px;
 	color: #40b3d9;
@@ -284,7 +284,7 @@ a.menu4:hover {
 }
 
 .logo p {
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	/* font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; */
 	color: white;
 	font-weight: bold;
 	font-size: 5rem;
@@ -296,7 +296,7 @@ a.menu4:hover {
 #nav ul li a {
 
 	margin: 0px;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	/* font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; */
 	font-size: 1.7rem;
 	color: white;
 }
@@ -314,13 +314,18 @@ a.menu4:hover {
 
 /* ------------------ BANNER DETIALS HERE -------------------*/
 .typs {
-	width: 100%;
+	width: 50%;
 	height: 100%;
 }
 
 .typs ul {
 
 	list-style: none;
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: row;
+	width: 100%;
+	padding: 40px;
 	/* float: left; */
 	/* display: inline-block; */
 }
@@ -333,7 +338,7 @@ a.menu4:hover {
 	text-align: center;
 	border-radius: 15px;
 	height: 100px;
-	margin-left: 15px;
+
 }
 
 /* .typs ul li span {
@@ -363,14 +368,13 @@ a.menu4:hover {
 	height: 100%;
 	justify-content: center;
 	align-items: center;
-	font-family: Arial, Helvetica, sans-serif;
 	font-size: 35px;
 	border-radius: 5px;
 	width: 100%;
 	height: 100%;
-	padding: 15px;
+	padding: 10px 30px;
 	text-align: center;
-	color:#ffffff;
+	color: #ffffff;
 	font-weight: bold;
 
 }
@@ -380,7 +384,7 @@ a.menu4:hover {
 	display: inline-block;
 	margin: 0px;
 	display: inline-block;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	/* font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; */
 	font-size: 28px;
 	color: #FFFFFF;
 	-webkit-box-shadow: 2px 2px;
@@ -390,13 +394,15 @@ a.menu4:hover {
 
 .typs ul li a:hover {
 	font-weight: bolder;
+	text-decoration: none !important;
+	transform: scale(1.1);
 }
 
 .typs ul li span.type2 {
 	display: inline-block;
 	margin: 0px;
 	display: inline-block;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	/* font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; */
 	font-size: 28px;
 	color: #FFFFFF;
 	-webkit-box-shadow: 2px 2px;
@@ -409,7 +415,7 @@ a.menu4:hover {
 	display: inline-block;
 	margin: 0px;
 	display: inline-block;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	/* font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; */
 	font-size: 28px;
 	color: #FFFFFF;
 	-webkit-box-shadow: 2px 2px;
@@ -422,7 +428,7 @@ a.menu4:hover {
 	display: inline-block;
 	margin: 0px;
 	display: inline-block;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	/* font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; */
 	font-size: 28px;
 	color: #FFFFFF;
 	-webkit-box-shadow: 2px 2px;
@@ -431,45 +437,48 @@ a.menu4:hover {
 	text-shadow: 2px 2px #91b971;
 }
 
-/* ------------------ NEWS HERE -------------------*/
-.news {
-	width: 428px;
-	margin-top: 10px;
-	margin-left: 20px;
-	margin-bottom: 10px;
-	padding-top: 15px;
-	padding-right: 15px;
-	padding-left: 15px;
-	padding-bottom: 20px;
-	background: #f7f7f7;
-	border: 1px solid #eeeeee;
-	display: inline-block;
-	/* float: left; */
-	border-radius: 5px;
+.typs2 {
+	width: 50%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	padding: 15px;
 }
 
 /* ------------------ NEWS HERE -------------------*/
-.news .text {
+.news {
+	width: fit-content;
+	padding: 15px;
+	background: #f7f7f7;
+	border: 1px solid #eeeeee;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 15px;
+}
+
+/* ------------------ NEWS HERE -------------------*/
+/* .news .text {
 	width: 400px;
 	margin: 20px;
 	padding: 15px;
 	background: #f7f7f7;
 	border: 1px solid #eeeeee;
 	display: inline-block;
-	/* float: left; */
-}
+} */
 
 .news h2 {
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-	font-size: 28px;
+	font-size: 38px;
 	color: #666666;
 	padding: 0 0 18px 0;
 	font-weight: normal;
 }
 
 .news p {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
+	font-size: 18px;
 	color: #666666;
 	line-height: 20px;
 	padding-top: 0;
@@ -477,8 +486,14 @@ a.menu4:hover {
 	padding-left: 0;
 }
 
+.news tr td {
+
+	font-size: 15px;	
+}
+
+
 .news p span {
-	font-family: Arial, Helvetica, sans-serif;
+	/* font-family: Arial, Helvetica, sans-serif; */
 	font-size: 12px;
 	color: #333333;
 	line-height: 20px;
@@ -532,7 +547,7 @@ a.menu4:hover {
 .footer_nav ul li a {
 	padding: 0px;
 	margin: 0px;
-	font-family: Arial, Helvetica, sans-serif;
+	/* font-family: Arial, Helvetica, sans-serif; */
 	font-size: 11px;
 	color: #333333;
 	padding: 0 9px;
@@ -552,7 +567,7 @@ a.menu4:hover {
 	margin: 0 11px 0 0;
 	background: url(../images/tw-icon.png) no-repeat left center;
 	padding: 1px 0 0 22px;
-	font-family: Arial, Helvetica, sans-serif;
+	/* font-family: Arial, Helvetica, sans-serif; */
 	font-size: 12px;
 	color: #333333;
 }
@@ -561,7 +576,7 @@ a.menu4:hover {
 	display: inline-block;
 	background: url(../images/fb-icon.png) no-repeat left center;
 	padding: 1px 0 0 22px;
-	font-family: Arial, Helvetica, sans-serif;
+	/* font-family: Arial, Helvetica, sans-serif; */
 	font-size: 12px;
 	color: #333333;
 }
@@ -576,14 +591,14 @@ a.menu4:hover {
 
 .copy p {
 	padding: 0px 0px 0px 20px;
-	font-family: Arial, Helvetica, sans-serif;
+	/* font-family: Arial, Helvetica, sans-serif; */
 	font-size: 11px;
 	color: #777;
 }
 
 .copy a {
 	padding: 0px 0px 0px 0px;
-	font-family: Arial, Helvetica, sans-serif;
+	/* font-family: Arial, Helvetica, sans-serif; */
 	font-size: 11px;
 	color: #333333;
 	display: inline-block;
@@ -592,7 +607,7 @@ a.menu4:hover {
 
 /* ------------------ FOOTER END -------------------*/
 .news a {
-	font-family: Arial, Helvetica, sans-serif;
+	/* font-family: Arial, Helvetica, sans-serif; */
 	color: #666666;
 	padding-top: 6px;
 	padding-right: 10px;

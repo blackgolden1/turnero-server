@@ -211,36 +211,39 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 	<!-- SET: STYLESHEET -->
 	<script src="jquery/jquery-1.10.2.min.js"></script>
 	<script src="socket/socket.io.min.js"></script>
-	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="js/messages.js" type="text/javascript"></script>
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	<link href="css/messages.css" rel="stylesheet" type="text/css" />
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap" rel="stylesheet">
 	<!-- END: STYLESHEET -->
 	<!-- SET: SCRIPTS -->
 	<style type="text/css">
 		body {
-			/* background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #003A57), color-stop(1, #267BA3));
-			background: -moz-linear-gradient(center top, #003A57 5%, #267BA3 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#003A57', endColorstr='#267BA3');
-			background-color: #003A57; */
+
 			height: 100vh;
 			width: 100vw;
 			overflow: hidden;
+			font-family: "Sarabun", sans-serif;
+			font-style: normal;
 		}
 
 		.info {
-			background: none repeat scroll 0 0 #fff;
-			border: 1px solid #CCCCCC;
-			color: #000000;
-			font: 12px/150% Arial, Helvetica, sans-serif;
+			border: 1px solid #eeeeee;
+			border-radius: 15px;
 			height: fit-content;
-	
-			width: fit-content;
+			min-width: fit-content;
+			display: flex;
+			flex-direction: column;
+			padding: 15px;
+			background-color:#f7f7f7;
 		}
 
 		.info_text {
-			margin: 15px;
+			
 			font-size: 20px;
 		}
 
@@ -252,7 +255,6 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			padding-bottom: 10px;
 			padding-top: 20px;
 			width: 978px;
-			/*border:solid 1px #ff0000;*/
 		}
 
 		.ayuda {
@@ -281,7 +283,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 		.Titulo5 {
 			FONT-SIZE: 11px;
 			COLOR: #FFFFFF;
-			FONT-FAMILY: Arial, Helvetica, Verdana;
+			/* FONT-FAMILY: Arial, Helvetica, Verdana; */
 			BACKGROUND-COLOR: #666666;
 			font-weight: bold;
 			background-image: url(../com/img/FondoGris.gif);
@@ -326,7 +328,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 		}
 
 		.datagrid {
-			font: normal 12px/150% Arial, Helvetica, sans-serif;
+			/* font: normal 12px/150% Arial, Helvetica, sans-serif; */
 			background: #fff;
 			overflow: hidden;
 			/*border: 2px solid #005A87;*/
@@ -379,8 +381,9 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 
 		.bienvenida {
 			color: #000000;
-			font: 20px/150% Arial, Helvetica, sans-serif;
+			/* font: 20px/150% Arial, Helvetica, sans-serif; */
 			width: fit-content;
+			font-size: 20px;
 			font-weight: lighter;
 			padding: 50px;
 		}
@@ -1085,7 +1088,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				<!-- <div id="turno_actual"></div> -->
 			</div>
 			<div class="typs">
-				<ul style="float: left; margin-left: 5%; margin-top: -22px;" class="flex ">
+				<ul  class="flex ">
 					<li id="li_turnoAyuda" style="display:none;">
 						<a href="javascript:turnoAyuda();" class="text-3xl">LLAMAR</a>
 					</li>
@@ -1134,7 +1137,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 					<div id="num_atendidos" class="num_atendidos" style="width:100%;">
 						Sincroniza y llama al primer turno
 					</div>
-					<ul style="display:flex; flex-direction:row; justify-content:center; width:100%;padding:40px;">
+					<ul>
 						<li id="li_turno" style="display:none;background-color:#4790FF;">
 							<a href="javascript:turno();">LLAMAR</a>
 						</li>
@@ -1150,12 +1153,12 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 					</ul>
 
 </div>
-<div style="width:100%; height: 100%;display:flex;flex-direction:column; align-items:center;justify-content: space-evenly;">		
+<div class="typs2">		
 <div id="info_turnos" class="info">
 						<p>
 						<table width="100%" border="0" class="info_text" id="table_info">
 							<tr>
-								<td  class="labeltextdefault">Fecha de inicio de turno:</td>
+								<td  class="labeltextdefault">Inicio de turno:</td>
 								<td >
 									<span style="font-size:18px;">
 										<?php
@@ -1165,19 +1168,18 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 									</span>
 								</td>
 								<!-- <td width="160"> </td> -->
-								<td rowspan="3">
-									<form name="form2" id="form2" method="post" action="">
+								<td rowspan="4">
+									<form name="form2" id="form2" method="post" action="" style="margin-left: 10px">
 										<table width="100%" border="0" id="T_sincronizado" style="display:none;">
 											<tr>
-												<td width="170" align="right" class="labeltextdefault">Iniciar Turno
-													Con Numero:</td>
-												<td width="159">
+												<td  align="right" class="labeltextdefault">Numero:</td>
+												<td >
 													<input class="inputtext" style="height:26px;" type="text"
 														name="numero_sincronizado" placeholder="Numero de turno"
 														onKeyPress='return acceptNum(event)' ; id="numero_sincronizado"
 														value="" size="15">
 												</td>
-												<td width="59"><a class="btn btn-xs btn-default"
+												<td ><a class="btn btn-xs btn-default"
 														href="javascript:f_sincronizar();" class="sbttn"
 														style="background:#267BA3;color:white; border: none">Enviar</a>
 												</td>
@@ -1191,7 +1193,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 														onblur="this.value = this.value.toUpperCase();" size="15">
 												</td>
 												<td><a class="btn btn-xs btn-default" id="ocultarsincr" class="sbttn"
-														href="javascript:OcultarSincr()">Ocultar</a></td>
+														href="javascript:OcultarSincr()">Cerrar</a></td>
 											</tr>
 											
 										</table>
@@ -1226,11 +1228,11 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 						</p>
 						</div>
 						<div id="usuariosenlinea" class="news">
-					<p align="center" class="text-5xl"><b>USUARIOS CONECTADOS AL SISTEMA</b></p>
+					<p align="center"><b>USUARIOS CONECTADOS AL SISTEMA</b></p>
 					<table id="listausuarios">
-						<tr style="font-weight:bold;">
-							<td width="150">Persona</td>
-							<td>Modulo</td>
+						<tr>
+							<td style="margin-right: 10px;">Persona</td>
+							<td style="margin-right: 10px;">Modulo</td>
 						</tr>
 					</table>
 				</div>
