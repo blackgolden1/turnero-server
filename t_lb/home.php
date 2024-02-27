@@ -378,7 +378,6 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 
 		.bienvenida {
 			color: #000000;
-			/* font: 20px/150% Arial, Helvetica, sans-serif; */
 			width: fit-content;
 			font-size: 20px;
 			font-weight: lighter;
@@ -1236,7 +1235,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			
 			</div>	
 
-</div>
+</div> 
 
 		<div class="footerHome"></div>
 </div>
