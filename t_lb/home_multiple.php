@@ -174,7 +174,7 @@ function ArmarLi($arr, $turnos)
 		}
 
 		.s_servicios {
-			border-bottom: solid 1px #666666;
+			border-bottom: solid 1px #bababa;
 			line-height: 1.7;
 			text-align:center;
 		
@@ -324,6 +324,7 @@ function ArmarLi($arr, $turnos)
 		.tableHeader td{
 			background:rgba(71, 144, 255, 1);
 			padding:5px;
+			
 		}
 		.tableHeader #tableLeft{
 			border-top-left-radius: 15px;
@@ -634,7 +635,7 @@ function ArmarLi($arr, $turnos)
 							document.getElementById('checkserv_' + cod2).checked = true;
 							if (document.getElementById('secuenciaservice_' + cod).value == '') {
 								$('#aviso_seleccionado').text('');
-								$('#num_atendidos').text('T');
+								$('#num_atendidos');
 								// $('#aviso_seleccionado').append('has seleccionado el servicio<b>' + $('#s_servicios_' + cod).text() + '</b>ya puedes sincronizar el turno ');
 								//$('#aviso_seleccionado').append('<a href="javascript:reiniciarchecks();">AQUI</a>');
 								mostrar();
@@ -860,7 +861,7 @@ function ArmarLi($arr, $turnos)
 					document.getElementById('paramservicevalor_' + cod_servicio).value = document.getElementById('numero_sincronizado').value;
 					document.getElementById('li_turno').style.display = 'block';
 					document.getElementById('T_sincronizado').style.display = 'none';
-					document.getElementById('dato_sincronizado').innerHTML = document.getElementById('numero_sincronizado').value;
+					document.getElementById('dato_sincronizado').innerHTML = document.getElementById('letra_sincronizada').value + document.getElementById('numero_sincronizado').value  ;
 					//document.getElementById('paramactivo_'+cod_servicio).innerHTML='Activo';
 					$('#paramactivo_' + cod_servicio).addClass('sincronizadosi');
 					$('#aviso_seleccionado').text('');
@@ -1023,7 +1024,7 @@ function ArmarLi($arr, $turnos)
 			var date = new Date();
 			var timestamp = date.getTime();
 
-			var v_dato = getDataServer("tipoguardar_multiple.php", "?tipoguardar=Inicio_Atencion&I_consecutivo=" + document.getElementById('consecutivoturno_' + cod_servicio).value + "&I_parametro=" + document.getElementById('paramservice_' + cod_servicio).value + "&letra_sincronizada=" + document.getElementById('letraturno_' + cod_servicio).value + "&time=" + timestamp);
+			var v_dato = getDataServer("tipoguardar_multiple.php", "?tipoguardar=Siguiente_turno&modulo=<?php echo ($_SESSION['MODULO']); ?>&turnojornada=<?php echo ($jornada); ?>&servicio_sincronizado=" + cod_servicio + "&secuencia_N=" + document.getElementById('secuencia_' + cod_servicio).value + "&numero_turno_N=" + document.form3.numero_turno.value + "&consecutivo_N=" + document.getElementById('consecutivoturno_' + cod_servicio).value + "&parametro_N=" + document.getElementById('paramservice_' + cod_servicio).value + "&letra_sincronizada=" + document.getElementById('letraturno_' + cod_servicio).value + "&time=" + timestamp);
 			//alert(v_dato);
 			if (v_dato != '') {
 				$('#accion_turnero').val('2|' + cod_servicio);
@@ -1033,7 +1034,10 @@ function ArmarLi($arr, $turnos)
 				var valor1 = v_campos[0];
 				var valor2 = v_campos[1];
 				var valor3 = v_campos[2];
-				document.getElementById('num_atendidos').innerHTML = valor1;
+				var valorLetra = v_campos[3]; <?php /*letra del turno*/ ?>
+				let elementos = valorLetra.split("<br");
+				let valor4 = elementos[0];
+				document.getElementById('num_atendidos').innerHTML = valor4 + '' + valor1;
 				//document.getElementById('turno_actual').innerHTML =valor1;
 				//document.form3.numero_parametrizado.value          =valor2;
 				//document.form3.consecutivo_turno.value             =valor3;
@@ -1427,8 +1431,9 @@ function ArmarLi($arr, $turnos)
 											<table>
 												<tr  class="tableHeader" align="center">
 													<td width="140" id="tableLeft"><b>Servicio</b></td>
-													<td width="100"><b>No Turno</b></td>
-													<td width="100" id="tableRight"><b>Letra</b></td>
+													<td width="100" ><b>Letra</b></td>
+													<td width="100" id="tableRight"><b>No Turno</b></td>
+
 													<!-- <td><b>Sincr.</b></td> -->
 												</tr>
 												<?php
@@ -1445,7 +1450,13 @@ function ArmarLi($arr, $turnos)
 																<td >
 																	<?php echo ($row_RsServicios['SERVNOMB']); ?>
 																</td>
-																<td >
+																<td ><input type="text"
+																		align="center" class="letra_turno"
+																		name="letraturno_<?php echo ($row_RsServicios['SERVID']); ?>"
+																		id="letraturno_<?php echo ($row_RsServicios['SERVID']); ?>"
+																		value="" size="2" disabled>
+																</td>
+																<td style="display:flex;align-items:center;justify-content:center;">
 																	<input type="hidden"
 																		name="paramservice_<?php echo ($row_RsServicios['SERVID']); ?>"
 																		id="paramservice_<?php echo ($row_RsServicios['SERVID']); ?>"
@@ -1467,18 +1478,13 @@ function ArmarLi($arr, $turnos)
 																		id="consecutivoturno_<?php echo ($row_RsServicios['SERVID']); ?>"
 																		value="" size="3">
 																	<div style="float:right;">
-																		<input class="checkservices" type="checkbox"
+																		<input class="checkservices" type="checkbox" style="margin:10px;"
 																			value="<?php echo ($row_RsServicios['SERVID']); ?>"
 																			name="checkserv_<?php echo ($row_RsServicios['SERVID']); ?>"
 																			id="checkserv_<?php echo ($row_RsServicios['SERVID']); ?>">
 																	</div>
 																</td>
-																<td ><input type="text"
-																		align="center" class="letra_turno"
-																		name="letraturno_<?php echo ($row_RsServicios['SERVID']); ?>"
-																		id="letraturno_<?php echo ($row_RsServicios['SERVID']); ?>"
-																		value="" size="2" disabled>
-																</td>
+																
 																<!-- <td style="border-bottom:solid 1px #2F93A4;">
 																	<div id="paramactivo_<?php echo ($row_RsServicios['SERVID']); ?>"
 																		style="width:100%; text-align:center;">&nbsp;</div>
