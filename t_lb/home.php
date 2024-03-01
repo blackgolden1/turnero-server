@@ -319,7 +319,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			justify-content: center;
 			font-weight: bold;
 			color: #000000;
-			font-size: 55px;
+			font-size: 70px;
 			padding: 50px;
 			text-align: center;
 		}
@@ -683,6 +683,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				var valorLetra = v_campos[3]; <?php /* la letra*/ ?>
 				var elementos = valorLetra.split("<br");
 				var valor4 = elementos[0];
+				console.log("turno", valor1, valor2, valor3, valor4);
 
 				document.getElementById('num_atendidos').innerHTML = valor4 + '' + valor1;
 				document.getElementById('turno_actual').innerHTML = valor4 + '' + valor1;
@@ -771,6 +772,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				var valorLetra = v_campos[3]; <?php /*letra del turno*/ ?>
 				let elementos = valorLetra.split("<br");
 				let valor4 = elementos[0];
+				console.log(valor1, valor2, valor3, valor4);
 
 				document.getElementById('num_atendidos').innerHTML = valor4 + '' + valor1;
 				document.getElementById('turno_actual').innerHTML = valor4 + '' + valor1;
