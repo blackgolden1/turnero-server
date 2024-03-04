@@ -212,6 +212,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 	<script src="jquery/jquery-1.10.2.min.js"></script>
 	<script src="socket/socket.io.min.js"></script>
 	<script src="js/messages.js" type="text/javascript"></script>
+	
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	<link href="css/messages.css" rel="stylesheet" type="text/css" />
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -683,7 +684,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				var valorLetra = v_campos[3]; <?php /* la letra*/ ?>
 				var elementos = valorLetra.split("<br");
 				var valor4 = elementos[0];
-				console.log("turno", valor1, valor2, valor3, valor4);
+			
 
 				document.getElementById('num_atendidos').innerHTML = valor4 + '' + valor1;
 				document.getElementById('turno_actual').innerHTML = valor4 + '' + valor1;
@@ -760,6 +761,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			var timestamp = date.getTime();
 
 			var v_dato = getDataServer("tipoguardar.php", "?tipoguardar=Siguiente_turno&modulo=<?php echo ($_SESSION['MODULO']); ?>&turnojornada=<?php echo ($jornada); ?>&secuencia_N=" + document.form3.secuencia.value + "&numero_turno_N=" + document.form3.numero_turno.value + "&consecutivo_N=" + document.form3.consecutivo_turno.value + "&parametro_N=" + document.form3.parametro_A.value + "&letra_sincronizada=" + document.getElementById('letra_sincronizada').value + "&time=" + timestamp);
+			console.log(v_dato);
 			if (v_dato != '') {
 
 				var v_campos;
@@ -769,10 +771,12 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				var valor1 = v_campos[0];
 				var valor2 = v_campos[1];
 				var valor3 = v_campos[2];
+				//  var valor4 = v_campos[3];
 				var valorLetra = v_campos[3]; <?php /*letra del turno*/ ?>
 				let elementos = valorLetra.split("<br");
 				let valor4 = elementos[0];
 				console.log(valor1, valor2, valor3, valor4);
+
 
 				document.getElementById('num_atendidos').innerHTML = valor4 + '' + valor1;
 				document.getElementById('turno_actual').innerHTML = valor4 + '' + valor1;
