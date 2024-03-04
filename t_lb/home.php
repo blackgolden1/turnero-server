@@ -211,36 +211,42 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 	<!-- SET: STYLESHEET -->
 	<script src="jquery/jquery-1.10.2.min.js"></script>
 	<script src="socket/socket.io.min.js"></script>
-	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="js/messages.js" type="text/javascript"></script>
+	
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	<link href="css/messages.css" rel="stylesheet" type="text/css" />
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap" rel="stylesheet">
 	<!-- END: STYLESHEET -->
 	<!-- SET: SCRIPTS -->
 	<style type="text/css">
 		body {
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #003A57), color-stop(1, #267BA3));
-			background: -moz-linear-gradient(center top, #003A57 5%, #267BA3 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#003A57', endColorstr='#267BA3');
-			background-color: #003A57;
+
+			height: 100vh;
+			width: 100vw;
+			overflow: hidden;
+			font-family: "Sarabun", sans-serif;
+			font-style: normal;
 		}
 
 		.info {
-			background: none repeat scroll 0 0 #fff;
-			border: 1px solid #CCCCCC;
-			color: #000000;
-			font: 12px/150% Arial, Helvetica, sans-serif;
-			height: 77px;
-			margin-left: 8px;
-			margin-top: -19px;
-			width: 928px;
+			border: 1px solid #eeeeee;
+			border-radius: 15px;
+			height: fit-content;
+			min-width: fit-content;
+			display: flex;
+			flex-direction: column;
+			padding: 15px;
+			background-color:#f7f7f7;
+			box-shadow: 0 8px 15px 0 #ccc;
 		}
 
 		.info_text {
-			margin: 5px;
-			font-family: sans-serif;
-			font-size: 13px;
+			
+			font-size: 20px;
 		}
 
 		.contentayuda {
@@ -251,7 +257,6 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			padding-bottom: 10px;
 			padding-top: 20px;
 			width: 978px;
-			/*border:solid 1px #ff0000;*/
 		}
 
 		.ayuda {
@@ -280,7 +285,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 		.Titulo5 {
 			FONT-SIZE: 11px;
 			COLOR: #FFFFFF;
-			FONT-FAMILY: Arial, Helvetica, Verdana;
+			/* FONT-FAMILY: Arial, Helvetica, Verdana; */
 			BACKGROUND-COLOR: #666666;
 			font-weight: bold;
 			background-image: url(../com/img/FondoGris.gif);
@@ -315,11 +320,13 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			justify-content: center;
 			font-weight: bold;
 			color: #000000;
-			font-size: 35px;
+			font-size: 70px;
+			padding: 50px;
+			text-align: center;
 		}
 
 		.datagrid {
-			font: normal 12px/150% Arial, Helvetica, sans-serif;
+			/* font: normal 12px/150% Arial, Helvetica, sans-serif; */
 			background: #fff;
 			overflow: hidden;
 			/*border: 2px solid #005A87;*/
@@ -371,20 +378,18 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 		}
 
 		.bienvenida {
-			background: none repeat scroll 0 0 #fff;
-			font: 12px/150% Arial, Helvetica, sans-serif;
-			margin: 0 auto;
-			width: 930px;
-			color: #D9536C;
-
-
+			color: #000000;
+			width: fit-content;
+			font-size: 20px;
+			font-weight: lighter;
+			padding: 50px;
 		}
 
 		.contentmultiple {
 			margin-top: 1px;
 			margin-left: 27px;
 			clear: both;
-			background: #E1EEF4;
+			background: #003A57;
 			width: 930px;
 			text-align: right;
 		}
@@ -679,6 +684,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				var valorLetra = v_campos[3]; <?php /* la letra*/ ?>
 				var elementos = valorLetra.split("<br");
 				var valor4 = elementos[0];
+			
 
 				document.getElementById('num_atendidos').innerHTML = valor4 + '' + valor1;
 				document.getElementById('turno_actual').innerHTML = valor4 + '' + valor1;
@@ -755,6 +761,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			var timestamp = date.getTime();
 
 			var v_dato = getDataServer("tipoguardar.php", "?tipoguardar=Siguiente_turno&modulo=<?php echo ($_SESSION['MODULO']); ?>&turnojornada=<?php echo ($jornada); ?>&secuencia_N=" + document.form3.secuencia.value + "&numero_turno_N=" + document.form3.numero_turno.value + "&consecutivo_N=" + document.form3.consecutivo_turno.value + "&parametro_N=" + document.form3.parametro_A.value + "&letra_sincronizada=" + document.getElementById('letra_sincronizada').value + "&time=" + timestamp);
+			console.log(v_dato);
 			if (v_dato != '') {
 
 				var v_campos;
@@ -764,9 +771,12 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 				var valor1 = v_campos[0];
 				var valor2 = v_campos[1];
 				var valor3 = v_campos[2];
+				//  var valor4 = v_campos[3];
 				var valorLetra = v_campos[3]; <?php /*letra del turno*/ ?>
 				let elementos = valorLetra.split("<br");
 				let valor4 = elementos[0];
+				console.log(valor1, valor2, valor3, valor4);
+
 
 				document.getElementById('num_atendidos').innerHTML = valor4 + '' + valor1;
 				document.getElementById('turno_actual').innerHTML = valor4 + '' + valor1;
@@ -885,7 +895,7 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 			} else {
 				document.getElementById('contentmultiple').style.display = 'none';
 				document.getElementById('T_sincronizado').style.display = 'block';
-				document.getElementById('content').style.display = 'block';
+				document.getElementById('content').style.display = 'flex';
 				document.getElementById('contentayuda').style.display = 'none';
 				document.getElementById('li_inicio').style.display = 'none';
 				document.getElementById('li_sig').style.display = 'none';
@@ -1033,120 +1043,145 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 </head>
 
 <body>
-	<!-- wrapper starts -->
-	<div class="wrapper">
-		<!-- Header Starts -->
-		<div class="continer">
-			<div class="header">
+	<div style="width:100%; height: 100%;display:flex;flex-direction:column; justify-content:center;">			
+		<div class="header">
 				<div class="logo">
-					<p>Turnos Web</p>
+					<p>Sistema de turnos</p>
 				</div>
 				<div id="nav">
 					<ul class="nav nav-pills">
-						<?php /*<li><a href="javascript:multiple();">MODO MULTIPLE</a></li>*/ ?>
-						<li id="limodoayuda"><a href="javascript:ayuda();">MODO AYUDA</a></li>
+						 <!-- <li><a href="javascript:multiple();">MODO MULTIPLE</a></li>  -->
+						<!-- <li id="limodoayuda"><a href="javascript:ayuda();">Modo Ayuda</a></li> -->
 
-						<li id="lisincronizar"><a href="javascript:mostrar();">SINCRONIZAR</a></li>
+						<li id="lisincronizar"><a href="javascript:mostrar();">Sincronizar</a></li>
 						<?php if ($rol_usuario == '4') { ?>
-							<li id="liusuarios"><a href="panel_control.php">USUARIOS</a></li>
+							<li id="liusuarios"><a href="panel_control.php">Usuarios</a></li>
 						<?php } ?>
 						<?php /*<li><a href="javascript:contador();">CONTADOR</a></li>*/ ?>
-						<li class="pad_last"><a href="javascript:salir();">SALIR</a></li>
+						<li class="pad_last"><a href="javascript:salir();">Salir</a></li>
 					</ul>
-					<div class="clear"></div>
 				</div>
-				<div class="clear"></div>
+		</div>
+
+			<!-- comentado porque no se esta usando -->
+		<div id="contentmultiple" class="contentmultiple" style="display:none;" >
+			<label>Agregar Servicio</label>
+			<select name="servicio_multiple" id="servicio_multiple">
+				<option value="">Seleccione...</option>
+				<?php
+				if ($totalRows_RsServicios > 0) {
+					do {
+						?>
+						<option value="<?php echo ($row_RsServicios['CODIGO']); ?>">
+							<?php echo ($row_RsServicios['NOMBRE']); ?>
+						</option>
+						<?php
+					} while ($row_RsServicios = mysqli_fetch_assoc($RsServicios));
+				}
+
+				?>
+			</select>
+		</div> 
+		<div id="contentayuda" class="contentayuda" style="display:none;">
+			<div id="link_ayuda" class="ayuda">
 			</div>
-			<!-- Header ends -->
-			<!-- Banner Starts -->
+			<div id="num_atendidosAyuda" class="num_atendidos">
+
+				<!-- <div id="turno_actual"></div> -->
+			</div>
+			<div class="typs">
+				<ul  class="flex ">
+					<li id="li_turnoAyuda" style="display:none;">
+						<a href="javascript:turnoAyuda();" class="text-3xl">LLAMAR</a>
+					</li>
+					<li class="l3" id="li_inicioAyuda" style="display:none;">
+						<a href="javascript:inicioAyuda();">INICIO</a>
+
+					</li>
+					<li class="l2" id="li_sigAyuda" style="display:none;">
+						<a href="javascript:siguienteAyuda();">SIGUIENTE</a>
+					</li>
+					<li class="l4" id="li_finAyuda" style="display:none;">
+						<a href="javascript:finAyuda();">FIN</a>
+					</li>
+				</ul>
+				<input type="hidden" name="turno_ayuda" value="" id="turno_ayuda">
+				<input type="hidden" name="parametro_ayuda" value="" id="parametro_ayuda">
+				<input type="hidden" name="consecutivo_ayuda" value="" id="consecutivo_ayuda">
+			</div>
+		</div>
+			<div id='link_cargandoayuda'></div>
+			<div class="content" id="content">
+			<div class="typs">
 			<div id="bienvenidatext" class="bienvenida"><b>
 					Bienvenido:
-					<?php echo ($_SESSION["USU_AUT_NOMB"]); ?>
-					<?php echo ($row_RsDatosBienvenida['MODULO_DES']); ?> SERVICIO:
+					<?php echo ($_SESSION["USU_AUT_NOMB"]); ?>.
+					<?php echo ($row_RsDatosBienvenida['MODULO_DES']); ?> Servicio:
 					<?php echo ($row_RsDatosBienvenida['SERVICIO_DES']); ?>
 				</b>
 			</div>
-			<div id="contentmultiple" class="contentmultiple" style="display:none;">
-				<label>Agregar Servicio</label>
-				<select name="servicio_multiple" id="servicio_multiple">
-					<option value="">Seleccione...</option>
-					<?php
-					if ($totalRows_RsServicios > 0) {
-						do {
-							?>
-							<option value="<?php echo ($row_RsServicios['CODIGO']); ?>">
-								<?php echo ($row_RsServicios['NOMBRE']); ?>
-							</option>
-							<?php
-						} while ($row_RsServicios = mysqli_fetch_assoc($RsServicios));
-					}
-
-					?>
-				</select>
-			</div>
-			<div id="contentayuda" class="contentayuda" style="display:none;">
-				<div id="link_ayuda" class="ayuda">
-				</div>
-				<div id="num_atendidosAyuda" class="num_atendidos">
-
-					<!-- <div id="turno_actual"></div> -->
-				</div>
-				<div class="typs">
-					<ul style="float: left; margin-left: 5%; margin-top: -22px;" class="flex ">
-						<li id="li_turnoAyuda" style="display:none;">
-							<a href="javascript:turnoAyuda();" class="text-3xl">LLAMAR</a>
+					<form name="form3" id="form3" method="post" action="">
+						<input type="hidden" name="parametro_A" id="parametro_A" value="">
+						<input type="hidden" name="numero_parametrizado" id="numero_parametrizado" value="">
+						<input type="hidden" name="consecutivo_turno" id="consecutivo_turno" value="">
+						<input type="hidden" name="secuencia" id="secuencia" value="">
+						<input type="hidden" name="numero_turno" id="numero_turno" value="">
+						<input type="hidden" name="sesion_modulo" id="sesion_modulo" value="<?php if (isset($_SESSION["MODULO"]) && $_SESSION["MODULO"] != '') {
+							echo ($_SESSION["MODULO"]);
+						} ?>">
+						<input type="hidden" name="sesion_servicio" id="sesion_servicio" value="<?php if (isset($_SESSION["ID_SERVI"]) && $_SESSION["ID_SERVI"] != '') {
+							echo ($_SESSION["ID_SERVI"]);
+						} ?>">
+						<input type="hidden" name="sesion_usuario" id="sesion_usuario" value="<?php if (isset($_SESSION["IDUSU"]) && $_SESSION["IDUSU"] != '') {
+							echo ($_SESSION["IDUSU"]);
+						} ?>">
+					</form>
+					<div id="num_atendidos" class="num_atendidos" style="width:100%;">
+						Sincroniza y llama al primer turno
+					</div>
+					<ul>
+						<li id="li_turno" style="display:none;background-color:#4790FF;">
+							<a href="javascript:turno();">LLAMAR</a>
 						</li>
-						<li class="l3" id="li_inicioAyuda" style="display:none;">
-							<a href="javascript:inicioAyuda();">INICIO</a>
-
+						<li class="l3" id="li_inicio" style="display:none;background-color:#4790FF;">
+							<a href="javascript:inicio();">INICIO</a>
 						</li>
-						<li class="l2" id="li_sigAyuda" style="display:none;">
-							<a href="javascript:siguienteAyuda();">SIGUIENTE</a>
+						<li class="l2" id="li_sig" style="display:none;background-color:#00a135;">
+							<a href="javascript:siguiente();">SIGUIENTE</a>
 						</li>
-						<li class="l4" id="li_finAyuda" style="display:none;">
-							<a href="javascript:finAyuda();">FIN</a>
+						<li class="l4" id="li_fin" style="display:none;background-color:#ec5353;">
+							<a href="javascript:fin();">FIN</a>
 						</li>
 					</ul>
-					<input type="hidden" name="turno_ayuda" value="" id="turno_ayuda">
-					<input type="hidden" name="parametro_ayuda" value="" id="parametro_ayuda">
-					<input type="hidden" name="consecutivo_ayuda" value="" id="consecutivo_ayuda">
-				</div>
-			</div>
-			<div id='link_cargandoayuda'></div>
-			<div class="content" id="content">
-				<div class="typs">
-					<div id="info_turnos" class="info">
+
+</div>
+<div class="typs2">		
+<div id="info_turnos" class="info">
 						<p>
 						<table width="100%" border="0" class="info_text" id="table_info">
 							<tr>
-								<td width="175" class="labeltextdefault">Fecha de inicio de turno:</td>
-								<td width="227">
-									<span style="font-size:11px;">
+								<td  class="labeltextdefault">Inicio de turno:</td>
+								<td >
+									<span style="font-size:18px;">
 										<?php
 										//echo($inicio_turno);
 										echo ($row_RsFechaActual['FECHA']);
 										?>
-
-										<br>Cupos de turno:
-										<?php
-										echo ($cupo_turno);
-										?>
 									</span>
 								</td>
-								<td width="160"> </td>
-								<td rowspan="3">
-									<form name="form2" id="form2" method="post" action="">
+								<!-- <td width="160"> </td> -->
+								<td rowspan="4">
+									<form name="form2" id="form2" method="post" action="" style="margin-left: 10px">
 										<table width="100%" border="0" id="T_sincronizado" style="display:none;">
 											<tr>
-												<td width="170" align="right" class="labeltextdefault">Iniciar Turno
-													Con Numero:</td>
-												<td width="159">
+												<td  align="right" class="labeltextdefault">Numero:</td>
+												<td >
 													<input class="inputtext" style="height:26px;" type="text"
 														name="numero_sincronizado" placeholder="Numero de turno"
 														onKeyPress='return acceptNum(event)' ; id="numero_sincronizado"
 														value="" size="15">
 												</td>
-												<td width="59"><a class="btn btn-xs btn-default"
+												<td ><a class="btn btn-xs btn-default"
 														href="javascript:f_sincronizar();" class="sbttn"
 														style="background:#267BA3;color:white; border: none">Enviar</a>
 												</td>
@@ -1160,11 +1195,19 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 														onblur="this.value = this.value.toUpperCase();" size="15">
 												</td>
 												<td><a class="btn btn-xs btn-default" id="ocultarsincr" class="sbttn"
-														href="javascript:OcultarSincr()">Ocultar</a></td>
+														href="javascript:OcultarSincr()">Cerrar</a></td>
 											</tr>
 											
 										</table>
 									</form>
+								</td>
+							</tr>
+							<tr>
+								<td>Cupos de turno:</td>
+								<td>
+								<?php
+										echo ($cupo_turno);
+										?>
 								</td>
 							</tr>
 							<tr>
@@ -1185,70 +1228,24 @@ if ($row_RsFechaActual['HORA'] == 'PM') {
 
 						</table>
 						</p>
-
-					</div>
-					<form name="form3" id="form3" method="post" action="">
-						<input type="hidden" name="parametro_A" id="parametro_A" value="">
-						<input type="hidden" name="numero_parametrizado" id="numero_parametrizado" value="">
-						<input type="hidden" name="consecutivo_turno" id="consecutivo_turno" value="">
-						<input type="hidden" name="secuencia" id="secuencia" value="">
-						<input type="hidden" name="numero_turno" id="numero_turno" value="">
-						<input type="hidden" name="sesion_modulo" id="sesion_modulo" value="<?php if (isset($_SESSION["MODULO"]) && $_SESSION["MODULO"] != '') {
-							echo ($_SESSION["MODULO"]);
-						} ?>">
-						<input type="hidden" name="sesion_servicio" id="sesion_servicio" value="<?php if (isset($_SESSION["ID_SERVI"]) && $_SESSION["ID_SERVI"] != '') {
-							echo ($_SESSION["ID_SERVI"]);
-						} ?>">
-						<input type="hidden" name="sesion_usuario" id="sesion_usuario" value="<?php if (isset($_SESSION["IDUSU"]) && $_SESSION["IDUSU"] != '') {
-							echo ($_SESSION["IDUSU"]);
-						} ?>">
-					</form>
-					<div id="num_atendidos" class="num_atendidos" style="width:100%;">
-						Sincroniza y llama al primer turno
-					</div>
-					<ul style="display:flex; flex-direction:row; justify-content:center; width:100%;padding:10px;">
-						<li id="li_turno" style="display:none;">
-							<a href="javascript:turno();" class="text-3xl">LLAMAR</a>
-						</li>
-						<li class="l3" id="li_inicio" style="display:none;">
-							<a href="javascript:inicio();">INICIO</a>
-						</li>
-						<li class="l2" id="li_sig" style="display:none;">
-							<a href="javascript:siguiente();">SIGUIENTE</a>
-						</li>
-						<li class="l4" id="li_fin" style="display:none;">
-							<a href="javascript:fin();">FIN</a>
-						</li>
-					</ul>
-					<div class="clear"></div>
-				</div>
-				<!-- <div class="banner"> <img src="images/banner_img.jpg" width="940" height="116" alt="img" /> </div> -->
-				<div id="usuariosenlinea" class="news">
-					<p align="center" class="text-5xl"><b>USUARIOS CONECTADOS AL SISTEMA</b></p>
+						</div>
+						<div id="usuariosenlinea" class="news">
+					<p align="center"><b>USUARIOS CONECTADOS AL SISTEMA</b></p>
 					<table id="listausuarios">
-						<tr style="font-weight:bold;">
-							<td width="150">Persona</td>
-							<td>Modulo</td>
+						<tr>
+							<td style="margin-right: 10px;">Persona</td>
+							<td style="margin-right: 10px;">Modulo</td>
 						</tr>
 					</table>
 				</div>
-			</div>
-			<!-- Banner End -->
-			<!-- FOOTER Starts -->
-			<div class="footer">
-				<div class="footer_continer">
-					<div class="footer_top">
+			
+			</div>	
 
-						<div class="clear"></div>
-					</div>
-				</div>
-				<div class="copy">
+</div> 
 
-				</div>
-			</div>
-		</div>
-		<!-- FOOTER END -->
-	</div>
+		<div class="footerHome"></div>
+</div>
+
 	<!-- WARRPER END -->
 	<?php
 	$query_RsComprobarDataLog = "SELECT * FROM MODULOS 

@@ -61,24 +61,18 @@ $totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 	<title>PANTALLA TV</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script src="jquery/jquery-1.10.2.min.js"></script>
-	<script src="jquery/ion.sound.js"></script>
 	<script src="socket/socket.io.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<script>
 		var socket;
 		$(document).ready(function () {
 
-			// $.ionSound({
+			var sound = new Howl({
+				src: ['sounds/Alert.mp3'] // Cambia 'ruta/al/archivo-de-sonido.mp3' por la ubicación de tu archivo de sonido
+			});
 
-			// 	sounds: [
-			// 		"SD_ALERT_12"
-			// 	],
-			// 	path: "sounds/",
-			// 	multiPlay: true,
-			// 	preload: true,
-			// 	volume: "1.0",
-			// 	loop: 10
-			// })
 			socket = new io.connect('<?php echo ($nodeserver); ?>', {
 				port: <?php echo ($nodeport); ?>
 			});
@@ -129,7 +123,8 @@ $totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 								}
 
 							})
-							//$.ionSound.play("Alert");
+
+							sound.play();
 
 							$("#turnero").prepend("<tr class='contenedor_turno' style='background:" + color + "' id='div_turn_" + turno + "_" + codigo_modulo + "_" + consecutivo + "'><td class='turnoA' height='319' align='center' style='background:" + color + "'>" + turno + "</td><td align='center' class='moduloA' height='319' style='border-color:" + color + "'>" + nombre_modulo + "<br>" + nombre_servicio + "</td></tr>");
 							document.getElementById('peticiones_ok').value = parseInt(document.getElementById('peticiones_ok').value) + 1;
@@ -196,7 +191,7 @@ $totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 									<td width="200" align="center" height="100" class="moduloA"
 										style="border-color:<?php echo ($row_RsllAMADOTV['COLOR']); ?>">
 										<?php echo ($row_RsllAMADOTV['MODULO']); ?>
-										
+
 									</td>
 								</tr>
 								<?php /*</div>*/ ?>
@@ -242,7 +237,8 @@ $totalRows_RsllAMADOTV = mysqli_num_rows($RsllAMADOTV);
 		align-items: center;
 		justify-content: space-around;
 	}
-	.footerTV{
+
+	.footerTV {
 		display: flex;
 		flex-direction: row;
 		text-align: center;
